@@ -15,20 +15,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http
             .authorizeRequests()
-                .antMatchers("/", "home").permitAll()
+                .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error")
                 .and()
             .logout().permitAll();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER");
-    }
 
 }
