@@ -4,56 +4,133 @@ package es.aromano.users.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class User implements UserDetails{
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotNull
     private String username;
+
+    @NotNull
     private String password;
+
+    @NotNull
     private String email;
+
+    @NotNull
+    @Column(name = "accountExpired")
     private boolean accountExpired;
+
+    @NotNull
+    @Column(name = "accountLocked")
     private boolean accountLocked;
+
+    @NotNull
+    @Column(name = "credentialsExpired")
     private boolean credentialsExpired;
+
+    @NotNull
     private boolean enabled;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "user"), uniqueConstraints = @UniqueConstraint(columnNames={"user", "role"}))
     private Set<UserRole> roles;
+
+
+    public User(){
+        roles = new HashSet<>();
+    }
+
+    public User(String username, String email){
+        this.username = username;
+        this.email = email;
+        this.enabled = true;
+        this.roles = new HashSet<>();
+    }
+
+
+    public void addRole(UserRole role){
+        this.roles.add(role);
+    }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return roles;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return !accountExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return !accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return !credentialsExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setAccountExpired(boolean accountExpired) {
+        this.accountExpired = accountExpired;
+    }
+
+    public void setAccountLocked(boolean accountLocked) {
+        this.accountLocked = accountLocked;
+    }
+
+    public void setCredentialsExpired(boolean credentialsExpired) {
+        this.credentialsExpired = credentialsExpired;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
