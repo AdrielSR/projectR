@@ -17,4 +17,11 @@ public class EmpresaServiceImpl implements EmpresaService {
 		return empresaRepository.findOne(idEmpresa);
 	}
 
+	@Override
+	public Empresa createEmpresa(Empresa empresa) {
+		Empresa newEmpresa = new Empresa(empresa.getNombre(), empresa.getCif());
+		
+		return empresaRepository.save(newEmpresa);
+	}
+
 }

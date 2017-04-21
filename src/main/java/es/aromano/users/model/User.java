@@ -61,8 +61,9 @@ public class User implements UserDetails{
     @ManyToOne
     @JoinColumn(name = "idEmpresa")
     private Empresa empresa;
+    
 
-    public User(){
+	public User(){
         roles = new HashSet<>();
     }
 
@@ -149,4 +150,13 @@ public class User implements UserDetails{
     public void setId(int id) {
         this.id = id;
     }
+    
+    public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+	
 }

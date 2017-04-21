@@ -28,7 +28,13 @@ public class Empresa {
 	private Set<User> usuarios;
 	
 	public Empresa(){
-		usuarios = new HashSet<>();
+		this.usuarios = new HashSet<>();
+	}
+	
+	public Empresa(String nombre, String cif){
+		this.nombre = nombre;
+		this.cif = cif;
+		this.usuarios = new HashSet<>();
 	}
 
 	public void addUser(User user){

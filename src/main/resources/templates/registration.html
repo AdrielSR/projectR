@@ -13,6 +13,8 @@
                 </div>
 
                 <form th:action="@{/registration}" method="post">
+                	<div><label> Empresa: <input type="text" name="empresa.nombre"/> </label></div>
+                    <div><label> Cif: <input type="text" name="empresa.cif"/> </label></div>
                     <div><label> Username : <input type="text" name="username"/> </label></div>
                     <div><label> Email: <input type="text" name="email"/> </label></div>
                     <div><label> Password: <input type="password" name="password"/> </label></div>

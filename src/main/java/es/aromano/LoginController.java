@@ -1,5 +1,7 @@
 package es.aromano;
 
+import es.aromano.empresas.exceptions.EmpresaException;
+import es.aromano.users.exceptions.UserException;
 import es.aromano.users.model.User;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class LoginController {
     }
 
     @RequestMapping(value="/registration", method = RequestMethod.POST)
-    public String doResigtration(@ModelAttribute User user){
+    public String doResigtration(@ModelAttribute User user) throws EmpresaException, UserException{
 
         User newUser = userService.createUser(user);
 

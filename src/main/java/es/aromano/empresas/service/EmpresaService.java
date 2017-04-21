@@ -6,4 +6,5 @@ public interface EmpresaService {
 
 	Empresa findById(int idEmpresa);
 	
+	Empresa createEmpresa(Empresa empresa);
 }
