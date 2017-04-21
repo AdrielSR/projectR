@@ -1,14 +1,27 @@
 package es.aromano.users.model;
 
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import es.aromano.empresas.model.Empresa;
 
 @Entity
 public class User implements UserDetails{
@@ -45,6 +58,9 @@ public class User implements UserDetails{
     @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "user"), uniqueConstraints = @UniqueConstraint(columnNames={"user", "role"}))
     private Set<UserRole> roles;
 
+    @ManyToOne
+    @JoinColumn(name = "idEmpresa")
+    private Empresa empresa;
 
     public User(){
         roles = new HashSet<>();
