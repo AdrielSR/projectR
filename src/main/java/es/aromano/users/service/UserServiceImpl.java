@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+	public User findUsuarioEmpresa(int idUsuario) {
+		return userRespository.findUsuarioEmpresa(idUsuario, getCurrentUser().getEmpresa().getId());
+	}
+    
+    @Override
     public User findByEmail(String email) {
         return userRespository.findByEmail(email);
     }
@@ -103,4 +108,5 @@ public class UserServiceImpl implements UserService {
 		
 		return newUser;
 	}
+
 }

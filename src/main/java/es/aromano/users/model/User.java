@@ -30,7 +30,7 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotNull
+	@NotNull
     private String username;
 
     @NotNull
@@ -147,6 +147,10 @@ public class User implements UserDetails{
         this.credentialsExpired = credentialsExpired;
     }
 
+    public int getId() {
+		return id;
+	}
+    
     public void setId(int id) {
         this.id = id;
     }

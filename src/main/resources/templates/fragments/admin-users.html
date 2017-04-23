@@ -11,6 +11,7 @@
 	              <th>Username</th>
 	              <th>Email</th>
 	              <th>Roles</th>
+	              <th>Acciones</th>
 	          </tr>
 	        </thead>
 	
@@ -20,8 +21,10 @@
 	            <td th:text="${u.email}"></td>
 	            <td>
 	            	<div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
-				       <i class="close material-icons">close</i>
 				    </div>
+				</td>
+				<td>
+					<a th:href="@{'/admin/user/' + ${u.id}}"><i class="material-icons">edit</i></a>
 				</td>
 	          </tr>
 	        </tbody>
