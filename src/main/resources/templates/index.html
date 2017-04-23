@@ -37,8 +37,8 @@
 			        	<img th:src="@{/img/background_1.jpg}" />
 			        </div>
 			        <a href="#!user"><img class="circle" th:src="@{/img/user_avatar.png}"/></a>
-			        <a href="#!name"><span class="white-text name">John Doe</span></a>
-			        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+			        <a href="#!name"><span class="white-text name" th:text="${#authentication.principal.username}"></span></a>
+			        <a href="#!email"><span class="white-text email" th:text="${#authentication.principal.email}"></span></a>
 		    	</div>
 			</li>
 		    <li><a href="#!"><i class="material-icons">class</i>Mis Reservas</a></li>
@@ -57,8 +57,10 @@
 		          </li>
 		        </ul>
 		    </li>
+		    <!--/*/  <th:block sec:authorize="hasRole('ROLE_ADMIN')"> /*/-->
 		    <li><div class="divider"></div></li>
 		    <li><a class="waves-effect" th:href="@{/admin}"><i class="material-icons">settings</i>Administrar</a></li>
+			<!--/*/  </th:block> /*/-->
 		</ul>
 
     </nav>

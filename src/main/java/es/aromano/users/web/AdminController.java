@@ -1,6 +1,7 @@
 package es.aromano.users.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
 	public ModelAndView getAdminView(){
 		ModelAndView model = new ModelAndView("index");
