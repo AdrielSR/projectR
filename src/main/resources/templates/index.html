@@ -5,7 +5,11 @@
 <header>
     <!-- Top Bar Dropdown -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li><a href="#!">Log out</a></li>
+	  <li>
+	  	<form th:action="@{/logout}" method="post">
+	  		<button type="submit" class="log-out">Log out</button>
+	  	</form>
+	  </li>
 	</ul>
 
     <nav>

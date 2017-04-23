@@ -18,13 +18,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/registration").permitAll()
                 .anyRequest().authenticated()
-                .and()
+            .and()
             .formLogin()
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/")
                 .failureUrl("/login?error")
-                .and()
-            .logout().permitAll();
+            .and()
+            .logout()
+            	.logoutSuccessUrl("/login")
+            	.permitAll();
     }
 
     @Override
