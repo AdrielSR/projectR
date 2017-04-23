@@ -1,6 +1,8 @@
 package es.aromano.users.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -85,4 +87,20 @@ public class UserServiceImpl implements UserService {
 
         return newUser;
     }
+
+	@Override
+	public List<User> findUsuariosEmpresa() {
+		return userRespository.findUsuariosEmpresa(getCurrentUser().getEmpresa().getId());
+	}
+
+	@Override
+	public User createUserEmpresa(User user) {
+		User newUser = new User(user.getUsername(), user.getEmail());
+		newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		newUser.addRole(new UserRole("ROLE_USER"));
+		newUser.setEmpresa(getCurrentUser().getEmpresa());
+		newUser = userRespository.save(newUser);
+		
+		return newUser;
+	}
 }
