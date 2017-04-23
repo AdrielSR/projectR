@@ -2,11 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 	
-	<h4>Lista De Usuarios</h4>
+	<div class="col s12 center">
+		<h4>Lista De Usuarios</h4>
+		
+		<table class="responsive-table bordered highlight">
+	        <thead>
+	          <tr>
+	              <th>Username</th>
+	              <th>Email</th>
+	              <th>Roles</th>
+	          </tr>
+	        </thead>
 	
-	<ul th:each="u : ${users}">
-		<li th:text="${u.email}"></li>
-	</ul>
+	        <tbody>
+	          <tr th:each="u : ${users}">
+	            <td th:text="${u.username}"></td>
+	            <td th:text="${u.email}"></td>
+	            <td>
+	            	<div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
+				       <i class="close material-icons">close</i>
+				    </div>
+				</td>
+	          </tr>
+	        </tbody>
+      </table>
+	</div>
+	
 	
 </body>
 </html>
