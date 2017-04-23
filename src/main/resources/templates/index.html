@@ -3,31 +3,100 @@
 <head th:include="fragments/head :: copy"></head>
 <body>
 <header>
+    <!-- Top Bar Dropdown -->
+	<ul id="dropdown1" class="dropdown-content">
+	  <li><a href="#!">Log out</a></li>
+	</ul>
+
     <nav>
+    	<!-- Top Bar -->
         <div class="nav-wrapper">
             <a href="#" class="brand-logo"> R </a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li th:text="${#httpServletRequest.remoteUser}"></li>
+            <a href="#" data-activates="slide-out" class="button-collapse">
+	  			<i class="material-icons">menu</i>
+	  		</a>
+            <ul id="nav-mobile" class="right">
+               
                 <li>
-                    <form th:action="@{/logout}" method="post">
-                       <a>Log out</a>
-                    </form>
+                	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+                		<i class="material-icons">more_vert</i>
+                	</a>
                 </li>
             </ul>
         </div>
+
+		<!-- Left Menu -->
+		<ul id="slide-out" class="side-nav fixed">
+		    <li>
+		    	<div class="userView">
+			    	<div class="background">
+			        	<img th:src="@{/img/background_1.jpg}" />
+			        </div>
+			        <a href="#!user"><img class="circle" th:src="@{/img/user_avatar.png}"/></a>
+			        <a href="#!name"><span class="white-text name">John Doe</span></a>
+			        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+		    	</div>
+			</li>
+		    <li><a href="#!"><i class="material-icons">class</i>Mis Reservas</a></li>
+		    <li class="no-padding">
+		        <ul class="collapsible collapsible-accordion">
+		          <li>
+		            <a class="collapsible-header">
+		            	<i class="material-icons">today</i>Reservar
+		            </a>
+		            <div class="collapsible-body">
+		              <ul>
+		                <li><a href="#!"><i class="material-icons">crop_5_4</i>Por espacio</a></li>
+		                <li><a href="#!"><i class="material-icons">date_range</i>Por fecha</a></li>
+		              </ul>
+		            </div>
+		          </li>
+		        </ul>
+		    </li>
+		    <li><div class="divider"></div></li>
+		    <li><a class="waves-effect" th:href="@{/admin}"><i class="material-icons">settings</i>Administrar</a></li>
+		</ul>
+
     </nav>
 </header>
 
 <main>
     <div class="container">
         <div class="row">
-            <div class="col s6 offset-s3">
-
+            <div class="col s12">
+				
+				<div th:include="${#strings.concat('fragments/', view)} :: copy"></div>
 
             </div>
         </div>
     </div>
 </main>
+
+<!-- Float Button -->
+<div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".button-collapse").sideNav({
+			 menuWidth: 260,
+		});
+		
+		$(".dropdown-button").dropdown({
+			 belowOrigin: true
+		});
+	});
+	
+</script>
 
 </body>
 </html>
