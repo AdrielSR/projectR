@@ -1,20 +1,54 @@
 package es.aromano.edificios.model;
 
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import es.aromano.empresas.model.Empresa;
+import es.aromano.espacios.model.Espacio;
+
+@Entity
 public class Edificio {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idEdificio")
     private int id;
+	
     private String nombre;
+    
     private String direccion;
+    
+    @ManyToOne
+    @JoinColumn(name = "idEmpresa")
+    private Empresa empresa;
+    
+    @OneToMany(mappedBy="edificio")
+	private Set<Espacio> espacios;
 
 
-    public Edificio(){ }
+    public Edificio(){
+    	this.espacios = new HashSet<>();
+    }
 
     public Edificio(String nombre, String direccion){
         this.nombre = nombre;
         this.direccion = direccion;
+        this.espacios = new HashSet<>();
     }
 
+    public void addEspacio(Espacio espacio){
+    	this.espacios.add(espacio);
+    }
+    
     public int getId() {
         return id;
     }
@@ -38,5 +72,21 @@ public class Edificio {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Set<Espacio> getEspacios() {
+		return espacios;
+	}
+
+	public void setEspacios(Set<Espacio> espacios) {
+		this.espacios = espacios;
+	}
 
 }
