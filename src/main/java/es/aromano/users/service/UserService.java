@@ -11,7 +11,7 @@ import es.aromano.users.model.User;
 
 public interface UserService extends UserDetailsService{
 
-    User findUsuarioEmpresa(int idUsuario);
+    User findUsuarioEmpresaLogada(int idUsuario);
 	
 	User findByEmail(String email);
 
@@ -19,7 +19,7 @@ public interface UserService extends UserDetailsService{
 
     User createUser(User user) throws EmpresaException, UserException;
 
-	List<User> findUsuariosEmpresa();
+	List<User> findUsuariosEmpresaLogada();
 
 	User createUserEmpresa(User user);
 }

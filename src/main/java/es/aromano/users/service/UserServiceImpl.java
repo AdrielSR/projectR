@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-	public User findUsuarioEmpresa(int idUsuario) {
-		return userRespository.findUsuarioEmpresa(idUsuario, getCurrentUser().getEmpresa().getId());
+	public User findUsuarioEmpresaLogada(int idUsuario) {
+		return userRespository.findUsuarioEmpresaLogada(idUsuario);
 	}
     
     @Override
@@ -94,8 +94,8 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public List<User> findUsuariosEmpresa() {
-		return userRespository.findUsuariosEmpresa(getCurrentUser().getEmpresa().getId());
+	public List<User> findUsuariosEmpresaLogada() {
+		return userRespository.findUsuariosEmpresaLogada();
 	}
 
 	@Override

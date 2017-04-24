@@ -28,7 +28,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listarUsuariosEmpresa(Model model){
-		model.addAttribute("users", userService.findUsuariosEmpresa());
+		model.addAttribute("users", userService.findUsuariosEmpresaLogada());
 		model.addAttribute("view", "admin-users");
 		
 		return "index";
@@ -36,7 +36,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public String editarUsuarioEmpresa(@PathVariable("id") int idUsuario, Model model){
-		model.addAttribute("user", userService.findUsuarioEmpresa(idUsuario));
+		model.addAttribute("user", userService.findUsuarioEmpresaLogada(idUsuario));
 		model.addAttribute("view", "admin-user-edit");
 		
 		return "index";
@@ -46,7 +46,7 @@ public class AdminController {
 	public String doEditarUsuarioEmpresa(@PathVariable("id") int idUsuario, 
 												@ModelAttribute User userEdited, Model model){
 	
-		User currentUser = userService.findUsuarioEmpresa(idUsuario);
+		User currentUser = userService.findUsuarioEmpresaLogada(idUsuario);
 		
 		
 		return "redirect:/admin/users";
