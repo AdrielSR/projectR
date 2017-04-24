@@ -5,7 +5,14 @@
 	<div class="col s12 center">
 		<h4>Lista De Reservas</h4>
 		
-		<table class="responsive-table bordered highlight">
+		<div class="valign-wrapper" th:if="${#lists.isEmpty(users)}">
+			<i class="large material-icons">sentiment_very_dissatisfied</i>
+			<h5 class="center-align">
+				Uups! Parece que todavia no has hecho ninguna reserva.
+			</h5>
+		</div>
+		
+		<table class="responsive-table bordered highlight" th:if="${not #lists.isEmpty(users)}">
 	        <thead>
 	          <tr>
 	              <th>Asunto</th>

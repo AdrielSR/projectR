@@ -22,4 +22,11 @@ header, main, footer {
     display: block;
     line-height: 22px;
     padding: 14px 16px;
-}  
+}
+
+.valign-wrapper{
+	height: 100px;
+	background: #ddd;
+}
+
+  
