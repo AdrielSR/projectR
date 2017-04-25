@@ -116,14 +116,19 @@ public class UserServiceImpl implements UserService {
 	}
 
     @Override
-    public User editUser(User user) throws UserException {
+    public User editUser(int idUsuario, User editedUser) throws UserException {
 
-        User editedUser = new User(user.getUsername(), user.getEmail());
-        editedUser.setRoles(user.getRoles());
+    	User currentUser = findUserById(idUsuario);
 
-        editedUser = userRespository.save(editedUser);
+		if(currentUser == null){
+			throw new UserException(String.format("No se ha encontrado el user con [id]= %d", idUsuario));
+		}
+		
+    	currentUser.setUsername(editedUser.getUsername());
+    	currentUser.setEmail(editedUser.getEmail());
+    	currentUser.setRoles(editedUser.getRoles());
 
-        return editedUser;
+        return userRespository.save(currentUser);
     }
 
 }

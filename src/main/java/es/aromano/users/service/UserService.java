@@ -25,6 +25,6 @@ public interface UserService extends UserDetailsService{
 
 	User createUserEmpresa(User user);
 
-	User editUser(User user) throws UserException;
+	User editUser(int idUsuario, User editedUser) throws UserException;
 
 }

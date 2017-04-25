@@ -1,13 +1,23 @@
 package es.aromano.users.web;
 
-import es.aromano.users.exceptions.UserException;
-import es.aromano.users.model.UserRoleType;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import es.aromano.users.exceptions.UserException;
 import es.aromano.users.model.User;
+import es.aromano.users.model.UserRole;
+import es.aromano.users.model.UserRoleType;
 import es.aromano.users.service.UserService;
 
 @Controller
@@ -36,7 +46,9 @@ public class AdminController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public String editarUsuarioEmpresa(@PathVariable("id") int idUsuario, Model model){
 		model.addAttribute("user", userService.findUsuarioEmpresaLogada(idUsuario));
-		model.addAttribute("roles", UserRoleType.values());
+		List<UserRole> userRoles = Arrays.asList(UserRoleType.values())
+				.stream().map(role -> new UserRole(role)).collect(Collectors.toList());
+		model.addAttribute("userRoles", userRoles);
 		model.addAttribute("view", "admin-user-edit");
 		
 		return "index";
@@ -44,18 +56,12 @@ public class AdminController {
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
 	public String doEditarUsuarioEmpresa(@PathVariable("id") int idUsuario,
-										 @RequestParam(value = "roles" , required = false) UserRoleType[] roles,
-											@ModelAttribute User userEdited, Model model) throws UserException {
-
-
-		User oldUser = userService.findUserById(idUsuario);
-
-		if(oldUser == null){
-			throw new UserException(String.format("No se ha encontrado el user con [id]= %d", idUsuario));
-		}
-
-		User editedUser = userService.editUser(oldUser);
-		if(editedUser == null){
+										 @RequestParam(value = "roles",required = false) List<UserRoleType> roles,
+										 @ModelAttribute User editedUser, Model model) throws UserException {
+		
+		editedUser.setRolesFrom(roles);
+		
+		if(userService.editUser(idUsuario, editedUser) == null){
 			return String.format("redirect:/admin/user/%d", idUsuario);
 		}
 		

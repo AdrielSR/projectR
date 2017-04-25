@@ -1,9 +1,13 @@
 package es.aromano.users.model;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -164,12 +168,35 @@ public class User implements UserDetails{
 	}
 
     public Set<UserRole> getRoles() {
-        return roles;
+        return Collections.unmodifiableSet(roles);
     }
 
     public void setRoles(Collection<UserRole> roles){
-        this.roles.clear();
-        this.roles.addAll(roles);
+    	if(Objects.nonNull(roles)){
+    		removeRoles();
+    		addRoles(roles);
+    	}
+    }
+    
+    private void removeRoles(){
+    	this.roles.clear();
+    }
+    
+    private void addRoles(Collection<UserRole> roles){
+    	this.roles.addAll(roles);
+    }
+    
+    public void setRolesFrom(Collection<UserRoleType> roles){
+    	
+    	if(Objects.isNull(roles)){
+    		roles = new HashSet<>();
+    		roles.add(UserRoleType.ROLE_USER);
+    	}
+    	
+    	Collection<UserRole> userRoles = roles.stream()
+    										  .map(role -> new UserRole(role))
+    										  .collect(Collectors.toSet());
+		setRoles(userRoles);
     }
 
 }

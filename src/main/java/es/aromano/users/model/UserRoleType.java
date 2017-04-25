@@ -7,11 +7,22 @@ public enum UserRoleType {
 
     private String name;
 
-    UserRoleType(String name){
+    private UserRoleType(String name){
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+    
+    public static UserRoleType from(String role){
+    	switch(role){
+	    	case "ROLE_ADMIN": 
+	    		return ROLE_ADMIN;
+	    	case "ROLE_USER": 
+	    		return ROLE_USER;
+	    	default: 
+	    		return ROLE_USER;
+    	}
     }
 }
