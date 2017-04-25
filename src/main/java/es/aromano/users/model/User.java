@@ -162,5 +162,14 @@ public class User implements UserDetails{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
+
+    public Set<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<UserRole> roles){
+        this.roles.clear();
+        this.roles.addAll(roles);
+    }
+
 }

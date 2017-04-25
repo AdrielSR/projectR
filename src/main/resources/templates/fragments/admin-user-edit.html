@@ -21,10 +21,14 @@
             
             <div class="col s6">
             	<div>
-	            	<label> Roles: 
-	            		<div th:each="r : ${user.authorities}" class="chip" th:inline="text">
-				      		 [[${r.authority}]] <i class="close material-icons">close</i>
-				    	</div> 
+	            	<label> Roles:
+						<th:block th:each="r : ${roles}">
+							<p>
+								<input type="checkbox" name="roles" class="filled-in" th:id="${#strings.concat('check-', r)}" th:value="${r}"/>
+								<label th:for="${#strings.concat('check-', r)}" th:text="${r.name}"></label>
+							</p>
+
+						</th:block>
 	            	</label>
             	</div>
             </div>

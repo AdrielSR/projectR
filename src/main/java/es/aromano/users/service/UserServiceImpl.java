@@ -3,6 +3,7 @@ package es.aromano.users.service;
 
 import java.util.List;
 
+import es.aromano.users.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -58,7 +59,12 @@ public class UserServiceImpl implements UserService {
 	public User findUsuarioEmpresaLogada(int idUsuario) {
 		return userRespository.findUsuarioEmpresaLogada(idUsuario);
 	}
-    
+
+    @Override
+    public User findUserById(int idUsuario) {
+        return userRespository.findOne(idUsuario);
+    }
+
     @Override
     public User findByEmail(String email) {
         return userRespository.findByEmail(email);
@@ -80,7 +86,7 @@ public class UserServiceImpl implements UserService {
     	
         User newUser = new User(user.getUsername(), user.getEmail());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        newUser.addRole(new UserRole("ROLE_ADMIN"));
+        newUser.addRole(new UserRole(UserRoleType.ROLE_ADMIN));
         newUser.setEmpresa(newEmpresa);
         newUser = userRespository.save(newUser);
         
@@ -102,11 +108,22 @@ public class UserServiceImpl implements UserService {
 	public User createUserEmpresa(User user) {
 		User newUser = new User(user.getUsername(), user.getEmail());
 		newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		newUser.addRole(new UserRole("ROLE_USER"));
+		newUser.addRole(new UserRole(UserRoleType.ROLE_USER));
 		newUser.setEmpresa(getCurrentUser().getEmpresa());
 		newUser = userRespository.save(newUser);
 		
 		return newUser;
 	}
+
+    @Override
+    public User editUser(User user) throws UserException {
+
+        User editedUser = new User(user.getUsername(), user.getEmail());
+        editedUser.setRoles(user.getRoles());
+
+        editedUser = userRespository.save(editedUser);
+
+        return editedUser;
+    }
 
 }
