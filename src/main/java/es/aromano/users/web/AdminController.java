@@ -64,23 +64,23 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value = "/users/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/new", method = RequestMethod.GET)
 	public String crearUsuariosEmpresa(Model model){
 		model.addAttribute("view", "admin-user-new");
 		
 		return "index";
 	}
 	
-	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/new", method = RequestMethod.POST)
 	public String doCrearUsuariosEmpresa(@ModelAttribute User user){
 		
 		User newUser = userService.createUser(user);
 		
 		if(newUser == null){
-			return "/users/new?error";
+			return "/user/new?error";
 		}
 		
-		return "redirect:/users";
+		return "redirect:/admin/users";
 	}
 	
 }
