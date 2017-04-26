@@ -29,7 +29,7 @@ public class LoginController {
     @RequestMapping(value="/registration", method = RequestMethod.POST)
     public String doResigtration(@ModelAttribute User user) throws EmpresaException, UserException{
 
-        User newUser = userService.createUser(user);
+        User newUser = userService.createEmpresaAndUser(user);
 
         if(newUser == null){
             return "redirect:/registration?error";

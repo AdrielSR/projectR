@@ -9,20 +9,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import es.aromano.edificios.model.Edificio;
 import es.aromano.users.model.User;
 
 @Entity
+@Table(name="empresa")
 public class Empresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEmpresa")
+	@Column(name = "empresa_id")
 	private int id;
 	
+	@Column(name="nombre", nullable=false)
 	private String nombre;
 	
+	@Column(name="cif", nullable=false)
 	private String cif;
 	
 	@OneToMany(mappedBy="empresa")

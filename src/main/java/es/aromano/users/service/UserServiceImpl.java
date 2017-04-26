@@ -2,8 +2,6 @@ package es.aromano.users.service;
 
 
 import java.util.List;
-
-import es.aromano.users.model.UserRoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +14,8 @@ import es.aromano.empresas.model.Empresa;
 import es.aromano.empresas.service.EmpresaService;
 import es.aromano.users.exceptions.UserException;
 import es.aromano.users.model.User;
-import es.aromano.users.model.UserRole;
+import es.aromano.users.model.Role;
+import es.aromano.users.repository.RoleRepository;
 import es.aromano.users.repository.UserRepository;
 
 @Service
@@ -24,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRespository;
+    
+    @Autowired
+    private RoleRepository roleRepository; 
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -76,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(User user) throws EmpresaException, UserException {
+    public User createEmpresaAndUser(User user) throws EmpresaException, UserException {
 
     	Empresa newEmpresa = empresaService.createEmpresa(user.getEmpresa());
     	
@@ -86,7 +88,7 @@ public class UserServiceImpl implements UserService {
     	
         User newUser = new User(user.getUsername(), user.getEmail());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        newUser.addRole(new UserRole(UserRoleType.ROLE_ADMIN));
+        newUser.addRole(roleRepository.findByRole("ROLE_ADMIN"));
         newUser.setEmpresa(newEmpresa);
         newUser = userRespository.save(newUser);
         
@@ -105,10 +107,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUserEmpresa(User user) {
+	public User createUser(User user) {
 		User newUser = new User(user.getUsername(), user.getEmail());
 		newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		newUser.addRole(new UserRole(UserRoleType.ROLE_USER));
+		newUser.addRole(roleRepository.findByRole("ROLE_USER"));
 		newUser.setEmpresa(getCurrentUser().getEmpresa());
 		newUser = userRespository.save(newUser);
 		
@@ -131,4 +133,10 @@ public class UserServiceImpl implements UserService {
         return userRespository.save(currentUser);
     }
 
+    @Override
+    public List<Role> findAllRoles(){
+    	return roleRepository.findAll();
+    }
+    
+    
 }

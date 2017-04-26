@@ -11,24 +11,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import es.aromano.empresas.model.Empresa;
 import es.aromano.espacios.model.Espacio;
 
 @Entity
+@Table(name="edificio")
 public class Edificio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "idEdificio")
+	@Column(name = "edificio_id")
     private int id;
 	
+	@Column(name = "nombre", nullable=false)
     private String nombre;
     
+	@Column(name = "direccion", nullable=false)
     private String direccion;
     
     @ManyToOne
-    @JoinColumn(name = "idEmpresa")
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     
     @OneToMany(mappedBy="edificio")

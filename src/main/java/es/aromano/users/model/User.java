@@ -1,25 +1,22 @@
 package es.aromano.users.model;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -28,42 +25,43 @@ import org.springframework.security.core.userdetails.UserDetails;
 import es.aromano.empresas.model.Empresa;
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private int id;
 
-	@NotNull
+    @Column(name = "userName", nullable=false)
     private String username;
 
-    @NotNull
+    @Column(name = "password", nullable=false)
     private String password;
 
-    @NotNull
+    @Column(name = "email", nullable=false)
     private String email;
 
-    @NotNull
-    @Column(name = "accountExpired")
+    @Column(name = "accountExpired", nullable=false)
     private boolean accountExpired;
 
-    @NotNull
-    @Column(name = "accountLocked")
+    @Column(name = "accountLocked", nullable=false)
     private boolean accountLocked;
 
-    @NotNull
-    @Column(name = "credentialsExpired")
+    @Column(name = "credentialsExpired", nullable=false)
     private boolean credentialsExpired;
 
-    @NotNull
+    @Column(name = "enabled", nullable=false)
     private boolean enabled;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "user"), uniqueConstraints = @UniqueConstraint(columnNames={"user", "role"}))
-    private Set<UserRole> roles;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
+    
+    @NotNull
     @ManyToOne
-    @JoinColumn(name = "idEmpresa")
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     
 
@@ -76,11 +74,6 @@ public class User implements UserDetails{
         this.email = email;
         this.enabled = true;
         this.roles = new HashSet<>();
-    }
-
-
-    public void addRole(UserRole role){
-        this.roles.add(role);
     }
 
 
@@ -167,36 +160,16 @@ public class User implements UserDetails{
 		this.empresa = empresa;
 	}
 
-    public Set<UserRole> getRoles() {
-        return Collections.unmodifiableSet(roles);
+    public Set<Role> getRoles() {
+        return this.roles;
     }
 
-    public void setRoles(Collection<UserRole> roles){
-    	if(Objects.nonNull(roles)){
-    		removeRoles();
-    		addRoles(roles);
-    	}
+    public void setRoles(Set<Role> roles){
+    	this.roles = roles;
     }
     
-    private void removeRoles(){
-    	this.roles.clear();
+    public void addRole(Role role){
+    	this.roles.add(role);
     }
     
-    private void addRoles(Collection<UserRole> roles){
-    	this.roles.addAll(roles);
-    }
-    
-    public void setRolesFrom(Collection<UserRoleType> roles){
-    	
-    	if(Objects.isNull(roles)){
-    		roles = new HashSet<>();
-    		roles.add(UserRoleType.ROLE_USER);
-    	}
-    	
-    	Collection<UserRole> userRoles = roles.stream()
-    										  .map(role -> new UserRole(role))
-    										  .collect(Collectors.toSet());
-		setRoles(userRoles);
-    }
-
 }

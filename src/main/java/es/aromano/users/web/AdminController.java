@@ -1,9 +1,7 @@
 package es.aromano.users.web;
 
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.aromano.users.exceptions.UserException;
+import es.aromano.users.model.Role;
 import es.aromano.users.model.User;
-import es.aromano.users.model.UserRole;
-import es.aromano.users.model.UserRoleType;
 import es.aromano.users.service.UserService;
 
 @Controller
@@ -46,9 +43,7 @@ public class AdminController {
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public String editarUsuarioEmpresa(@PathVariable("id") int idUsuario, Model model){
 		model.addAttribute("user", userService.findUsuarioEmpresaLogada(idUsuario));
-		List<UserRole> userRoles = Arrays.asList(UserRoleType.values())
-				.stream().map(role -> new UserRole(role)).collect(Collectors.toList());
-		model.addAttribute("userRoles", userRoles);
+		model.addAttribute("roles", userService.findAllRoles());
 		model.addAttribute("view", "admin-user-edit");
 		
 		return "index";
@@ -56,10 +51,10 @@ public class AdminController {
 	
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
 	public String doEditarUsuarioEmpresa(@PathVariable("id") int idUsuario,
-										 @RequestParam(value = "roles",required = false) List<UserRoleType> roles,
+										 @RequestParam(value = "roles",required = false) Set<Role> roles,
 										 @ModelAttribute User editedUser, Model model) throws UserException {
 		
-		editedUser.setRolesFrom(roles);
+		editedUser.setRoles(roles);
 		
 		if(userService.editUser(idUsuario, editedUser) == null){
 			return String.format("redirect:/admin/user/%d", idUsuario);
@@ -79,7 +74,7 @@ public class AdminController {
 	@RequestMapping(value = "/users/new", method = RequestMethod.POST)
 	public String doCrearUsuariosEmpresa(@ModelAttribute User user){
 		
-		User newUser = userService.createUserEmpresa(user);
+		User newUser = userService.createUser(user);
 		
 		if(newUser == null){
 			return "/users/new?error";

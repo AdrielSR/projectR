@@ -1,27 +1,33 @@
 package es.aromano.espacios.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import es.aromano.edificios.model.Edificio;
 
 @Entity
+@Table(name="espacio")
 public class Espacio {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "espacio_id")
 	private int id;
 	
+	@Column(name = "nombre", nullable=false)
 	private String nombre;
 	
+	@Column(name = "aforo", nullable=false)
 	private int aforo;
 	
 	@ManyToOne
-    @JoinColumn(name = "idEdificio")
+    @JoinColumn(name = "edificio_id")
     private Edificio edificio;
 	
 	public Espacio(){ }

@@ -22,11 +22,11 @@
             <div class="col s6">
             	<div>
 	            	<label> Roles:
-						<th:block th:each="r : ${userRoles}">
+						<th:block th:each="r : ${roles}">
 							<p>
-								<input type="checkbox" name="roles" th:id="${#strings.concat('check-', r.role)}" 
-										th:value="${r.authority}" th:checked="${r.role.name == 'ROL USER'}" th:disabled="${r.role.name == 'ROL USER'}" />
-								<label th:for="${#strings.concat('check-', r.role)}" th:text="${r.role.name}"></label>
+								<input type="checkbox" name="roles" th:id="${#strings.concat('check-', r.authority)}" 
+										th:value="${r.id}" th:checked="${#sets.contains(user.roles, r)}" th:readonly="${r.authority == 'ROLE_USER'}" />
+								<label th:for="${#strings.concat('check-', r.authority)}" th:text="${r.authority}"></label>
 							</p>
 
 						</th:block>

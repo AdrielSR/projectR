@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import es.aromano.empresas.exceptions.EmpresaException;
 import es.aromano.users.exceptions.UserException;
+import es.aromano.users.model.Role;
 import es.aromano.users.model.User;
 
 
@@ -19,12 +20,14 @@ public interface UserService extends UserDetailsService{
 
     User findByUsername(String usermname);
 
-    User createUser(User user) throws EmpresaException, UserException;
+    User createEmpresaAndUser(User user) throws EmpresaException, UserException;
 
 	List<User> findUsuariosEmpresaLogada();
 
-	User createUserEmpresa(User user);
+	User createUser(User user);
 
 	User editUser(int idUsuario, User editedUser) throws UserException;
+	
+	List<Role> findAllRoles();
 
 }
