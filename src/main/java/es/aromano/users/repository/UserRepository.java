@@ -15,10 +15,17 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByEmail(String email);
 
+    User findByEmailAndEnabledTrue(String email);
+
     User findByUsername(String usermname);
+
+    User findByUsernameAndEnabledTrue(String usermname);
 
     @Query("from User u where u.empresa.id = ?#{principal.empresa.id}")
 	List<User> findUsuariosEmpresaLogada();
+
+    @Query("from User u where u.enabled = 1 and u.empresa.id = ?#{principal.empresa.id}")
+    List<User> findUsuariosActivosEmpresaLogada();
     
     @Query("from User u where u.id = :idUsuario and u.empresa.id = ?#{principal.empresa.id}")
     User findUsuarioEmpresaLogada(@Param("idUsuario") int idUsuario);
