@@ -137,6 +137,16 @@ public class UserServiceImpl implements UserService {
     public List<Role> findAllRoles(){
     	return roleRepository.findAll();
     }
+
+	@Override
+	public List<User> findUsuariosActivosEmpresaLogada() {
+		return userRespository.findUsuariosActivosEmpresaLogada();
+	}
+
+	@Override
+	public List<User> findUsuariosDesactivosEmpresaLogada() {
+		return userRespository.findUsuariosDesactivosEmpresaLogada();
+	}
     
     
 }

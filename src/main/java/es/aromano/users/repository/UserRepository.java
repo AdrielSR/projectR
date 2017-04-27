@@ -27,6 +27,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("from User u where u.enabled = 1 and u.empresa.id = ?#{principal.empresa.id}")
     List<User> findUsuariosActivosEmpresaLogada();
     
+    @Query("from User u where u.enabled = 0 and u.empresa.id = ?#{principal.empresa.id}")
+    List<User> findUsuariosDesactivosEmpresaLogada();
+    
     @Query("from User u where u.id = :idUsuario and u.empresa.id = ?#{principal.empresa.id}")
     User findUsuarioEmpresaLogada(@Param("idUsuario") int idUsuario);
 

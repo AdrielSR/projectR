@@ -29,5 +29,9 @@ public interface UserService extends UserDetailsService{
 	User editUser(int idUsuario, User editedUser) throws UserException;
 	
 	List<Role> findAllRoles();
+	
+	List<User> findUsuariosActivosEmpresaLogada();
+	
+	List<User> findUsuariosDesactivosEmpresaLogada();
 
 }

@@ -34,7 +34,8 @@ public class AdminController {
 	
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listarUsuariosEmpresa(Model model){
-		model.addAttribute("users", userService.findUsuariosEmpresaLogada());
+		model.addAttribute("active_users", userService.findUsuariosActivosEmpresaLogada());
+		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
 		model.addAttribute("view", "admin-users");
 		
 		return "index";
