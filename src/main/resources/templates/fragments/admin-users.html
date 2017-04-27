@@ -12,7 +12,7 @@
 
 		 <!-- Activos -->
 		 <div id="test-swipe-1" class="col s12">
-		 	<table class="responsive-table bordered highlight">
+		 	<table class="responsive-table bordered highlight activos">
 		        <thead>
 		          <tr>
 		              <th>Username</th>
@@ -23,7 +23,7 @@
 		        </thead>
 		
 		        <tbody>
-		          <tr th:each="u : ${active_users}">
+		          <tr th:each="u : ${active_users}" th:id="${u.id}">
 		            <td th:text="${u.username}"></td>
 		            <td th:text="${u.email}"></td>
 		            <td>
@@ -32,6 +32,7 @@
 					</td>
 					<td>
 						<a th:href="@{'/admin/user/' + ${u.id}}"><i class="material-icons">edit</i></a>
+						<i th:attr="data-id=${u.id}" class="material-icons desactivar">delete</i>
 					</td>
 		          </tr>
 		        </tbody>
@@ -40,7 +41,7 @@
 		 
 		 <!-- No activos -->
 		 <div id="test-swipe-2" class="col s12">
-		 	<table class="responsive-table bordered highlight">
+		 	<table class="responsive-table bordered highlight no-activos">
 		        <thead>
 		          <tr>
 		              <th>Username</th>
@@ -82,7 +83,42 @@
       </li>
     </ul>
 </div>
-	
+<script th:inline="javascript">
+ 	var baseURL = /*[[@{/}]]*/ '/';
+ </script>	
+<script type="text/javascript">
+	$(document).ready(function(){
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		var reqHeaders = [];
+		reqHeaders[header] = token;
+		
+		
+		$(".activos td i.desactivar").on("click", function(){
+			
+			var idUsuario = $(this).attr("data-id");
+			
+			$.ajax({
+				url: baseURL + 'user/desactivar',
+				method: 'POST',
+				headers : reqHeaders,
+				data: JSON.stringify(idUsuario),
+				contentType: 'application/json'
+				})
+				.done(function(){
+					$("#" + idUsuario).remove();
+				})
+				.fail(function(xhr, status){
+					alert(status);
+				});
+			
+			
+		});
+		
+		
+	});
+
+</script>
 	
 </body>
 </html>

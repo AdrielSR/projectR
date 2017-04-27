@@ -13,7 +13,9 @@ import es.aromano.users.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User findByEmail(String email);
+    User findById(int idUsuario);
+	
+	User findByEmail(String email);
 
     User findByEmailAndEnabledTrue(String email);
 

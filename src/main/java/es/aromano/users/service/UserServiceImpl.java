@@ -147,6 +147,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> findUsuariosDesactivosEmpresaLogada() {
 		return userRespository.findUsuariosDesactivosEmpresaLogada();
 	}
+
+	@Override
+	public User desactivarUsuario(User user) {
+		user.setEnabled(false);
+		return userRespository.save(user);
+	}
     
     
 }
