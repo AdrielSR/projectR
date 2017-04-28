@@ -149,8 +149,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User desactivarUsuario(User user) {
-		user.setEnabled(false);
+	public User toggleActivarUsuario(User user) {
+        if(user.isEnabled()){
+            user.desactivar();
+        }
+        else{
+            user.activar();
+        }
+
 		return userRespository.save(user);
 	}
     

@@ -34,6 +34,6 @@ public interface UserService extends UserDetailsService{
 	
 	List<User> findUsuariosDesactivosEmpresaLogada();
 	
-	User desactivarUsuario(User user);
+	User toggleActivarUsuario(User user);
 
 }

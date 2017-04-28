@@ -19,7 +19,7 @@ public class UserRestController {
 	private UserService userService;
 	
 	
-	@RequestMapping(value = "/user/desactivar", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/activar-desactivar-usuario", method = RequestMethod.POST)
 	public ResponseEntity<Void> desactivarUsuario(@RequestBody int idUsuario){
 		
 		User user = userService.findUserById(idUsuario);
@@ -28,7 +28,7 @@ public class UserRestController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		
-		userService.desactivarUsuario(user);
+		userService.toggleActivarUsuario(user);
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}

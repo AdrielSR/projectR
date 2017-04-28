@@ -167,9 +167,17 @@ public class User implements UserDetails{
     public void setRoles(Set<Role> roles){
     	this.roles = roles;
     }
-    
+
     public void addRole(Role role){
     	this.roles.add(role);
     }
-    
+
+    public void activar(){
+        setEnabled(true);
+    }
+
+    public void desactivar(){
+        setEnabled(false);
+    }
+
 }
