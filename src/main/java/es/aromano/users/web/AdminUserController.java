@@ -19,19 +19,14 @@ import es.aromano.users.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminUserController {
 
 	@Autowired
 	private UserService userService;
 	
-	
-	@RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-	public String getAdminView(Model model){
-		model.addAttribute("view", "administrar");
-		
-		return "index";
-	}
-	
+
+	////// Listar usuarios //////
+
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listarUsuariosEmpresa(Model model){
 		model.addAttribute("active_users", userService.findUsuariosActivosEmpresaLogada());
@@ -40,7 +35,9 @@ public class AdminController {
 		
 		return "index";
 	}
-	
+
+	////// Editar usuario //////
+
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	public String editarUsuarioEmpresa(@PathVariable("id") int idUsuario, Model model){
 		model.addAttribute("user", userService.findUsuarioEmpresaLogada(idUsuario));
@@ -63,8 +60,9 @@ public class AdminController {
 		
 		return "redirect:/admin/users";
 	}
-	
-	
+
+	////// Crear usuario //////
+
 	@RequestMapping(value = "/user/new", method = RequestMethod.GET)
 	public String crearUsuariosEmpresa(Model model){
 		model.addAttribute("view", "admin-user-new");
