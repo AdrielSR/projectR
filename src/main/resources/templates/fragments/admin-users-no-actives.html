@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<div class="col s12 center">
+    <h4>Usuarios No Activos</h4>
+
+    
+      <table class="responsive-table bordered highlight no-activos">
+          <thead>
+          <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Roles</th>
+              <th>Acciones</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr th:each="u : ${no_active_users}" th:id="${u.id}">
+              <td th:text="${u.username}"></td>
+              <td th:text="${u.email}"></td>
+              <td>
+                  <div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
+                  </div>
+              </td>
+              <td>
+                  <i th:attr="data-id=${u.id}" class="material-icons activar">undo</i>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  
+</div>
+
+
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script th:src="@{/js/admin-users.js}" src="../../js/admin-users.js"></script>
+
+</body>
+</html>

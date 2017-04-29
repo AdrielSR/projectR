@@ -28,10 +28,17 @@ public class AdminUserController {
 	////// Listar usuarios //////
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public String listarUsuariosEmpresa(Model model){
+	public String listarUsuariosActivosEmpresa(Model model){
 		model.addAttribute("active_users", userService.findUsuariosActivosEmpresaLogada());
-		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
 		model.addAttribute("view", "admin-users");
+		
+		return "index";
+	}
+	
+	@RequestMapping(value = "/users/restore", method = RequestMethod.GET)
+	public String listarUsuariosNoActivosEmpresa(Model model){
+		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
+		model.addAttribute("view", "admin-users-no-actives");
 		
 		return "index";
 	}

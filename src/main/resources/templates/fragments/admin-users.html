@@ -3,71 +3,34 @@
 <body th:fragment="copy">
 
 <div class="col s12 center">
-    <h4>Lista De Usuarios</h4>
+    <h4>Usuarios Activos</h4>
 
-    <ul id="tabs-swipe-demo" class="tabs">
-        <li class="tab col s6"><a class="active" href="#test-swipe-1">Activos</a></li>
-        <li class="tab col s6"><a href="#test-swipe-2">No activos</a></li>
-    </ul>
+      <table class="responsive-table bordered highlight activos">
+          <thead>
+          <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Roles</th>
+              <th>Acciones</th>
+          </tr>
+          </thead>
 
-    <!-- Activos -->
-    <div id="test-swipe-1" class="col s12">
-        <table class="responsive-table bordered highlight activos">
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="u : ${active_users}" th:id="${u.id}">
-                <td th:text="${u.username}"></td>
-                <td th:text="${u.email}"></td>
-                <td>
-                    <div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
-                    </div>
-                </td>
-                <td>
-                    <a th:href="@{'/admin/user/' + ${u.id}}"><i class="material-icons">edit</i></a>
-                    <i th:attr="data-id=${u.id}" class="material-icons desactivar">delete</i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- No activos -->
-    <div id="test-swipe-2" class="col s12">
-        <table class="responsive-table bordered highlight no-activos">
-            <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="u : ${no_active_users}" th:id="${u.id}">
-                <td th:text="${u.username}"></td>
-                <td th:text="${u.email}"></td>
-                <td>
-                    <div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
-                    </div>
-                </td>
-                <td>
-                    <i th:attr="data-id=${u.id}" class="material-icons activar">undo</i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-
+          <tbody>
+          <tr th:each="u : ${active_users}" th:id="${u.id}">
+              <td th:text="${u.username}"></td>
+              <td th:text="${u.email}"></td>
+              <td>
+                  <div th:each="r : ${u.authorities}" class="chip" th:text="${r.authority}">
+                  </div>
+              </td>
+              <td>
+                  <a th:href="@{'/admin/user/' + ${u.id}}"><i class="material-icons">edit</i></a>
+                  <i th:attr="data-id=${u.id}" class="material-icons desactivar">delete</i>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+   
 </div>
 
 <!-- Float Button -->
@@ -76,6 +39,12 @@
         <i class="large material-icons">add</i>
     </a>
     <ul>
+    	<li>
+            <a th:href="@{/admin/users/restore}" class="btn-floating blue tooltipped" data-position="left" data-delay="50"
+               data-tooltip="Restaurar usuarios">
+                <i class="material-icons">people_outline</i>
+            </a>
+        </li>
         <li>
             <a th:href="@{/admin/user/new}" class="btn-floating blue tooltipped" data-position="left" data-delay="50"
                data-tooltip="Nuevo usuario">
@@ -87,46 +56,7 @@
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
 </script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        var token = $("meta[name='_csrf']").attr("content");
-        var header = $("meta[name='_csrf_header']").attr("content");
-        var reqHeaders = [];
-        reqHeaders[header] = token;
-
-
-        $(".activos td i.desactivar").on("click", function () {
-            var idUsuario = $(this).attr("data-id");
-            toggleActivarDesactivar(idUsuario, reqHeaders);
-        });
-
-        $(".no-activos td i.activar").on("click", function () {
-            var idUsuario = $(this).attr("data-id");
-            toggleActivarDesactivar(idUsuario, reqHeaders);
-        });
-
-
-    });
-
-    function toggleActivarDesactivar(idUsuario, reqHeaders) {
-        $.ajax({
-            url: baseURL + 'user/activar-desactivar-usuario',
-            method: 'POST',
-            headers: reqHeaders,
-            data: JSON.stringify(idUsuario),
-            contentType: 'application/json'
-        })
-        .done(function () {
-            /* var row = $("#" + idUsuario);
-             $("table.no-activos tbody").append(row);*/
-            window.location.reload();
-        })
-        .fail(function (xhr, status) {
-            alert(status);
-        });
-    }
-
-</script>
+<script th:src="@{/js/admin-users.js}" src="../../js/admin-users.js"></script>
 
 </body>
 </html>
