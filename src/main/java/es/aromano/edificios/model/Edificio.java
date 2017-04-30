@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import es.aromano.empresas.model.Empresa;
 import es.aromano.espacios.model.Espacio;
@@ -31,12 +32,16 @@ public class Edificio {
 	@Column(name = "direccion", nullable=false)
     private String direccion;
     
+	@NotNull
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
     
     @OneToMany(mappedBy="edificio")
 	private Set<Espacio> espacios;
+    
+    @Column(name = "activo", nullable=false)
+    private boolean activo;
 
 
     public Edificio(){
@@ -46,6 +51,7 @@ public class Edificio {
     public Edificio(String nombre, String direccion){
         this.nombre = nombre;
         this.direccion = direccion;
+        this.activo = true;
         this.espacios = new HashSet<>();
     }
 
@@ -93,4 +99,13 @@ public class Edificio {
 		this.espacios = espacios;
 	}
 
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+	
 }

@@ -3,7 +3,7 @@
 <body th:fragment="copy">
 	
 	<div class="col s12 center">
-		<h4>Lista De Edificios</h4>
+		<h4>Edificios Activos</h4>
 		
 		<table class="responsive-table bordered highlight">
 	        <thead>
@@ -33,7 +33,7 @@
     </a>
     <ul>
       <li>
-      	<a class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
+      	<a th:href="@{/admin/edificio/new}" class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
       		<i class="material-icons">domain</i>
       	</a>
       </li>

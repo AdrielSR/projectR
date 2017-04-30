@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     private EmpresaService empresaService;
 
 
-
+    @Override
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if ( principal instanceof User) {

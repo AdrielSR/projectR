@@ -6,6 +6,12 @@ import es.aromano.edificios.model.Edificio;
 
 public interface EdificioService {
 
-	List<Edificio> edificiosEmpresaLogada();
+	List<Edificio> edificiosActivos();
+
+	Edificio crearEdificio(Edificio edificio);
+
+	Edificio findEdificio(int idEdificio);
+
+	Edificio editarEdificio(int idEdificio, Edificio edificio);
 
 }
