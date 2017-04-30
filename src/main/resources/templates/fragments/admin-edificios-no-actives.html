@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<div class="col s12 center">
+    <h4>Edificios No Activos</h4>
+
+    
+      <table class="responsive-table bordered highlight no-activos">
+          <thead>
+          <tr>
+              <th>Nombre</th>
+              <th>Direccion</th>
+              <th>Acciones</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr th:each="e : ${edificios_no_activos}" th:id="${e.id}">
+              <td th:text="${e.nombre}"></td>
+              <td th:text="${e.direccion}"></td>
+              <td>
+                  <i th:attr="data-id=${e.id}" class="material-icons activar">undo</i>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  
+</div>
+
+
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script th:src="@{/js/admin-edificios.js}" src="../../js/admin-edificios.js"></script>
+
+</body>
+</html>

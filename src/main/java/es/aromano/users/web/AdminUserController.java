@@ -35,7 +35,7 @@ public class AdminUserController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/users/restore", method = RequestMethod.GET)
+	@RequestMapping(value = "/users-no-actives", method = RequestMethod.GET)
 	public String listarUsuariosNoActivosEmpresa(Model model){
 		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
 		model.addAttribute("view", "admin-users-no-actives");

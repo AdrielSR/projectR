@@ -5,7 +5,7 @@
 	<div class="col s12 center">
 		<h4>Edificios Activos</h4>
 		
-		<table class="responsive-table bordered highlight">
+		<table class="responsive-table bordered highlight activos">
 	        <thead>
 	          <tr>
 	              <th>Nombre</th>
@@ -15,11 +15,12 @@
 	        </thead>
 	
 	        <tbody>
-	          <tr th:each="e : ${edificios}">
+	          <tr th:each="e : ${edificios}" th:id="${e.id}">
 	            <td th:text="${e.nombre}"></td>
 	            <td th:text="${e.direccion}"></td>
 				<td>
 					<a th:href="@{'/admin/edificio/' + ${e.id}}"><i class="material-icons">edit</i></a>
+					<i th:attr="data-id=${e.id}" class="material-icons desactivar">delete</i>
 				</td>
 	          </tr>
 	        </tbody>
@@ -32,14 +33,24 @@
       <i class="large material-icons">add</i>
     </a>
     <ul>
-      <li>
-      	<a th:href="@{/admin/edificio/new}" class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
-      		<i class="material-icons">domain</i>
-      	</a>
-      </li>
+	  	<li>
+	        <a th:href="@{/admin/edificios-no-actives}" class="btn-floating blue tooltipped" data-position="left" data-delay="50"
+	             data-tooltip="Restaurar edificios">
+	            <i class="material-icons">delete_sweep</i>
+	        </a>
+	    </li>
+	    <li>
+	    	<a th:href="@{/admin/edificio/new}" class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
+	    		<i class="material-icons">domain</i>
+	    	</a>
+	    </li>
     </ul>
 </div>
-	
+
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script th:src="@{/js/admin-edificios.js}" src="../../js/admin-edificios.js"></script>	
 	
 </body>
 </html>

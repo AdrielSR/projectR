@@ -22,6 +22,11 @@ public class EdificioServiceImp implements EdificioService{
 	public List<Edificio> edificiosActivos() {
 		return edificioRepository.edificiosActivos();
 	}
+	
+	@Override
+	public List<Edificio> edificiosDesactivos() {
+		return edificioRepository.edificiosDesactivos();
+	}
 
 	@Override
 	public Edificio crearEdificio(Edificio e) {
@@ -32,14 +37,19 @@ public class EdificioServiceImp implements EdificioService{
 	}
 
 	@Override
+	public Edificio findEdificioActivo(int idEdificio) {
+		return edificioRepository.findEdificioActivo(idEdificio);
+	}
+	
+	@Override
 	public Edificio findEdificio(int idEdificio) {
-		return edificioRepository.findEdificio(idEdificio);
+		return edificioRepository.findOne(idEdificio);
 	}
 
 	@Override
 	public Edificio editarEdificio(int idEdificio, Edificio e) {
 		
-		Edificio edificio = findEdificio(idEdificio);
+		Edificio edificio = findEdificioActivo(idEdificio);
 		
 		if(edificio == null){
 			
@@ -48,6 +58,18 @@ public class EdificioServiceImp implements EdificioService{
 		edificio.setNombre(e.getNombre());
 		edificio.setDireccion(e.getDireccion());
 		
+		
+		return edificioRepository.save(edificio);
+	}
+
+	@Override
+	public Edificio toggleActivarEdificio(Edificio edificio) {
+		if(edificio.isActivo()){
+			edificio.desactivar();
+		}
+		else{
+			edificio.activar();
+		}
 		
 		return edificioRepository.save(edificio);
 	}

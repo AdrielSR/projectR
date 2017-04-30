@@ -20,9 +20,17 @@ public class AdminEdificioController {
 	////// Listar edificios //////
 	
 	@RequestMapping(value = "/edificios", method = RequestMethod.GET)
-	public String listarEdificiosEmpresa(Model model){
+	public String listarEdificiosActivosEmpresa(Model model){
 		model.addAttribute("edificios", edificioService.edificiosActivos());
 		model.addAttribute("view", "admin-edificios");
+		
+		return "index";
+	}
+	
+	@RequestMapping(value = "/edificios-no-actives", method = RequestMethod.GET)
+	public String listarEdificiosNoActivosEmpresa(Model model){
+		model.addAttribute("edificios_no_activos", edificioService.edificiosDesactivos());
+		model.addAttribute("view", "admin-edificios-no-actives");
 		
 		return "index";
 	}
@@ -31,7 +39,7 @@ public class AdminEdificioController {
 
 	@RequestMapping(value = "/edificio/{id}", method = RequestMethod.GET)
 	public String editarEdificioEmpresa(@PathVariable("id") int idEdificio, Model model){
-		model.addAttribute("edificio", edificioService.findEdificio(idEdificio));
+		model.addAttribute("edificio", edificioService.findEdificioActivo(idEdificio));
 		model.addAttribute("view", "admin-edificio-edit");
 		
 		return "index";

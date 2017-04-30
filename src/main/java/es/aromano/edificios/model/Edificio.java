@@ -107,5 +107,12 @@ public class Edificio {
 		this.activo = activo;
 	}
 
+	public void activar(){
+		this.activo = true;
+	}
+	
+	public void desactivar(){
+		this.activo = false;
+	}
 	
 }
