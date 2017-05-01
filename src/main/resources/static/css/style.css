@@ -24,9 +24,31 @@ header, main, footer {
     padding: 14px 16px;
 }
 
-.valign-wrapper{
-	height: 100px;
+.jumbo{
+	height: auto;
 	background: #ddd;
+	padding: 20px 0px;
 }
+
+nav{
+	background-color: #FFF;
+}
+
+nav .brand-logo{
+	padding-left: 5px;
+	padding-right: 5px;
+	color: #000;
+	font-family: 'Pacifico', cursive;
+}
+
+nav i.material-icons{
+	color: #000;
+}
+
+.btn-floating,
+.btn-floating:hover{
+	background-color: #007aff;
+}
+
 
   

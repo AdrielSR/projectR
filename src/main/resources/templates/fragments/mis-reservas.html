@@ -3,10 +3,9 @@
 <body th:fragment="copy">
 	
 	<div class="col s12 center">
-		<h4>Lista De Reservas</h4>
+		<h4>Mis Reservas</h4>
 		
-		<div class="valign-wrapper" th:if="${#lists.isEmpty(users)}">
-			<i class="large material-icons">sentiment_very_dissatisfied</i>
+		<div class="jumbo" th:if="${#lists.isEmpty(users)}">
 			<h5 class="center-align">
 				Uups! Parece que todavia no has hecho ninguna reserva.
 			</h5>
