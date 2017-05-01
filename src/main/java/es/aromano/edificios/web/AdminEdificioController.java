@@ -27,10 +27,10 @@ public class AdminEdificioController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/edificios-no-actives", method = RequestMethod.GET)
+	@RequestMapping(value = "/edificios-no-activos", method = RequestMethod.GET)
 	public String listarEdificiosNoActivosEmpresa(Model model){
 		model.addAttribute("edificios_no_activos", edificioService.edificiosDesactivos());
-		model.addAttribute("view", "admin-edificios-no-actives");
+		model.addAttribute("view", "admin-edificios-no-activos");
 		
 		return "index";
 	}
@@ -59,14 +59,14 @@ public class AdminEdificioController {
 	
 	////// Crear edificio //////
 	
-	@RequestMapping(value = "/edificio/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/edificio", method = RequestMethod.GET)
 	public String crearEdificioEmpresa(Model model){
 		model.addAttribute("view", "admin-edificio-new");
 		
 		return "index";
 	}
 	
-	@RequestMapping(value = "/edificio/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/edificio", method = RequestMethod.POST)
 	public String doCrearEdificioEmpresa(@ModelAttribute Edificio edificio){
 		
 		Edificio newEdificio = edificioService.crearEdificio(edificio);

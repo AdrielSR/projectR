@@ -35,10 +35,10 @@ public class AdminUserController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/users-no-actives", method = RequestMethod.GET)
+	@RequestMapping(value = "/users-no-activos", method = RequestMethod.GET)
 	public String listarUsuariosNoActivosEmpresa(Model model){
 		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
-		model.addAttribute("view", "admin-users-no-actives");
+		model.addAttribute("view", "admin-users-no-activos");
 		
 		return "index";
 	}
@@ -70,14 +70,14 @@ public class AdminUserController {
 
 	////// Crear usuario //////
 
-	@RequestMapping(value = "/user/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String crearUsuariosEmpresa(Model model){
 		model.addAttribute("view", "admin-user-new");
 		
 		return "index";
 	}
 	
-	@RequestMapping(value = "/user/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/user", method = RequestMethod.POST)
 	public String doCrearUsuariosEmpresa(@ModelAttribute User user){
 		
 		User newUser = userService.createUser(user);
