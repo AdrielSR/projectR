@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import es.aromano.edificios.model.Edificio;
 
@@ -26,15 +27,20 @@ public class Espacio {
 	@Column(name = "aforo", nullable=false)
 	private int aforo;
 	
+	@NotNull
 	@ManyToOne
     @JoinColumn(name = "edificio_id")
     private Edificio edificio;
+	
+	@Column(name="activo", nullable=false)
+	private boolean activo;
 	
 	public Espacio(){ }
 	
 	public Espacio(String nombre, int aforo){
 		this.nombre = nombre;
 		this.aforo = aforo;
+		this.activo = true;
 	}
 
 	public int getId() {
@@ -67,6 +73,14 @@ public class Espacio {
 
 	public void setEdificio(Edificio edificio) {
 		this.edificio = edificio;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 

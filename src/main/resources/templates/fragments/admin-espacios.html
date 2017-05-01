@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+	
+	<div class="col s12 center">
+		<h4>Espacios Activos</h4>
+		
+		<table class="responsive-table bordered highlight activos">
+	        <thead>
+	          <tr>
+	              <th>Edificio</th>
+	              <th>Nombre</th>
+	              <th>Aforo</th>
+	              <th>Acciones</th>
+	          </tr>
+	        </thead>
+	
+	        <tbody>
+	          <tr th:each="e : ${espacios}" th:id="${e.id}">
+	            <td th:text="${e.edificio.id}"></td>
+	            <td th:text="${e.nombre}"></td>
+	            <td th:text="${e.aforo}"></td>
+				<td>
+					<a th:href="@{'/admin/espacio/' + ${e.id}}"><i class="material-icons">edit</i></a>
+					<i th:attr="data-id=${e.id}" class="material-icons desactivar">delete</i>
+				</td>
+	          </tr>
+	        </tbody>
+      </table>
+	</div>
+	
+	<!-- Float Button -->
+<div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+    </a>
+    <ul>
+	  	<li>
+	        <a th:href="@{/admin/espacios-no-actives}" class="btn-floating blue tooltipped" data-position="left" data-delay="50"
+	             data-tooltip="Restaurar espacios">
+	            <i class="material-icons">delete_sweep</i>
+	        </a>
+	    </li>
+	    <li>
+	    	<a th:href="@{/admin/espacio/new}" class="btn-floating blue tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
+	    		<i class="material-icons">domain</i>
+	    	</a>
+	    </li>
+    </ul>
+</div>
+
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script th:src="@{/js/admin-espacios.js}" src="../../js/admin-espacios.js"></script>	
+	
+</body>
+</html>
