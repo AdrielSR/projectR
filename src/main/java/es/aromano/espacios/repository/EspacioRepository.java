@@ -15,5 +15,10 @@ public interface EspacioRepository extends JpaRepository<Espacio, Integer> {
 			+ "where ed.empresa.id = ?#{principal.empresa.id} "
 			+ "and ed.activo = 1 and es.activo = 1")
 	List<Espacio> findEspaciosActivos();
+
+	@Query("select es from Espacio es join es.edificio ed "
+			+ "where ed.empresa.id = ?#{principal.empresa.id} "
+			+ "and ed.activo = 1 and es.activo = 0")
+	List<Espacio> findEspaciosDesactivos();
 	
 }

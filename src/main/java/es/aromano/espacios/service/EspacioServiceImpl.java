@@ -19,11 +19,22 @@ public class EspacioServiceImpl implements EspacioService {
 	@Autowired
 	private EdificioService edificioService;
 	
+	
+	@Override
+	public Espacio findEspacio(int idEspacio) {
+		return espacioRepository.findOne(idEspacio);
+	}
+	
 	@Override
 	public List<Espacio> espaciosActivos() {
 		return espacioRepository.findEspaciosActivos();
 	}
 
+	@Override
+	public List<Espacio> espaciosDesactivos() {
+		return espacioRepository.findEspaciosDesactivos();
+	}
+	
 	@Override
 	public Espacio crearEspacio(EspacioDTO espacioDTO) {
 		
@@ -32,5 +43,20 @@ public class EspacioServiceImpl implements EspacioService {
 		
 		return espacioRepository.save(newEspacio);
 	}
+
+	@Override
+	public Espacio toggleActivarEspacio(Espacio espacio) {
+		if(espacio.isActivo()){
+			espacio.desactivar();
+		}
+		else{
+			espacio.activar();
+		}
+		
+		
+		return espacioRepository.save(espacio);
+	}
+
+
 
 }

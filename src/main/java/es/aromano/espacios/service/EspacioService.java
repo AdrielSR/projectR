@@ -7,9 +7,14 @@ import es.aromano.espacios.web.EspacioDTO;
 
 public interface EspacioService {
 
+	Espacio findEspacio(int idEspacio);
 
 	List<Espacio> espaciosActivos();
 
+	List<Espacio> espaciosDesactivos();
+	
 	Espacio crearEspacio(EspacioDTO espacioDTO);
+
+	Espacio toggleActivarEspacio(Espacio espacio);
 	
 }

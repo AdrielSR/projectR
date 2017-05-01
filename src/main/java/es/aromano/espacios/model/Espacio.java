@@ -82,6 +82,13 @@ public class Espacio {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+
+	public void activar() {
+		this.activo = true;	
+	}
 	
+	public void desactivar() {
+		this.activo = false;	
+	}
 
 }

@@ -31,6 +31,14 @@ public class AdminEspacioController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/espacios-no-activos", method = RequestMethod.GET)
+	public String listarEspaciosNoActivos(Model model){
+		model.addAttribute("espacios_no_activos", espacioService.espaciosDesactivos());
+		model.addAttribute("view", "admin-espacios-no-activos");
+		
+		return "index";
+	}
+	
 	
 	////// Crear espacio //////
 	
