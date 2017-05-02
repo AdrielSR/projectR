@@ -1,16 +1,22 @@
 package es.aromano.espacios.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import es.aromano.edificios.model.Edificio;
+import es.aromano.reservas.model.Reserva;
 
 @Entity
 @Table(name="espacio")
@@ -35,12 +41,18 @@ public class Espacio {
 	@Column(name="activo", nullable=false)
 	private boolean activo;
 	
-	public Espacio(){ }
+	@OneToMany(mappedBy="espacio")
+	private List<Reserva> reservas;
+	
+	public Espacio(){
+		this.reservas = new ArrayList<>();
+	}
 	
 	public Espacio(String nombre, int aforo){
 		this.nombre = nombre;
 		this.aforo = aforo;
 		this.activo = true;
+		this.reservas = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -91,4 +103,13 @@ public class Espacio {
 		this.activo = false;	
 	}
 
+	public List<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	
 }
