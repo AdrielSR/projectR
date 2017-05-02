@@ -5,22 +5,29 @@
 	<div class="col s12 center">
 		<h4>Mis Reservas</h4>
 		
-		<div class="jumbo" th:if="${#lists.isEmpty(users)}">
+		<div class="jumbo" th:if="${#lists.isEmpty(reservas)}">
 			<h5 class="center-align">
 				Uups! Parece que todavia no has hecho ninguna reserva.
 			</h5>
 		</div>
 		
-		<table class="responsive-table bordered highlight" th:if="${not #lists.isEmpty(users)}">
+		<table class="responsive-table bordered highlight" th:if="${not #lists.isEmpty(reservas)}">
 	        <thead>
 	          <tr>
 	              <th>Asunto</th>
 	              <th>Lugar</th>
-	              <th>Fecha</th>
-	              <th>Estado</th>
+	              <th>Desde</th>
+	              <th>Hasta</th>
+	              <th>Acciones</th>
 	          </tr>
 	        </thead>
-	
+				<tr th:each="r : ${reservas}">
+					<td th:text="${#strings.abbreviate(r.asunto,14)}"> </td>
+					<td th:text="${r.espacio.nombre}"> </td>
+					<td th:text="${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}"> </td>
+					<td th:text="${#dates.format(r.rango.fin,'dd/MM/yyy HH:mm')}"> </td>
+					<td></td>
+				</tr>
 	        <tbody>
 	          
 	        </tbody>
