@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<br/><br/>
+
+<div id="calendar" class="col s12 center">
+</div>
+
+
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+
+	$('#calendar').fullCalendar({
+		lang: 'es',
+		timezone: 'local',
+	    header: {
+	        left: 'prev,next today',
+	        center: 'title',
+	        right: 'month,agendaWeek,agendaDay,listWeek'
+	    },
+	    editable: true,
+	    eventLimit: true,
+	    events: [
+	             {
+	                 title: 'Event1',
+	                 start: '2017-05-04'
+	             },
+	             {
+	                 title: 'Event2',
+	                 start: '2017-05-05'
+	             }
+	             // etc...
+	         ],
+	   color: 'yellow',   // an option!
+	   textColor: 'black' // an option!
+  
+	});
+	
+});
+</script>
+
+</body>
+</html>
