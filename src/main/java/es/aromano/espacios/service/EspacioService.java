@@ -17,4 +17,5 @@ public interface EspacioService {
 
 	Espacio toggleActivarEspacio(Espacio espacio);
 	
+	List<Espacio> findEspaciosActivosByIdEdificio(int idEdificio);
 }

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+	
+	<div class="col s12 center">
+		<h4>Seleccione un espacio</h4>
+		<div class="input-field col s6 offset-s3">
+			<select>
+				<option>Elija una opcion...</option>
+				<option th:each="e : ${espacios}"
+						th:value="${e.id}"
+						th:text="${e.nombre}"></option>
+			</select>
+			
+			<br/>
+			<hr/>
+			<br/>
+			<a th:href="@{''}">SIGUIENTE</a>
+	   </div>  
+	
+	</div>
+	
+	
+	
+</body>
+</html>

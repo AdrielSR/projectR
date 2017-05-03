@@ -3,6 +3,7 @@ package es.aromano.edificios.service;
 import java.util.List;
 
 import es.aromano.edificios.model.Edificio;
+import es.aromano.users.model.User;
 
 public interface EdificioService {
 
@@ -20,5 +21,5 @@ public interface EdificioService {
 
 	Edificio toggleActivarEdificio(Edificio edificio);
 
-
+	boolean canAccessUser(int id);
 }

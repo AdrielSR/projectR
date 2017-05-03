@@ -57,6 +57,11 @@ public class EspacioServiceImpl implements EspacioService {
 		return espacioRepository.save(espacio);
 	}
 
+	@Override
+	public List<Espacio> findEspaciosActivosByIdEdificio(int idEdificio) {
+		return espacioRepository.findEspaciosActivosByIdEdificio(idEdificio);
+	}
+
 
 
 }

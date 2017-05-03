@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 
 import es.aromano.edificios.model.Edificio;
 import es.aromano.edificios.repository.EdificioRepository;
+import es.aromano.users.model.User;
 import es.aromano.users.service.UserService;
 
 @Service
-public class EdificioServiceImp implements EdificioService{
+public class EdificioServiceImpl implements EdificioService{
 
 	@Autowired
 	private EdificioRepository edificioRepository;
@@ -72,6 +73,13 @@ public class EdificioServiceImp implements EdificioService{
 		}
 		
 		return edificioRepository.save(edificio);
+	}
+
+	@Override
+	public boolean canAccessUser(int id) {
+		return edificioRepository.edificiosActivos()
+				.stream()
+				.anyMatch(e -> e.getId() == id);
 	}
 
 

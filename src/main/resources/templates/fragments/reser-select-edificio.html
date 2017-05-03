@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+	
+	<div class="col s12 center">
+		<h4>Seleccione un edificio</h4>
+		<div class="input-field col s6 offset-s3">
+			<select class="selec_edificio">
+				<option>Elija una opcion...</option>
+				<option th:each="e : ${edificios}"
+						th:value="${e.id}"
+						th:text="${e.nombre}"></option>
+			</select>
+			
+			<br/>
+			<hr/>
+			<br/>
+			<a id="edificio_link" th:href="@{''}">SIGUIENTE</a>
+	   </div>  
+	
+	</div>
+	
+	<script th:inline="javascript">
+    	var baseURL = /*[[@{/}]]*/ '/';
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$(".selec_edificio").change(function() {
+				  var edificio_id = $(this).val();
+				  
+				  var link = baseURL + 'edificio/' + edificio_id + '/espacios';
+				  $("#edificio_link").attr("href",link);
+			});
+			
+			
+			
+			$("#edificio_link").click(function(){
+				var link = $("#edificio_link").attr('href');
+				if(link == '')
+				   alert("Debes seleccionar un edificio.");
+				
+			});
+			
+			
+		});
+	</script>
+	
+</body>
+</html>
