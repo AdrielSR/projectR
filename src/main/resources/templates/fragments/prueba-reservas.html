@@ -25,19 +25,12 @@ $(document).ready(function(){
 	    },
 	    editable: true,
 	    eventLimit: true,
-	    events: [
+        eventSources: [
 	             {
-	                 title: 'Event1',
-	                 start: '2017-05-04'
-	             },
-	             {
-	                 title: 'Event2',
-	                 start: '2017-05-05'
-	             }
-	             // etc...
-	         ],
-	   color: 'yellow',   // an option!
-	   textColor: 'black' // an option!
+	                 url: 'espacio/1/reservas',
+                     textColor: 'black'
+                 }
+	         ]
   
 	});
 	
