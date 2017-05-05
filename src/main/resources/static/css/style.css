@@ -53,4 +53,7 @@ nav i.material-icons{
 .fc-center h2{
 	font-size: 26px;
 }
-  
+
+.collection .collection-item.avatar{
+	padding-left: 20px;
+}
