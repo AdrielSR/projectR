@@ -15,13 +15,18 @@
 			<li th:each="r : ${reservas}" class="collection-item avatar">
 
 				<div class="row">
-					<div class="col s6">
-						<p th:inline="text"> Donde: [[${r.espacio.nombre}]]</p>
-					</div>
-
-					<div class="col s6">
-						<p th:inline="text"> Cuando: [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]]</p>
-					</div>
+					<div class="col s12">
+						<div class="col s6" style="padding-left: 0px;">
+							<p th:inline="text"> Donde: [[${r.espacio.nombre}]]</p>
+						</div>
+	
+						<div class="col s6" style="padding-left: 0px;">
+							<p th:inline="text"> 
+								Cuando: [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
+								[[${#dates.format(r.rango.fin,'HH:mm')}]]
+							</p>
+						</div>
+					</div>					
 				</div>
 
 				<div class="row" style="margin-bottom: 0px;">
@@ -30,12 +35,42 @@
 					</div>
 				</div>
 
-				<a href="#!" class="secondary-content"><i class="material-icons">more_vert</i></a>
+				<a th:attr="data-id=${r.id}" href="#modal1" class="secondary-content"><i class="material-icons">more_vert</i></a>
 			</li>
 		</ul>
 
+	<!-- Modal Structure -->
+	  <div id="modal1" class="modal bottom-sheet">
+	    <div class="modal-footer">
+	      <a id="link-eliminar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Eliminar</a>
+	      <a id="link-editar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat blue-text">Editar</a>
+	    </div>
+	  </div>
+
+
 	</div>
 	
+	
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+		$('.modal').modal();
+		
+		$('a.secondary-content').click(function(){
+			var id_reserva = $(this).attr("data-id");
+			
+			var url_editar = "/editar/" + id_reserva;
+			$("#link-editar").attr("href", url_editar)
+			
+			var url_eliminar = "/eliminar/" + id_reserva;
+			$("#link-eliminar").attr("href", url_eliminar)
+		});
+		
+	});
+	
+</script>
+
 	
 </body>
 </html>

@@ -22,7 +22,7 @@
             <ul id="nav-mobile" class="right">
                
                 <li>
-                	<a class="dropdown-button" href="#!" data-activates="dropdown1">
+                	<a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true">
                 		<i class="material-icons">more_vert</i>
                 	</a>
                 </li>
@@ -84,13 +84,12 @@
 			 menuWidth: 260,
 		});
 		
-		$(".dropdown-button").dropdown({
-			 belowOrigin: true
-		});
+		$(".dropdown-button").dropdown();
 		
 		$('.tooltipped').tooltip({delay: 50});
 		
 		$('select').material_select();
+		
 	});
 	
 </script>
