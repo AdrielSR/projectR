@@ -10,6 +10,7 @@
 
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
+    var idEspacio = /*[[${idEspacio}]]*/ '1';
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -27,7 +28,7 @@ $(document).ready(function(){
 	    eventLimit: true,
         eventSources: [
 	             {
-	                 url: 'espacio/1/reservas',
+	                 url: baseURL + idEspacio + '/reservas',
                      textColor: 'black'
                  }
 	         ]

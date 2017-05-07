@@ -16,7 +16,7 @@ public class ReservaRestController {
     @Autowired
     private ReservaService reservaService;
 
-    @RequestMapping(value = "/espacio/{id}/reservas")
+    @RequestMapping(value = "/{id}/reservas")
     public List<ReservaDTO> getReservasFromEspacio(@PathVariable("id") int idEspacio){
         return reservaService.findReservasByIdEspacio(idEspacio).stream()
                 .map(r -> ReservaDTO.from(r))

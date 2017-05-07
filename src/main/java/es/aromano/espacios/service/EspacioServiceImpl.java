@@ -62,6 +62,17 @@ public class EspacioServiceImpl implements EspacioService {
 		return espacioRepository.findEspaciosActivosByIdEdificio(idEdificio);
 	}
 
+	@Override
+	public boolean canAccessUser(int idEspacio) {
+		Espacio espacio = findEspacio(idEspacio);
+		
+		if(espacio == null){
+			return false;
+		}
+		
+		return edificioService.canAccessUser(espacio.getEdificio().getId());
+	}
+
 
 
 }

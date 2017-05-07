@@ -5,7 +5,7 @@
 	<div class="col s12 center">
 		<h4>Seleccione un espacio</h4>
 		<div class="input-field col s6 offset-s3">
-			<select>
+			<select class="selec_espacio">
 				<option>Elija una opcion...</option>
 				<option th:each="e : ${espacios}"
 						th:value="${e.id}"
@@ -15,11 +15,36 @@
 			<br/>
 			<hr/>
 			<br/>
-			<a th:href="@{''}">SIGUIENTE</a>
+			<a id="espacio_link" th:href="@{''}">SIGUIENTE</a>
 	   </div>  
 	
 	</div>
-	
+
+<script th:inline="javascript">
+   	var baseURL = /*[[@{/}]]*/ '/';
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(".selec_espacio").change(function() {
+			  var espacio_id = $(this).val();
+			  
+			  var link = baseURL + 'espacio/' + espacio_id + '/reservas';
+			  $("#espacio_link").attr("href", link);
+		});
+		
+		
+		
+		$("#espacio_link").click(function(){
+			var link = $("#espacio_link").attr('href');
+			if(link == '')
+			   alert("Debes seleccionar un espacio.");
+			
+		});
+		
+		
+	});
+</script>
 	
 	
 </body>

@@ -76,10 +76,10 @@ public class EdificioServiceImpl implements EdificioService{
 	}
 
 	@Override
-	public boolean canAccessUser(int id) {
+	public boolean canAccessUser(int idEdificio) {
 		return edificioRepository.edificiosActivos()
 				.stream()
-				.anyMatch(e -> e.getId() == id);
+				.anyMatch(e -> e.getId() == idEdificio);
 	}
 
 
