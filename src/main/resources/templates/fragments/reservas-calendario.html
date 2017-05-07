@@ -4,39 +4,26 @@
 
 <br/><br/>
 
+<!-- Calendario -->
 <div id="calendar" class="col s12 center">
 </div>
 
+<!-- Modal Crear Reserva -->
+ <div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>Nueva Reserva</h4>
+     <p>...</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Crear</a>
+   </div>
+ </div>
 
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
     var idEspacio = /*[[${idEspacio}]]*/ '1';
 </script>
-<script type="text/javascript">
-$(document).ready(function(){
-	
-
-	$('#calendar').fullCalendar({
-		lang: 'es',
-		timezone: 'local',
-	    header: {
-	        left: 'prev,next today',
-	        center: 'title',
-	        right: 'month,agendaWeek,agendaDay,listWeek'
-	    },
-	    editable: true,
-	    eventLimit: true,
-        eventSources: [
-	             {
-	                 url: baseURL + idEspacio + '/reservas',
-                     textColor: 'black'
-                 }
-	         ]
-  
-	});
-	
-});
-</script>
+<script th:src="@{/js/reservas-calendario.js}" src="../../js/reservas-calendario.js"></script>
 
 </body>
 </html>
