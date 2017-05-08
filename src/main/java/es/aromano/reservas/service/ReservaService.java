@@ -9,4 +9,6 @@ public interface ReservaService {
 	List<Reserva> reservasUsuario();
 
     List<Reserva> findReservasByIdEspacio(int idEspacio);
+
+    Reserva crearReserva(ReservaDTO reservaDTO);
 }
