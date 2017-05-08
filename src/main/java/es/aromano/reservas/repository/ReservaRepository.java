@@ -13,7 +13,7 @@ import es.aromano.reservas.model.Reserva;
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 
-	@Query("from Reserva r where r.user.id = ?#{principal.id}")
+	@Query("from Reserva r where r.user.id = ?#{principal.id} order by r.rango.inicio")
 	List<Reserva> reservasUsuario();
 
 	@Query("select r from Reserva r join r.espacio es join es.edificio ed" +

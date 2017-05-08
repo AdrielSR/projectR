@@ -13,26 +13,25 @@
 
 		<ul class="collection" th:if="${not #lists.isEmpty(reservas)}">
 			<li th:each="r : ${reservas}" class="collection-item avatar">
-
 				<div class="row">
 					<div class="col s12">
+						<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
+					</div>
+				</div>
+				
+				<div class="row" style="margin-bottom: 0px;">
+					<div class="col s12">
 						<div class="col s6" style="padding-left: 0px;">
-							<p th:inline="text"> Donde: [[${r.espacio.nombre}]]</p>
+							<p th:inline="text"> <i><b>Donde:</b></i> [[${r.espacio.nombre}]]</p>
 						</div>
 	
 						<div class="col s6" style="padding-left: 0px;">
 							<p th:inline="text"> 
-								Cuando: [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
+								<i><b>Cuando:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
 								[[${#dates.format(r.rango.fin,'HH:mm')}]]
 							</p>
 						</div>
 					</div>					
-				</div>
-
-				<div class="row" style="margin-bottom: 0px;">
-					<div class="col s12">
-						<span th:inline="text"> Asunto: [[${#strings.abbreviate(r.asunto,20)}]]</span>
-					</div>
 				</div>
 
 				<a th:attr="data-id=${r.id}" href="#modal1" class="secondary-content"><i class="material-icons">more_vert</i></a>
