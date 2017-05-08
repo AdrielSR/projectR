@@ -79,11 +79,13 @@ function crearReserva(reserva, reqHeaders) {
         contentType: 'application/json'
     })
 	.done(function () {
-        $('#modal1').modal('close');
+        closeModal();
         refreshCalendar();
 	})
 	.fail(function (xhr, status) {
-		alert(status);
+        closeModal();
+        var error = JSON.parse(xhr.responseText);
+		console.log(error.msg);
 	});
 
 }

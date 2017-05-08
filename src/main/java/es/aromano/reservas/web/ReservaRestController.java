@@ -1,5 +1,6 @@
 package es.aromano.reservas.web;
 
+import es.aromano.reservas.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.model.Reserva;
 import es.aromano.reservas.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ReservaRestController {
     }
 
     @RequestMapping(value = "/crear-reserva", method = RequestMethod.POST)
-    public ResponseEntity<Void> crearReserva(@RequestBody ReservaDTO reservaDTO){
+    public ResponseEntity<Void> crearReserva(@RequestBody ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
         Reserva newReserva = reservaService.crearReserva(reservaDTO);
 

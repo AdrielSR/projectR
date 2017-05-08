@@ -1,6 +1,9 @@
 package es.aromano.reservas.service;
 
 import java.util.List;
+
+import es.aromano.reservas.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.model.RangoDateTime;
 import es.aromano.reservas.model.Reserva;
 import es.aromano.reservas.web.ReservaDTO;
 
@@ -10,5 +13,7 @@ public interface ReservaService {
 
     List<Reserva> findReservasByIdEspacio(int idEspacio);
 
-    Reserva crearReserva(ReservaDTO reservaDTO);
+    Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException;
+
+    boolean esPosibleReservarEnEspacio(RangoDateTime rango, int idEspacio);
 }

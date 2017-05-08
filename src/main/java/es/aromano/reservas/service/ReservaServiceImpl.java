@@ -3,6 +3,8 @@ package es.aromano.reservas.service;
 import java.util.List;
 
 import es.aromano.espacios.service.EspacioService;
+import es.aromano.reservas.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.model.RangoDateTime;
 import es.aromano.reservas.model.ReservaStepBuilder;
 import es.aromano.reservas.web.ReservaDTO;
 import es.aromano.users.service.UserService;
@@ -35,7 +37,12 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public Reserva crearReserva(ReservaDTO reservaDTO) {
+	public Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
+
+		if(!esPosibleReservarEnEspacio(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
+			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra"));
+		}
+
 		Reserva newReserva = ReservaStepBuilder.builder()
 								.propietario(userService.getCurrentUser())
 								.lugar(espacioService.findEspacio(reservaDTO.getIdEspacio()))
@@ -46,6 +53,11 @@ public class ReservaServiceImpl implements ReservaService {
 
 
 		return reservaRepository.save(newReserva);
+	}
+
+	@Override
+	public boolean esPosibleReservarEnEspacio(RangoDateTime rango, int idEspacio) {
+		return reservaRepository.findReservasEspacioEnRango(rango.getInicio(), rango.getFin(), idEspacio).isEmpty();
 	}
 
 }
