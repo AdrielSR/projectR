@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<div class="col s12">
+
+    <h4 class="center">Editar Reserva</h4>
+    <form>
+        <div class="col s6 offset-s3">
+            <div>
+                <label> Asunto :
+                    <input type="text" id="asunto" th:value="${reserva.asunto}"/>
+                </label>
+            </div>
+            <div>
+                <label> Desde:
+                    <input type="text" id="datetimepicker1" th:value="${#dates.format(reserva.rango.inicio,'dd/MM/yyy HH:mm')}"/>
+                </label>
+            </div>
+            <div>
+                <label> Hasta:
+                    <input type="text" id="datetimepicker2" th:value="${#dates.format(reserva.rango.fin,'dd/MM/yyy HH:mm')}"/>
+                </label>
+            </div>
+        </div>
+
+
+        <div class="col s12 center">
+            <button id="btn-guardar" class="btn waves-effect waves-light">Guardar</button>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

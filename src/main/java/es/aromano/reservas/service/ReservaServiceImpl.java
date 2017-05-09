@@ -1,6 +1,7 @@
 package es.aromano.reservas.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import es.aromano.espacios.service.EspacioService;
 import es.aromano.reservas.excepciones.ReservaSolapadaException;
@@ -28,7 +29,7 @@ public class ReservaServiceImpl implements ReservaService {
 	
 	@Override
 	public List<Reserva> reservasUsuario() {
-		return reservaRepository.reservasUsuario();
+		return reservaRepository.findReservasUsuario();
 	}
 
 	@Override
@@ -58,6 +59,16 @@ public class ReservaServiceImpl implements ReservaService {
 	@Override
 	public boolean esPosibleReservarEnEspacio(RangoDateTime rango, int idEspacio) {
 		return reservaRepository.findReservasEspacioEnRango(rango.getInicio(), rango.getFin(), idEspacio).isEmpty();
+	}
+
+	@Override
+	public Reserva findReservaByIdReserva(long idReserva) {
+		return reservaRepository.findOne(idReserva);
+	}
+
+	@Override
+	public boolean canAccessUser(long idReserva) {
+		return Objects.nonNull(reservaRepository.findReservaUsuario(idReserva));
 	}
 
 }

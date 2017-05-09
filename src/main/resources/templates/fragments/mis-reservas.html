@@ -59,10 +59,10 @@
 		$('a.secondary-content').click(function(){
 			var id_reserva = $(this).attr("data-id");
 			
-			var url_editar = "/editar/" + id_reserva;
+			var url_editar = "/reserva/" + id_reserva;
 			$("#link-editar").attr("href", url_editar)
 			
-			var url_eliminar = "/eliminar/" + id_reserva;
+			var url_eliminar = "/reserva-eliminar/" + id_reserva;
 			$("#link-eliminar").attr("href", url_eliminar)
 		});
 		
