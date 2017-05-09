@@ -6,6 +6,7 @@ import es.aromano.reservas.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,20 @@ public class ReservaRestController {
         Reserva newReserva = reservaService.crearReserva(reservaDTO);
 
         if(Objects.isNull(newReserva)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PreAuthorize("@reservaServiceImpl.canAccessUser(#idReserva)")
+    @RequestMapping(value = "/editar-reserva/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Void> editarReserva(@PathVariable("id") long idReserva, @RequestBody ReservaDTO reservaDTO) throws ReservaSolapadaException {
+
+        Reserva editedReserva = reservaService.editarReserva(reservaDTO);
+
+        if(Objects.isNull(editedReserva)){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 

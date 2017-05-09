@@ -2,6 +2,9 @@ package es.aromano.reservas.web;
 
 import es.aromano.reservas.model.Reserva;
 import org.joda.time.DateTime;
+import org.springframework.util.StringUtils;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 
 public class ReservaDTO {
@@ -38,7 +41,7 @@ public class ReservaDTO {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = isNotBlank(title) ? title : "Sin asunto";
     }
 
     public DateTime getStart() {

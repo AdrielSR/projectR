@@ -50,8 +50,10 @@ dependencies {
 	// JACKSON JSON DATA BIND
 	compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version: '2.8.7'
 	compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda', version: '2.8.7'
-	
-	
+
+	// APACHE: COMMONS
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+
 
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

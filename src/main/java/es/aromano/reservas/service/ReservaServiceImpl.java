@@ -62,6 +62,11 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
+	public boolean esPosibleEditarReservaEnEspacio(RangoDateTime rango, int idEspacio, long idReserva) {
+		return reservaRepository.findReservasEspacioEnRango(rango.getInicio(), rango.getFin(), idEspacio, idReserva).isEmpty();
+	}
+
+	@Override
 	public Reserva findReservaByIdReserva(long idReserva) {
 		return reservaRepository.findOne(idReserva);
 	}
@@ -69,6 +74,20 @@ public class ReservaServiceImpl implements ReservaService {
 	@Override
 	public boolean canAccessUser(long idReserva) {
 		return Objects.nonNull(reservaRepository.findReservaUsuario(idReserva));
+	}
+
+	@Override
+	public Reserva editarReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
+
+		if(!esPosibleEditarReservaEnEspacio(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio(), reservaDTO.getId())){
+			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra"));
+		}
+
+		Reserva reserva = findReservaByIdReserva(reservaDTO.getId());
+		reserva.setAsunto(reservaDTO.getTitle());
+		reserva.setRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()));
+
+		return reservaRepository.save(reserva);
 	}
 
 }
