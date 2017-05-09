@@ -21,7 +21,7 @@ function toggleActivarDesactivar(idEspacio) {
         contentType: 'application/json'
     })
     .done(function () {
-        $("#" + idEspacio).remove(); 
+    	removeElementById(idEspacio);   
     })
     .fail(function (xhr, status) {
         alert(status);

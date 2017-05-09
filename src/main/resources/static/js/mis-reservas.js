@@ -1,6 +1,5 @@
 $(document).ready(function(){
     
-
 	$('.modal').modal();
 	
 	$('a.secondary-content').click(function(){
@@ -22,7 +21,7 @@ $(document).ready(function(){
 	
 });
 
-function eliminarReserva(idReserva, reqHeaders){
+function eliminarReserva(idReserva){
     $.ajax({
         url: baseURL + 'eliminar-reserva',
         method: 'POST',

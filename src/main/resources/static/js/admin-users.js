@@ -21,7 +21,7 @@ function toggleActivarDesactivar(idUsuario) {
         contentType: 'application/json'
     })
     .done(function () {
-        $("#" + idUsuario).remove(); 
+    	removeElementById(idUsuario); 
     })
     .fail(function (xhr, status) {
         alert(status);

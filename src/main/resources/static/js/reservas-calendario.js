@@ -1,39 +1,7 @@
 $(document).ready(function(){
 
-    $("input[id^='datetimepicker']").datetimepicker({
-		format: 'd/m/Y H:i',
-		lang: 'es',
-		step: 30,
-		mask: true
-	});
-
-
-    /// Controla que la hora de fin no sea menor que la de inicio ///
-    $("#datetimepicker1").change(function(){
-        var comienzo = toIso8601($('#datetimepicker1').val());
-        var m = new moment(comienzo);
-        var fin = m.add(1,'hours');
-        $('#datetimepicker2').val(fin.format("DD/MM/YYYY HH:mm"));
-    });
-
-    $("#datetimepicker2").change(function(){
-        var comienzo = toIso8601($('#datetimepicker1').val());
-        var fin = toIso8601($('#datetimepicker2').val());
-        var start = new moment(comienzo)
-        var end = new moment(fin);
-        if(end.isBefore(start)){
-            $('#datetimepicker2').val(start.add(1,'hours').format("DD/MM/YYYY HH:mm"));
-        }
-        else{
-            $('#datetimepicker2').val(end.format("DD/MM/YYYY HH:mm"));
-        }
-
-    });
-
-
-
-
-
+	$('.modal').modal();
+	
     $("#crear-reserva").click(function(){
 		var reserva = {};
 		reserva.title = $("#asunto").val();
@@ -44,8 +12,6 @@ $(document).ready(function(){
 		crearReserva(reserva);
 	});
 
-
-	$('.modal').modal();
 
 	$('#calendar').fullCalendar({
 		lang: 'es',
@@ -110,11 +76,3 @@ function crearReserva(reserva) {
 
 }
 
-
-function refreshCalendar(){
-    $("#calendar").fullCalendar('refetchEvents');
-}
-
-function closeModal(){
-    $('#modal1').modal('close');
-}
