@@ -1,10 +1,5 @@
 $(document).ready(function() {
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    var reqHeaders = [];
-    reqHeaders[header] = token;
-
-
+  
     $("#editar-reserva").click(function(){
         var reserva = {};
         reserva.id = idReserva;
@@ -13,18 +8,17 @@ $(document).ready(function() {
         reserva.end = toIso8601($("#datetimepicker2").val());
         reserva.idEspacio = $("#idEspacio").val();
 
-        editarReserva(reserva, reqHeaders);
+        editarReserva(reserva);
     });
 
 
 });
 
 
-function editarReserva(reserva, reqHeaders){
+function editarReserva(reserva){
     $.ajax({
         url: baseURL + 'editar-reserva/' + idReserva,
         method: 'POST',
-        headers: reqHeaders,
         data: JSON.stringify(reserva),
         contentType: 'application/json'
     })

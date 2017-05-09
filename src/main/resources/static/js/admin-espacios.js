@@ -1,27 +1,22 @@
 $(document).ready(function () {
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    var reqHeaders = [];
-    reqHeaders[header] = token;
-    
+  
     $(".no-activos td i.activar").on("click", function () {
         var idEspacio = $(this).attr("data-id");
-        toggleActivarDesactivar(idEspacio, reqHeaders);
+        toggleActivarDesactivar(idEspacio);
     });
     
     $(".activos td i.desactivar").on("click", function () {
         var idEspacio = $(this).attr("data-id");
-        toggleActivarDesactivar(idEspacio, reqHeaders);
+        toggleActivarDesactivar(idEspacio);
     });
 
 });
 
 
-function toggleActivarDesactivar(idEspacio, reqHeaders) {
+function toggleActivarDesactivar(idEspacio) {
     $.ajax({
         url: baseURL + 'user/activar-desactivar-espacio',
         method: 'POST',
-        headers: reqHeaders,
         data: JSON.stringify(idEspacio),
         contentType: 'application/json'
     })

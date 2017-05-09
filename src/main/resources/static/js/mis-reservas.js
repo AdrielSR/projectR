@@ -1,8 +1,5 @@
 $(document).ready(function(){
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    var reqHeaders = [];
-    reqHeaders[header] = token;
+    
 
 	$('.modal').modal();
 	
@@ -18,7 +15,7 @@ $(document).ready(function(){
     $('#link-eliminar').click(function(){
 		if(confirm("Quieres eliminar esta reserva?")){
 		    var idReserva = $(this).attr("data-id");
-		    eliminarReserva(idReserva, reqHeaders);
+		    eliminarReserva(idReserva);
 		}
     });
 
@@ -29,7 +26,6 @@ function eliminarReserva(idReserva, reqHeaders){
     $.ajax({
         url: baseURL + 'eliminar-reserva',
         method: 'POST',
-        headers: reqHeaders,
         data: JSON.stringify(idReserva),
         contentType: 'application/json'
     })
