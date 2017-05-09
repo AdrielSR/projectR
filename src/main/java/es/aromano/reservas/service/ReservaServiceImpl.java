@@ -90,4 +90,9 @@ public class ReservaServiceImpl implements ReservaService {
 		return reservaRepository.save(reserva);
 	}
 
+	@Override
+	public void eliminarReserva(long idReserva) {
+		 reservaRepository.delete(idReserva);
+	}
+
 }

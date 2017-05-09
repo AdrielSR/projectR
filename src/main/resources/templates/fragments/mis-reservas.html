@@ -12,7 +12,7 @@
 		</div>
 
 		<ul class="collection" th:if="${not #lists.isEmpty(reservas)}">
-			<li th:each="r : ${reservas}" class="collection-item avatar">
+			<li th:each="r : ${reservas}" class="collection-item avatar" th:id="${r.id}">
 				<div class="row">
 					<div class="col s12">
 						<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
@@ -41,32 +41,63 @@
 	<!-- Modal Structure -->
 	  <div id="modal1" class="modal bottom-sheet">
 	    <div class="modal-footer">
-	      <a id="link-eliminar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Eliminar</a>
+	      <a id="link-eliminar" data-id="" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Eliminar</a>
 	      <a id="link-editar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat blue-text">Editar</a>
 	    </div>
 	  </div>
 
 
 	</div>
-	
-	
 
+
+<script th:inline="javascript">
+	var baseURL = /*[[@{/}]]*/ '/';
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){
-	
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var reqHeaders = [];
+        reqHeaders[header] = token;
+
 		$('.modal').modal();
 		
 		$('a.secondary-content').click(function(){
 			var id_reserva = $(this).attr("data-id");
 			
 			var url_editar = "/reserva/" + id_reserva;
-			$("#link-editar").attr("href", url_editar)
-			
-			var url_eliminar = "/reserva-eliminar/" + id_reserva;
-			$("#link-eliminar").attr("href", url_eliminar)
+			$("#link-editar").attr("href", url_editar);
+
+			$("#link-eliminar").attr("data-id", id_reserva);
 		});
+
+        $('#link-eliminar').click(function(){
+			if(confirm("Quieres eliminar esta reserva?")){
+			    var idReserva = $(this).attr("data-id");
+			    eliminarReserva(idReserva, reqHeaders);
+			}
+        });
+
 		
 	});
+
+	function eliminarReserva(idReserva, reqHeaders){
+        $.ajax({
+            url: baseURL + 'eliminar-reserva',
+            method: 'POST',
+            headers: reqHeaders,
+            data: JSON.stringify(idReserva),
+            contentType: 'application/json'
+        })
+		.done(function () {
+
+			$("#" + idReserva).remove();
+		})
+		.fail(function (xhr, status) {
+			var error = JSON.parse(xhr.responseText);
+			console.log(error.msg);
+		});
+	}
 	
 </script>
 

@@ -54,4 +54,13 @@ public class ReservaRestController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+
+    @RequestMapping(value = "/eliminar-reserva", method = RequestMethod.POST)
+    public ResponseEntity<Void> eliminarReserva(@RequestBody long idReserva) {
+
+        reservaService.eliminarReserva(idReserva);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

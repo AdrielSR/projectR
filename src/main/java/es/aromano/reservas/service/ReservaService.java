@@ -24,4 +24,6 @@ public interface ReservaService {
     boolean canAccessUser(long idReserva);
 
     Reserva editarReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException;
+
+    void eliminarReserva(long idReserva);
 }
