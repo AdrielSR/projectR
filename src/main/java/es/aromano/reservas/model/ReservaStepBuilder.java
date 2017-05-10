@@ -3,7 +3,7 @@ package es.aromano.reservas.model;
 
 import es.aromano.espacios.model.Espacio;
 import es.aromano.reservas.model.ReservaStepBuilderInterfaces.*;
-import es.aromano.users.model.User;
+import es.aromano.users.domain.model.User;
 import org.joda.time.DateTime;
 
 

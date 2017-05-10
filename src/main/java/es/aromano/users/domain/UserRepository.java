@@ -1,4 +1,4 @@
-package es.aromano.users.repository;
+package es.aromano.users.domain;
 
 
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import es.aromano.users.model.User;
+import es.aromano.users.domain.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {

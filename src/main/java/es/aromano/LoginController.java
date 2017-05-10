@@ -1,8 +1,8 @@
 package es.aromano;
 
 import es.aromano.empresas.exceptions.EmpresaException;
-import es.aromano.users.exceptions.UserException;
-import es.aromano.users.model.User;
+import es.aromano.users.domain.exceptions.UserException;
+import es.aromano.users.domain.model.User;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

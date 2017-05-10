@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import es.aromano.edificios.model.Edificio;
-import es.aromano.users.model.User;
+import es.aromano.users.domain.model.User;
 
 @Entity
 @Table(name="empresa")

@@ -1,4 +1,4 @@
-package es.aromano.users.model;
+package es.aromano.users.domain.model;
 
 
 import java.util.Collection;

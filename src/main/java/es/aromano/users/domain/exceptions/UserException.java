@@ -1,4 +1,4 @@
-package es.aromano.users.exceptions;
+package es.aromano.users.domain.exceptions;
 
 public class UserException extends Exception{
 

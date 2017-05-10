@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.aromano.users.exceptions.UserException;
-import es.aromano.users.model.Role;
-import es.aromano.users.model.User;
+import es.aromano.users.domain.exceptions.UserException;
+import es.aromano.users.domain.model.Role;
+import es.aromano.users.domain.model.User;
 import es.aromano.users.service.UserService;
 
 @Controller

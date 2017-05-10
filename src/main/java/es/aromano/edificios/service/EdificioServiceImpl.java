@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import es.aromano.edificios.model.Edificio;
 import es.aromano.edificios.repository.EdificioRepository;
-import es.aromano.users.model.User;
 import es.aromano.users.service.UserService;
 
 @Service

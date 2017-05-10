@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import es.aromano.empresas.exceptions.EmpresaException;
-import es.aromano.users.exceptions.UserException;
-import es.aromano.users.model.Role;
-import es.aromano.users.model.User;
+import es.aromano.users.domain.exceptions.UserException;
+import es.aromano.users.domain.model.Role;
+import es.aromano.users.domain.model.User;
 
 
 public interface UserService extends UserDetailsService{
