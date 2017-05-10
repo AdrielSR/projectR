@@ -14,6 +14,8 @@ import es.aromano.edificios.service.EdificioService;
 @RequestMapping("/admin")
 public class AdminEdificioController {
 
+	private static final String ADMIN = "admin/";
+
 	@Autowired
 	private EdificioService edificioService;
 	
@@ -22,7 +24,7 @@ public class AdminEdificioController {
 	@RequestMapping(value = "/edificios", method = RequestMethod.GET)
 	public String listarEdificiosActivosEmpresa(Model model){
 		model.addAttribute("edificios", edificioService.edificiosActivos());
-		model.addAttribute("view", "admin-edificios");
+		model.addAttribute("view", generateView("admin-edificios"));
 		
 		return "index";
 	}
@@ -30,7 +32,7 @@ public class AdminEdificioController {
 	@RequestMapping(value = "/edificios-no-activos", method = RequestMethod.GET)
 	public String listarEdificiosNoActivosEmpresa(Model model){
 		model.addAttribute("edificios_no_activos", edificioService.edificiosDesactivos());
-		model.addAttribute("view", "admin-edificios-no-activos");
+		model.addAttribute("view", generateView("admin-edificios-no-activos"));
 		
 		return "index";
 	}
@@ -40,7 +42,7 @@ public class AdminEdificioController {
 	@RequestMapping(value = "/edificio/{id}", method = RequestMethod.GET)
 	public String editarEdificioEmpresa(@PathVariable("id") int idEdificio, Model model){
 		model.addAttribute("edificio", edificioService.findEdificioActivo(idEdificio));
-		model.addAttribute("view", "admin-edificio-edit");
+		model.addAttribute("view", generateView("admin-edificio-edit"));
 		
 		return "index";
 	}
@@ -61,7 +63,7 @@ public class AdminEdificioController {
 	
 	@RequestMapping(value = "/edificio", method = RequestMethod.GET)
 	public String crearEdificioEmpresa(Model model){
-		model.addAttribute("view", "admin-edificio-new");
+		model.addAttribute("view", generateView("admin-edificio-new"));
 		
 		return "index";
 	}
@@ -77,5 +79,9 @@ public class AdminEdificioController {
 		
 		return "redirect:/admin/edificios";
 	}
-	
+
+	private String generateView(String viewName){
+		return new StringBuilder(ADMIN).append(viewName).toString();
+	}
+
 }

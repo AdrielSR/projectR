@@ -21,6 +21,8 @@ import es.aromano.users.service.UserService;
 @RequestMapping("/admin")
 public class AdminUserController {
 
+	private static final String ADMIN = "admin/";
+
 	@Autowired
 	private UserService userService;
 	
@@ -30,7 +32,7 @@ public class AdminUserController {
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listarUsuariosActivosEmpresa(Model model){
 		model.addAttribute("active_users", userService.findUsuariosActivosEmpresaLogada());
-		model.addAttribute("view", "admin-users");
+		model.addAttribute("view", generateView("admin-users"));
 		
 		return "index";
 	}
@@ -38,7 +40,7 @@ public class AdminUserController {
 	@RequestMapping(value = "/users-no-activos", method = RequestMethod.GET)
 	public String listarUsuariosNoActivosEmpresa(Model model){
 		model.addAttribute("no_active_users", userService.findUsuariosDesactivosEmpresaLogada());
-		model.addAttribute("view", "admin-users-no-activos");
+		model.addAttribute("view", generateView("admin-users-no-activos"));
 		
 		return "index";
 	}
@@ -49,7 +51,7 @@ public class AdminUserController {
 	public String editarUsuarioEmpresa(@PathVariable("id") int idUsuario, Model model){
 		model.addAttribute("user", userService.findUsuarioEmpresaLogada(idUsuario));
 		model.addAttribute("roles", userService.findAllRoles());
-		model.addAttribute("view", "admin-user-edit");
+		model.addAttribute("view", generateView("admin-user-edit"));
 		
 		return "index";
 	}
@@ -72,7 +74,7 @@ public class AdminUserController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String crearUsuariosEmpresa(Model model){
-		model.addAttribute("view", "admin-user-new");
+		model.addAttribute("view", generateView("admin-user-new"));
 		
 		return "index";
 	}
@@ -88,5 +90,10 @@ public class AdminUserController {
 		
 		return "redirect:/admin/users";
 	}
-	
+
+	private String generateView(String viewName){
+		return new StringBuilder(ADMIN).append(viewName).toString();
+	}
+
+
 }

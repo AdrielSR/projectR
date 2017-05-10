@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private static final String ADMIN = "admin/";
+
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String getAdminView(Model model){
-        model.addAttribute("view", "administrar");
+        model.addAttribute("view", ADMIN + "administrar");
 
         return "index";
     }

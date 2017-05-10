@@ -15,6 +15,8 @@ import es.aromano.espacios.service.EspacioService;
 @RequestMapping("/admin")
 public class AdminEspacioController {
 
+	private static final String ADMIN = "admin/";
+
 	@Autowired
 	private EspacioService espacioService;
 	
@@ -26,7 +28,7 @@ public class AdminEspacioController {
 	@RequestMapping(value = "/espacios", method = RequestMethod.GET)
 	public String listarEspaciosActivos(Model model){
 		model.addAttribute("espacios", espacioService.espaciosActivos());
-		model.addAttribute("view", "admin-espacios");
+		model.addAttribute("view", generateView("admin-espacios"));
 		
 		return "index";
 	}
@@ -34,7 +36,7 @@ public class AdminEspacioController {
 	@RequestMapping(value = "/espacios-no-activos", method = RequestMethod.GET)
 	public String listarEspaciosNoActivos(Model model){
 		model.addAttribute("espacios_no_activos", espacioService.espaciosDesactivos());
-		model.addAttribute("view", "admin-espacios-no-activos");
+		model.addAttribute("view", generateView("admin-espacios-no-activos"));
 		
 		return "index";
 	}
@@ -45,7 +47,7 @@ public class AdminEspacioController {
 	@RequestMapping(value = "/espacio", method = RequestMethod.GET)
 	public String crearEspacio(Model model){
 		model.addAttribute("edificios", edificioService.edificiosActivos());
-		model.addAttribute("view", "admin-espacio-new");
+		model.addAttribute("view", generateView("admin-espacio-new"));
 		
 		return "index";
 	}
@@ -61,6 +63,9 @@ public class AdminEspacioController {
 		
 		return "redirect:/admin/espacios";
 	}
-	
-	
+
+	private String generateView(String viewName){
+		return new StringBuilder(ADMIN).append(viewName).toString();
+	}
+
 }
