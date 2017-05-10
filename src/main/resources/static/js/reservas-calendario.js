@@ -22,7 +22,11 @@ $(document).ready(function(){
 	        right: 'month,agendaWeek,agendaDay,listWeek'
 	    },
 	    eventLimit: true,
+		editable: true,
 	    selectable : true,
+        eventDrop: function(event, delta, revertFunc) {
+            editarReserva(event, revertFunc);
+        },
 	    select : function(start, end) {
 
             var now = moment();
@@ -73,6 +77,25 @@ function crearReserva(reserva) {
         var error = JSON.parse(xhr.responseText);
 		console.log(error.msg);
 	});
+
+}
+
+function editarReserva(reserva, revertFunc) {
+
+    $.ajax({
+        url: baseURL + 'editar-reserva/' + reserva.id,
+        method: 'POST',
+        data: JSON.stringify(reserva),
+        contentType: 'application/json'
+    })
+    .done(function () {
+        refreshCalendar();
+    })
+    .fail(function (xhr, status) {
+        var error = JSON.parse(xhr.responseText);
+        console.log(error.msg);
+        revertFunc();
+    });
 
 }
 
