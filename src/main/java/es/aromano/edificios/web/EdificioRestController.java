@@ -17,7 +17,7 @@ public class EdificioRestController {
 	@Autowired
 	private EdificioService edificioService;
 	
-	@RequestMapping(value = "/user/activar-desactivar-edificio", method = RequestMethod.POST)
+	@RequestMapping(value = "/activar-desactivar-edificio", method = RequestMethod.POST)
 	public ResponseEntity<Void> desactivarEdificio(@RequestBody int idEdificio){
 		
 		Edificio edificio = edificioService.findEdificio(idEdificio);

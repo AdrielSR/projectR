@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function toggleActivarDesactivar(idEspacio) {
     $.ajax({
-        url: baseURL + 'user/activar-desactivar-espacio',
+        url: baseURL + 'activar-desactivar-espacio',
         method: 'POST',
         data: JSON.stringify(idEspacio),
         contentType: 'application/json'

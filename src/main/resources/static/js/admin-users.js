@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function toggleActivarDesactivar(idUsuario) {
     $.ajax({
-        url: baseURL + 'user/activar-desactivar-usuario',
+        url: baseURL + 'activar-desactivar-usuario',
         method: 'POST',
         data: JSON.stringify(idUsuario),
         contentType: 'application/json'

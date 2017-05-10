@@ -17,7 +17,7 @@ public class EspacioRestController {
 	@Autowired
 	private EspacioService espacioService;
 	
-	@RequestMapping(value = "/user/activar-desactivar-espacio", method = RequestMethod.POST)
+	@RequestMapping(value = "/activar-desactivar-espacio", method = RequestMethod.POST)
 	public ResponseEntity<Void> desactivarEdificio(@RequestBody int idEspacio){
 		
 		Espacio espacio = espacioService.findEspacio(idEspacio);

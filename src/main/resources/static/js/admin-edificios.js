@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function toggleActivarDesactivar(idEdificio) {
     $.ajax({
-        url: baseURL + 'user/activar-desactivar-edificio',
+        url: baseURL + 'activar-desactivar-edificio',
         method: 'POST',
         data: JSON.stringify(idEdificio),
         contentType: 'application/json'
