@@ -1,4 +1,4 @@
-package es.aromano.espacios.repository;
+package es.aromano.espacios.domain;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import es.aromano.espacios.model.Espacio;
+import es.aromano.espacios.domain.model.Espacio;
 
 @Repository
 public interface EspacioRepository extends JpaRepository<Espacio, Integer> {

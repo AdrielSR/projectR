@@ -1,4 +1,4 @@
-package es.aromano.espacios.model;
+package es.aromano.espacios.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;

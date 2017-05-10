@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.aromano.edificios.service.EdificioService;
-import es.aromano.espacios.model.Espacio;
+import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.service.EspacioService;
 
 @Controller

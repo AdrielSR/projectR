@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.aromano.edificios.service.EdificioService;
-import es.aromano.espacios.model.Espacio;
-import es.aromano.espacios.repository.EspacioRepository;
+import es.aromano.espacios.domain.model.Espacio;
+import es.aromano.espacios.domain.EspacioRepository;
 import es.aromano.espacios.web.EspacioDTO;
 
 @Service
