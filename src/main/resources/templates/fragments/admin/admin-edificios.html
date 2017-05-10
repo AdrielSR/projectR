@@ -19,8 +19,8 @@
 	            <td th:text="${e.nombre}"></td>
 	            <td th:text="${e.direccion}"></td>
 				<td>
-					<a th:href="@{'/admin/edificio/' + ${e.id}}"><i class="material-icons">edit</i></a>
-					<i th:attr="data-id=${e.id}" class="material-icons desactivar">delete</i>
+					<a th:href="@{'/admin/edificio/' + ${e.id}}"><i class="material-icons icon" title="Editar">edit</i></a>
+					<i th:attr="data-id=${e.id}" class="material-icons icon desactivar" title="Desactivar">delete</i>
 				</td>
 	          </tr>
 	        </tbody>

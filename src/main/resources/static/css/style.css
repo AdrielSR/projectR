@@ -57,3 +57,8 @@ nav i.material-icons{
 .collection .collection-item.avatar{
 	padding-left: 20px;
 }
+
+.icon{
+	cursor: pointer;
+	color: rgba(0,0,0,0.87);
+}

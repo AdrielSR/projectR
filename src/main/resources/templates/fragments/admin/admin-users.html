@@ -24,8 +24,13 @@
                   </div>
               </td>
               <td>
-                  <a th:href="@{'/admin/user/' + ${u.id}}"><i class="material-icons">edit</i></a>
-                  <i th:attr="data-id=${u.id}" class="material-icons desactivar">delete</i>
+                  <a th:href="@{'/admin/user/' + ${u.id}}" title="Editar">
+                 	 <i class="material-icons icon">edit</i>
+                  </a>
+                  
+                  <i th:attr="data-id=${u.id}" class="material-icons icon desactivar" title="Desactivar">
+                  	delete
+                  </i>
               </td>
           </tr>
           </tbody>
