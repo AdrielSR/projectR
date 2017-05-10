@@ -1,7 +1,7 @@
 package es.aromano.reservas.web;
 
-import es.aromano.reservas.excepciones.ReservaSolapadaException;
-import es.aromano.reservas.model.Reserva;
+import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

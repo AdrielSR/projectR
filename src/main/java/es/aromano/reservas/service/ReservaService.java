@@ -2,9 +2,9 @@ package es.aromano.reservas.service;
 
 import java.util.List;
 
-import es.aromano.reservas.excepciones.ReservaSolapadaException;
-import es.aromano.reservas.model.RangoDateTime;
-import es.aromano.reservas.model.Reserva;
+import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.domain.model.RangoDateTime;
+import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.web.ReservaDTO;
 
 public interface ReservaService {

@@ -1,6 +1,6 @@
 package es.aromano;
 
-import es.aromano.reservas.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.web.ErrorResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

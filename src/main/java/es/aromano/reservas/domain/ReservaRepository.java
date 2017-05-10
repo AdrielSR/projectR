@@ -1,15 +1,14 @@
-package es.aromano.reservas.repository;
+package es.aromano.reservas.domain;
 
 import java.util.List;
 
-import es.aromano.reservas.model.RangoDateTime;
 import org.joda.time.DateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import es.aromano.reservas.model.Reserva;
+import es.aromano.reservas.domain.model.Reserva;
 
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long>{

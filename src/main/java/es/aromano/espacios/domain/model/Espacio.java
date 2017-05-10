@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import es.aromano.edificios.domain.model.Edificio;
-import es.aromano.reservas.model.Reserva;
+import es.aromano.reservas.domain.model.Reserva;
 
 @Entity
 @Table(name="espacio")

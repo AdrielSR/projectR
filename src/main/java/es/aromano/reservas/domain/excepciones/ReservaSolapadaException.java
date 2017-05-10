@@ -1,4 +1,4 @@
-package es.aromano.reservas.excepciones;
+package es.aromano.reservas.domain.excepciones;
 
 
 public class ReservaSolapadaException extends ReservaException{

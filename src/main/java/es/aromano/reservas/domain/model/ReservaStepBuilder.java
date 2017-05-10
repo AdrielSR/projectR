@@ -1,8 +1,8 @@
-package es.aromano.reservas.model;
+package es.aromano.reservas.domain.model;
 
 
 import es.aromano.espacios.domain.model.Espacio;
-import es.aromano.reservas.model.ReservaStepBuilderInterfaces.*;
+import es.aromano.reservas.domain.model.ReservaStepBuilderInterfaces.*;
 import es.aromano.users.domain.model.User;
 import org.joda.time.DateTime;
 

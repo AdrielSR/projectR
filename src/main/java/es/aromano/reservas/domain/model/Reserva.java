@@ -1,4 +1,4 @@
-package es.aromano.reservas.model;
+package es.aromano.reservas.domain.model;
 
 import java.util.Objects;
 

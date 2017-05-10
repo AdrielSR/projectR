@@ -1,8 +1,7 @@
 package es.aromano.reservas.web;
 
-import es.aromano.reservas.model.Reserva;
+import es.aromano.reservas.domain.model.Reserva;
 import org.joda.time.DateTime;
-import org.springframework.util.StringUtils;
 
 import static org.apache.commons.lang3.StringUtils.*;
 

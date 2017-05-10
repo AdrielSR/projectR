@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Objects;
 
 import es.aromano.espacios.service.EspacioService;
-import es.aromano.reservas.excepciones.ReservaSolapadaException;
-import es.aromano.reservas.model.RangoDateTime;
-import es.aromano.reservas.model.ReservaStepBuilder;
+import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.domain.model.RangoDateTime;
+import es.aromano.reservas.domain.model.ReservaStepBuilder;
 import es.aromano.reservas.web.ReservaDTO;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.aromano.reservas.model.Reserva;
-import es.aromano.reservas.repository.ReservaRepository;
+import es.aromano.reservas.domain.model.Reserva;
+import es.aromano.reservas.domain.ReservaRepository;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
