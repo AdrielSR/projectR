@@ -80,7 +80,7 @@ public class ReservaServiceImpl implements ReservaService {
 	public Reserva editarReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(!esPosibleEditarReservaEnEspacio(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio(), reservaDTO.getId())){
-			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra"));
+			throw new ReservaSolapadaException(String.format("No se ha podido editar la reserva. Es posible que se solape con otra existente"));
 		}
 
 		Reserva reserva = findReservaByIdReserva(reservaDTO.getId());

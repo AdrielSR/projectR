@@ -14,7 +14,6 @@ $(document).ready(function(){
 
 
 	$('#calendar').fullCalendar({
-		lang: 'es',
 		timezone: 'local',
 	    header: {
 	        left: 'prev,next today',
@@ -24,6 +23,9 @@ $(document).ready(function(){
 	    eventLimit: true,
 		editable: true,
 	    selectable : true,
+	    eventResize: function(event, delta, revertFunc, jsEvent) {
+	    	editarReserva(event, revertFunc);
+	    },
         eventDrop: function(event, delta, revertFunc) {
             editarReserva(event, revertFunc);
         },
@@ -93,7 +95,7 @@ function editarReserva(reserva, revertFunc) {
     })
     .fail(function (xhr, status) {
         var error = JSON.parse(xhr.responseText);
-        console.log(error.msg);
+        Materialize.toast(error.msg, 4000);
         revertFunc();
     });
 
