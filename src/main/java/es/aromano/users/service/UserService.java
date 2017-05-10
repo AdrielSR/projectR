@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import es.aromano.empresas.exceptions.EmpresaException;
+import es.aromano.empresas.domain.exceptions.EmpresaException;
 import es.aromano.users.domain.exceptions.UserException;
 import es.aromano.users.domain.model.Role;
 import es.aromano.users.domain.model.User;

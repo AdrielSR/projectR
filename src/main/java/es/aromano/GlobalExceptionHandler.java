@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.aromano.empresas.exceptions.EmpresaException;
+import es.aromano.empresas.domain.exceptions.EmpresaException;
 import es.aromano.users.domain.exceptions.UserException;
 
 @ControllerAdvice

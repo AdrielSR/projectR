@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import es.aromano.empresas.model.Empresa;
+import es.aromano.empresas.domain.model.Empresa;
 import es.aromano.espacios.model.Espacio;
 
 @Entity

@@ -1,4 +1,4 @@
-package es.aromano.empresas.model;
+package es.aromano.empresas.domain.model;
 
 import java.util.HashSet;
 import java.util.Set;

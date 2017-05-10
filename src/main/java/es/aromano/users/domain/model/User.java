@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import es.aromano.empresas.model.Empresa;
+import es.aromano.empresas.domain.model.Empresa;
 
 @Entity
 @Table(name = "user")

@@ -1,6 +1,6 @@
 package es.aromano.empresas.service;
 
-import es.aromano.empresas.model.Empresa;
+import es.aromano.empresas.domain.model.Empresa;
 
 public interface EmpresaService {
 

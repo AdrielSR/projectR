@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.aromano.empresas.exceptions.EmpresaException;
-import es.aromano.empresas.model.Empresa;
+import es.aromano.empresas.domain.exceptions.EmpresaException;
+import es.aromano.empresas.domain.model.Empresa;
 import es.aromano.empresas.service.EmpresaService;
 import es.aromano.users.domain.exceptions.UserException;
 import es.aromano.users.domain.model.User;

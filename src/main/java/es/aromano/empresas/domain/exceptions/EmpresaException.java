@@ -1,4 +1,4 @@
-package es.aromano.empresas.exceptions;
+package es.aromano.empresas.domain.exceptions;
 
 public class EmpresaException extends Exception{
 
