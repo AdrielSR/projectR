@@ -1,7 +1,7 @@
 package es.aromano.edificios.service;
 
 import java.util.List;
-import es.aromano.edificios.model.Edificio;
+import es.aromano.edificios.domain.model.Edificio;
 
 public interface EdificioService {
 

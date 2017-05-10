@@ -1,4 +1,4 @@
-package es.aromano.edificios.model;
+package es.aromano.edificios.domain.model;
 
 import java.util.HashSet;
 import java.util.Set;

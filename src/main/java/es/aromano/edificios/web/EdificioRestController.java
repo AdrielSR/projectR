@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.aromano.edificios.model.Edificio;
+import es.aromano.edificios.domain.model.Edificio;
 import es.aromano.edificios.service.EdificioService;
 
 @RestController

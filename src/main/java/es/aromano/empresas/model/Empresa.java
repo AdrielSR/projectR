@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import es.aromano.edificios.model.Edificio;
+import es.aromano.edificios.domain.model.Edificio;
 import es.aromano.users.domain.model.User;
 
 @Entity

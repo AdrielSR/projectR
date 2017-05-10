@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.aromano.edificios.model.Edificio;
-import es.aromano.edificios.repository.EdificioRepository;
+import es.aromano.edificios.domain.model.Edificio;
+import es.aromano.edificios.domain.EdificioRepository;
 import es.aromano.users.service.UserService;
 
 @Service
