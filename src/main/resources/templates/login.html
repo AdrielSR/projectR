@@ -8,11 +8,8 @@
             <div class="col s6 offset-s3">
                 <h3 class="center">LOGIN</h3>
 
-                <div th:if="${param.error}">
-                    Invalid username and password.
-                </div>
-                <div th:if="${param.logout}">
-                    You have been logged out.
+                <div class="center" th:if="${error}">
+                    <p class="red-text" th:text="${error}"></p>
                 </div>
 
                 <form th:action="@{/login}" method="post">
