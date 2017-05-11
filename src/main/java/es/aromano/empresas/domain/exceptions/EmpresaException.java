@@ -1,6 +1,8 @@
 package es.aromano.empresas.domain.exceptions;
 
-public class EmpresaException extends Exception{
+import es.aromano.users.domain.exceptions.UserException;
+
+public class EmpresaException extends UserException {
 
 	public EmpresaException(String msg){
 		super(msg);

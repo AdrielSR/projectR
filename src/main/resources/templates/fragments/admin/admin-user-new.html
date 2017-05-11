@@ -5,6 +5,11 @@
 	<div class="col s12">
 	
 		<h4 class="center">Crear Usuario</h4>
+
+		<div class="center" th:if="${error}">
+			<p class="red-text" th:text="${error}"></p>
+		</div>
+
 		<form th:action="@{/admin/user}" method="post">
             <div class="col s6">
 	            <div>

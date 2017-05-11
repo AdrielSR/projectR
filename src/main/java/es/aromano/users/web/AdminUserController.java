@@ -80,14 +80,17 @@ public class AdminUserController {
 	}
 	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String doCrearUsuariosEmpresa(@ModelAttribute User user){
-		
-		User newUser = userService.createUser(user);
-		
-		if(newUser == null){
-			return "/user/new?error";
+	public String doCrearUsuariosEmpresa(@ModelAttribute User user, Model model){
+
+		try {
+
+			userService.createUser(user);
+
+		} catch (UserException e) {
+			model.addAttribute("error", e.getMessage());
+			return crearUsuariosEmpresa(model);
 		}
-		
+
 		return "redirect:/admin/users";
 	}
 

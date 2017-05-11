@@ -20,11 +20,11 @@ public interface UserService extends UserDetailsService{
 
     User findByUsername(String usermname);
 
-    User createEmpresaAndUser(User user) throws EmpresaException, UserException;
+    User createEmpresaAndUser(User user) throws UserException;
 
 	List<User> findUsuariosEmpresaLogada();
 
-	User createUser(User user);
+	User createUser(User user) throws UserException;
 
 	User editUser(int idUsuario, User editedUser) throws UserException;
 	
@@ -37,5 +37,7 @@ public interface UserService extends UserDetailsService{
 	User toggleActivarUsuario(User user);
 	
 	User getCurrentUser();
+
+	void checkIfUserExist(User user) throws UserException;
 
 }

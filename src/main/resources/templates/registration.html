@@ -8,8 +8,8 @@
             <div class="col s6 offset-s3">
                 <h3 class="center">CREAR CUENTA</h3>
 
-                <div th:if="${param.error}">
-                   No se ha podido realizar el registro.
+                <div class="center" th:if="${error}">
+                    <p class="red-text" th:text="${error}"></p>
                 </div>
 
                 <form th:action="@{/registration}" method="post">

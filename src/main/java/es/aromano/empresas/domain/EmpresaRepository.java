@@ -8,4 +8,8 @@ import es.aromano.empresas.domain.model.Empresa;
 @Repository
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer>{
 
+    Empresa findEmpresaByNombre(String nombre);
+
+    Empresa findEmpresaByCif(String cif);
+
 }

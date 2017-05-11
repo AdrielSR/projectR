@@ -2,6 +2,8 @@ package es.aromano.users.service;
 
 
 import java.util.List;
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,6 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void checkIfUserExist(User user) throws UserException {
+        User u = findByUsername(user.getUsername());
+
+        if(Objects.isNull(u)){
+            u = findByEmail(user.getEmail());
+        }
+
+        if(Objects.nonNull(u)){
+            throw new UserException("Lo sentimos. Ya existe un usuario con ese username");
+        }
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = userRespository.findByEmailAndEnabledTrue(username);
         if (user == null)  {
@@ -78,23 +93,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createEmpresaAndUser(User user) throws EmpresaException, UserException {
+    public User createEmpresaAndUser(User user) throws UserException {
 
     	Empresa newEmpresa = empresaService.createEmpresa(user.getEmpresa());
-    	
-    	if(newEmpresa == null){
-    		throw new EmpresaException("Error creando empresa");
-    	}
-    	
+
+        checkIfUserExist(user);
+
         User newUser = new User(user.getUsername(), user.getEmail());
         newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         newUser.addRole(roleRepository.findByRole("ROLE_ADMIN"));
         newUser.setEmpresa(newEmpresa);
         newUser = userRespository.save(newUser);
-        
-        if(newUser == null){
-        	throw new UserException("Error creando usuario");
-        }
         
         newEmpresa.addUser(newUser);
 
@@ -107,7 +116,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user) {
+	public User createUser(User user) throws UserException {
+        checkIfUserExist(user);
+
 		User newUser = new User(user.getUsername(), user.getEmail());
 		newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		newUser.addRole(roleRepository.findByRole("ROLE_USER"));
