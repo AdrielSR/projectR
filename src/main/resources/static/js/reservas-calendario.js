@@ -95,9 +95,20 @@ function editarReserva(reserva, revertFunc) {
     })
     .fail(function (xhr, status) {
         var error = JSON.parse(xhr.responseText);
-        Materialize.toast(error.msg, 4000);
+
+        scrollToTop();
+        showErrorPanel(error.msg);
         revertFunc();
     });
 
 }
 
+function scrollToTop(){
+    $("html, body").animate({
+        scrollTop: 0
+    });
+}
+
+function showErrorPanel(msgError){
+    $(".info-panel").addClass("info-error").text(msgError).show().delay(10000).fadeOut();
+}

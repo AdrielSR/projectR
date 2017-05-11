@@ -62,3 +62,19 @@ nav i.material-icons{
 	cursor: pointer;
 	color: rgba(0,0,0,0.87);
 }
+
+.info-panel{
+	padding: 10px 15px;
+	min-height: 20px;
+	background-color: #278bd2;
+	color: #FFFFFF;
+	display: none;
+}
+
+.info-error{
+	background-color: #d23434;
+}
+
+.info-success{
+	background-color: green;
+}
