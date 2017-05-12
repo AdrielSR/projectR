@@ -1,9 +1,6 @@
 $(document).ready(function(){
 
 	$('.modal').modal();
-    $('.tooltip').tooltipster({
-        theme: 'tooltipster-light'
-    });
 	
     $("#crear-reserva").click(function(){
 		var reserva = {};
@@ -24,6 +21,12 @@ $(document).ready(function(){
 	        right: 'month,agendaWeek,agendaDay,listWeek'
 	    },
 	    eventLimit: true,
+	    eventClick: function(event, jsEvent, view){
+	    	if(view.name == 'month'){
+	    		showTooltip(event, $(this));
+	    	}
+	    	
+	    },
 		editable: true,
 	    selectable : true,
 	    eventResize: function(event, delta, revertFunc, jsEvent) {
@@ -114,4 +117,25 @@ function scrollToTop(){
 
 function showErrorPanel(msgError){
     $(".info-panel").addClass("info-error").text(msgError).show().delay(10000).fadeOut();
+}
+
+
+function showTooltip(event, $element){
+	var asunto = '<p>Asunto: ' + event.title + '</p>';
+	var cuando = '<p>Cuando: ' + event.start.format("DD/MM/YYYY HH:mm") + '</p>';
+	var donde = '<p>Donde: ' + event.nombreEspacio + '</p>'
+	
+	var content = asunto + cuando + donde;
+	
+	if(event.editable){
+		var acciones = '<button> Eliminar </button>';
+		content += acciones;
+	}
+	
+	$element.tooltipster({
+		contentAsHTML: true,
+		contentCloning: true,
+		theme: 'tooltipster-light',
+        trigger: 'click'
+	}).tooltipster('content', content);
 }

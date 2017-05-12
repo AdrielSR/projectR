@@ -78,3 +78,8 @@ nav i.material-icons{
 .info-success{
 	background-color: green;
 }
+
+.tooltipster-light{
+	border-radius: 0px;
+}
+
