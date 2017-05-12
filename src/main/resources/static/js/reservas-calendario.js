@@ -1,6 +1,9 @@
 $(document).ready(function(){
 
 	$('.modal').modal();
+    $('.tooltip').tooltipster({
+        theme: 'tooltipster-light'
+    });
 	
     $("#crear-reserva").click(function(){
 		var reserva = {};

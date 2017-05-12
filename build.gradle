@@ -38,8 +38,9 @@ dependencies {
 	compile group: 'org.webjars', name: 'fullcalendar', version: '3.0.0'
 	compile group: 'org.webjars', name: 'momentjs', version: '2.16.0'
 	compile group: 'org.webjars', name: 'datetimepicker', version: '2.3.4'
+	compile group: 'org.webjars', name: 'tooltipster', version: '3.3.0'
 
-
+	
 	// THYMELEAF EXTRA
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
 	
