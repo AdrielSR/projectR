@@ -109,6 +109,28 @@ function editarReserva(reserva, revertFunc) {
 
 }
 
+function eliminarReserva(idReserva){
+	if(confirm("¿Desea eliminar esta reserva?")){
+		eliminarReservaCalendario(idReserva);
+	}
+}
+
+function eliminarReservaCalendario(idReserva){
+	$.ajax({
+        url: baseURL + 'eliminar-reserva',
+        method: 'POST',
+        data: JSON.stringify(idReserva),
+        contentType: 'application/json'
+    })
+	.done(function () {
+		refreshCalendar();
+	})
+	.fail(function (xhr, status) {
+		var error = JSON.parse(xhr.responseText);
+		console.log(error.msg);
+	});
+}
+
 function scrollToTop(){
     $("html, body").animate({
         scrollTop: 0
@@ -127,14 +149,18 @@ function showTooltip(event, $element){
 	
 	var content = asunto + cuando + donde;
 	
-	if(event.editable){
-		var acciones = '<button> Eliminar </button>';
+	//if(event.editable){
+		var editar = '<div class="col s6 left"><a href="/reserva/' + event.id +'">Editar</a></div>';
+		var eliminar = '<div class="col s6 right"><a href="#" onclick="eliminarReserva(\'' + event.id + '\')">Eliminar</a></div>';
+		var acciones = '<div class="col s12">' + editar + eliminar + '</div>';
+		
 		content += acciones;
-	}
+	//}
 	
 	$element.tooltipster({
 		contentAsHTML: true,
 		contentCloning: true,
+		interactive: true,
 		theme: 'tooltipster-light',
         trigger: 'click'
 	}).tooltipster('content', content);
