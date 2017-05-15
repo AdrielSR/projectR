@@ -2,6 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 
+<!-- Info Panel -->
+<div class="info-panel">  </div>
+
+   <div class="container">
+       <div class="row">
+       
 <br/><br/>
 
 <!-- Calendario -->
@@ -43,6 +49,9 @@
    </div>
  </div>
 
+
+	</div>
+</div>
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
     var idEspacio = /*[[${idEspacio}]]*/ '1';

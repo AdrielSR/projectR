@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
-	
-	<div class="col s12 center">
-		<h4>Edificios Activos</h4>
+
+<div class="container">
+    <div class="row">	
+		<div class="col s12 center">
+			<h4>Edificios Activos</h4>
+			
+			<table class="responsive-table bordered highlight activos">
+		        <thead>
+		          <tr>
+		              <th>Nombre</th>
+		              <th>Direccion</th>
+		              <th>Acciones</th>
+		          </tr>
+		        </thead>
 		
-		<table class="responsive-table bordered highlight activos">
-	        <thead>
-	          <tr>
-	              <th>Nombre</th>
-	              <th>Direccion</th>
-	              <th>Acciones</th>
-	          </tr>
-	        </thead>
-	
-	        <tbody>
-	          <tr th:each="e : ${edificios}" th:id="${e.id}">
-	            <td th:text="${e.nombre}"></td>
-	            <td th:text="${e.direccion}"></td>
-				<td>
-					<a th:href="@{'/admin/edificio/' + ${e.id}}"><i class="material-icons icon" title="Editar">edit</i></a>
-					<i th:attr="data-id=${e.id}" class="material-icons icon desactivar" title="Desactivar">delete</i>
-				</td>
-	          </tr>
-	        </tbody>
-      </table>
-	</div>
+		        <tbody>
+		          <tr th:each="e : ${edificios}" th:id="${e.id}">
+		            <td th:text="${e.nombre}"></td>
+		            <td th:text="${e.direccion}"></td>
+					<td>
+						<a th:href="@{'/admin/edificio/' + ${e.id}}"><i class="material-icons icon" title="Editar">edit</i></a>
+						<i th:attr="data-id=${e.id}" class="material-icons icon desactivar" title="Desactivar">delete</i>
+					</td>
+		          </tr>
+		        </tbody>
+	      </table>
+		</div>
 	
 	<!-- Float Button -->
-<div class="fixed-action-btn click-to-toggle">
-    <a class="btn-floating btn-large">
-      <i class="large material-icons">add</i>
-    </a>
-    <ul>
-	  	<li>
-	        <a th:href="@{/admin/edificios-no-activos}" class="btn-floating tooltipped" data-position="left" data-delay="50"
-	             data-tooltip="Restaurar edificios">
-	            <i class="material-icons">delete_sweep</i>
-	        </a>
-	    </li>
-	    <li>
-	    	<a th:href="@{/admin/edificio}" class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
-	    		<i class="material-icons">domain</i>
-	    	</a>
-	    </li>
-    </ul>
-</div>
+	<div class="fixed-action-btn click-to-toggle">
+	    <a class="btn-floating btn-large">
+	      <i class="large material-icons">add</i>
+	    </a>
+	    <ul>
+		  	<li>
+		        <a th:href="@{/admin/edificios-no-activos}" class="btn-floating tooltipped" data-position="left" data-delay="50"
+		             data-tooltip="Restaurar edificios">
+		            <i class="material-icons">delete_sweep</i>
+		        </a>
+		    </li>
+		    <li>
+		    	<a th:href="@{/admin/edificio}" class="btn-floating tooltipped" data-position="left" data-delay="50" data-tooltip="Nuevo edificio">
+		    		<i class="material-icons">domain</i>
+		    	</a>
+		    </li>
+	    </ul>
+	</div>
+
+	</div>
+</div>	
 
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';

@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
-	
-	<div class="col s12">
-		<h4 class="center">Mis Reservas</h4>
-		
-		<div class="jumbo" th:if="${#lists.isEmpty(reservas)}">
-			<h5 class="center-align">
-				Uups! Parece que todavia no has hecho ninguna reserva.
-			</h5>
-		</div>
+	<!-- Info Panel -->
+	<div class="info-panel">  </div>
 
-		<ul class="collection" th:if="${not #lists.isEmpty(reservas)}">
-			<li th:each="r : ${reservas}" class="collection-item avatar" th:id="${r.id}">
-				<div class="row">
-					<div class="col s12">
-						<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
-					</div>
-				</div>
+    <div class="container">
+        <div class="row">
+			<div class="col s12">
+				<h4 class="center">Mis Reservas</h4>
 				
-				<div class="row" style="margin-bottom: 0px;">
-					<div class="col s12">
-						<div class="col s6" style="padding-left: 0px;">
-							<p th:inline="text"> <i><b>Donde:</b></i> [[${r.espacio.nombre}]]</p>
-						</div>
-	
-						<div class="col s6" style="padding-left: 0px;">
-							<p th:inline="text"> 
-								<i><b>Cuando:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
-								[[${#dates.format(r.rango.fin,'HH:mm')}]]
-							</p>
-						</div>
-					</div>					
+				<div class="jumbo" th:if="${#lists.isEmpty(reservas)}">
+					<h5 class="center-align">
+						Uups! Parece que todavia no has hecho ninguna reserva.
+					</h5>
 				</div>
+			
+				<ul class="collection" th:if="${not #lists.isEmpty(reservas)}">
+					<li th:each="r : ${reservas}" class="collection-item avatar" th:id="${r.id}">
+						<div class="row">
+							<div class="col s12">
+								<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
+							</div>
+						</div>
+						
+						<div class="row" style="margin-bottom: 0px;">
+							<div class="col s12">
+								<div class="col s6" style="padding-left: 0px;">
+									<p th:inline="text"> <i><b>Donde:</b></i> [[${r.espacio.nombre}]]</p>
+								</div>
+			
+								<div class="col s6" style="padding-left: 0px;">
+									<p th:inline="text"> 
+										<i><b>Cuando:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
+										[[${#dates.format(r.rango.fin,'HH:mm')}]]
+									</p>
+								</div>
+							</div>					
+						</div>
+			
+						<a th:attr="data-id=${r.id}" href="#modal1" class="secondary-content"><i class="material-icons">more_vert</i></a>
+					</li>
+				</ul>
+			
+			<!-- Modal Structure -->
+			  <div id="modal1" class="modal bottom-sheet">
+			    <div class="modal-footer">
+			      <a id="link-eliminar" data-id="" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Eliminar</a>
+			      <a id="link-editar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat blue-text">Editar</a>
+			    </div>
+			  </div>
 
-				<a th:attr="data-id=${r.id}" href="#modal1" class="secondary-content"><i class="material-icons">more_vert</i></a>
-			</li>
-		</ul>
 
-	<!-- Modal Structure -->
-	  <div id="modal1" class="modal bottom-sheet">
-	    <div class="modal-footer">
-	      <a id="link-eliminar" data-id="" class="modal-action modal-close waves-effect waves-green btn-flat red-text">Eliminar</a>
-	      <a id="link-editar" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat blue-text">Editar</a>
-	    </div>
-	  </div>
+			</div>
 
-
-	</div>
-
-
+ 		</div>
+    </div>
 <script th:inline="javascript">
 	var baseURL = /*[[@{/}]]*/ '/';
 </script>

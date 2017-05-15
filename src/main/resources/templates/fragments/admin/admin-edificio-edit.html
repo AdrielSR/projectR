@@ -2,34 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 	
-	<div class="col s12">
-	
-		<h4 class="center">Editar Edificio</h4>
-		<form th:action="@{'/admin/edificio/' + ${edificio.id}}" method="post">
-            <div class="col s6">
-	            <div>
-	            	<label> Nombre : 
-	            		<input type="text" name="nombre" th:value="${edificio.nombre}"/>
-	            	</label>	
-	            </div>	           
-            </div>
-            
-            <div class="col s6">
-            	<div>
-	            	<label> Direccion: 
-	            		<input type="text" name="direccion" th:value="${edificio.direccion}"/> 
-	            	</label>
+<div class="container">
+    <div class="row">
+		<div class="col s12">
+		
+			<h4 class="center">Editar Edificio</h4>
+			<form th:action="@{'/admin/edificio/' + ${edificio.id}}" method="post">
+	            <div class="col s6">
+		            <div>
+		            	<label> Nombre : 
+		            		<input type="text" name="nombre" th:value="${edificio.nombre}"/>
+		            	</label>	
+		            </div>	           
 	            </div>
-            </div>
-            
-            
-            
-            <div class="col s12 center">
-                <button type="submit" class="btn waves-effect waves-light">Guardar</button>
-            </div>
-        </form>
+	            
+	            <div class="col s6">
+	            	<div>
+		            	<label> Direccion: 
+		            		<input type="text" name="direccion" th:value="${edificio.direccion}"/> 
+		            	</label>
+		            </div>
+	            </div>
+	            
+	            
+	            
+	            <div class="col s12 center">
+	                <button type="submit" class="btn waves-effect waves-light">Guardar</button>
+	            </div>
+	        </form>
+		</div>
 	</div>
-	
+</div>	
 	
 </body>
 </html>

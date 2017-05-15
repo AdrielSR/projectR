@@ -66,18 +66,8 @@
     </nav>
 </header>
 
-<main>
+<main th:include="${#strings.concat('fragments/', view)} :: copy">
 
-	<!-- Info Panel -->
-	<div class="info-panel">  </div>
-
-    <div class="container">
-        <div class="row">
-				
-			<div th:include="${#strings.concat('fragments/', view)} :: copy"></div>
-  
-        </div>
-    </div>
 </main>
 
 

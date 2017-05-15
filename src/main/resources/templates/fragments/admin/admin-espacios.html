@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
-	
-	<div class="col s12 center">
-		<h4>Espacios Activos</h4>
+
+<div class="container">
+    <div class="row">	
+		<div class="col s12 center">
+			<h4>Espacios Activos</h4>
+			
+			<table class="responsive-table bordered highlight activos">
+		        <thead>
+		          <tr>
+		              <th>Edificio</th>
+		              <th>Nombre</th>
+		              <th>Aforo</th>
+		              <th>Acciones</th>
+		          </tr>
+		        </thead>
 		
-		<table class="responsive-table bordered highlight activos">
-	        <thead>
-	          <tr>
-	              <th>Edificio</th>
-	              <th>Nombre</th>
-	              <th>Aforo</th>
-	              <th>Acciones</th>
-	          </tr>
-	        </thead>
-	
-	        <tbody>
-	          <tr th:each="e : ${espacios}" th:id="${e.id}">
-	            <td th:text="${e.edificio.id}"></td>
-	            <td th:text="${e.nombre}"></td>
-	            <td th:text="${e.aforo}"></td>
-				<td>
-					<a th:href="@{'/admin/espacio/' + ${e.id}}"><i class="material-icons icon" title="Editar">edit</i></a>
-					<i th:attr="data-id=${e.id}" class="material-icons icon desactivar" title="Desactivar">delete</i>
-				</td>
-	          </tr>
-	        </tbody>
-      </table>
-	</div>
+		        <tbody>
+		          <tr th:each="e : ${espacios}" th:id="${e.id}">
+		            <td th:text="${e.edificio.id}"></td>
+		            <td th:text="${e.nombre}"></td>
+		            <td th:text="${e.aforo}"></td>
+					<td>
+						<a th:href="@{'/admin/espacio/' + ${e.id}}"><i class="material-icons icon" title="Editar">edit</i></a>
+						<i th:attr="data-id=${e.id}" class="material-icons icon desactivar" title="Desactivar">delete</i>
+					</td>
+		          </tr>
+		        </tbody>
+	      </table>
+		</div>
 	
 	<!-- Float Button -->
 <div class="fixed-action-btn click-to-toggle">
@@ -49,6 +51,8 @@
     </ul>
 </div>
 
+	</div>
+</div>
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
 </script>

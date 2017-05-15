@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
-	
-	<div class="col s12">
-	
-		<h4 class="center">Editar Usuario</h4>
-		<form th:action="@{'/admin/user/' + ${user.id}}" method="post">
-            <div class="col s6">
-	            <div>
-	            	<label> Username : 
-	            		<input type="text" name="username" th:value="${user.username}"/>
-	            	</label>	
-	            </div>
-	             <div>
-	            	<label> Email: 
-	            		<input type="text" name="email" th:value="${user.email}"/> 
-	            	</label>
-	            </div>
-            </div>
-            
-            <div class="col s6">
-            	<div>
-	            	<label> Roles:
-						<th:block th:each="r : ${roles}">
-							<p>
-								<input type="checkbox" name="roles" th:id="${#strings.concat('check-', r.authority)}" 
-										th:value="${r.id}" th:checked="${#sets.contains(user.roles, r)}" th:readonly="${r.authority == 'ROLE_USER'}" />
-								<label th:for="${#strings.concat('check-', r.authority)}" th:text="${r.authority}"></label>
-							</p>
 
-						</th:block>
-	            	</label>
-            	</div>
-            </div>
-            
-            
-            
-            <div class="col s12 center">
-                <button type="submit" class="btn waves-effect waves-light">Guardar</button>
-            </div>
-        </form>
-	</div>
+<div class="container">
+    <div class="row">	
+		<div class="col s12">
+		
+			<h4 class="center">Editar Usuario</h4>
+			<form th:action="@{'/admin/user/' + ${user.id}}" method="post">
+	            <div class="col s6">
+		            <div>
+		            	<label> Username : 
+		            		<input type="text" name="username" th:value="${user.username}"/>
+		            	</label>	
+		            </div>
+		             <div>
+		            	<label> Email: 
+		            		<input type="text" name="email" th:value="${user.email}"/> 
+		            	</label>
+		            </div>
+	            </div>
+	            
+	            <div class="col s6">
+	            	<div>
+		            	<label> Roles:
+							<th:block th:each="r : ${roles}">
+								<p>
+									<input type="checkbox" name="roles" th:id="${#strings.concat('check-', r.authority)}" 
+											th:value="${r.id}" th:checked="${#sets.contains(user.roles, r)}" th:readonly="${r.authority == 'ROLE_USER'}" />
+									<label th:for="${#strings.concat('check-', r.authority)}" th:text="${r.authority}"></label>
+								</p>
 	
+							</th:block>
+		            	</label>
+	            	</div>
+	            </div>
+	            
+	            
+	            
+	            <div class="col s12 center">
+	                <button type="submit" class="btn waves-effect waves-light">Guardar</button>
+	            </div>
+	        </form>
+		</div>
+	</div>
+</div>	
 	
 </body>
 </html>

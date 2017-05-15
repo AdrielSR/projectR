@@ -2,34 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 
-<div class="col s12 center">
-    <h4>Espacios No Activos</h4>
-
-    
-      <table class="responsive-table bordered highlight no-activos">
-          <thead>
-          <tr>
-              <th>Edificio</th>
-              <th>Nombre</th>
-              <th>Aforo</th>
-              <th>Acciones</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <tr th:each="e : ${espacios_no_activos}" th:id="${e.id}">
-              <td th:text="${e.edificio.id}"></td>
-              <td th:text="${e.nombre}"></td>
-              <td th:text="${e.aforo}"></td>
-              <td>
-                  <i th:attr="data-id=${e.id}" class="material-icons icon activar" title="Activar">undo</i>
-              </td>
-          </tr>
-          </tbody>
-      </table>
-  
+<div class="container">
+    <div class="row">
+		<div class="col s12 center">
+		    <h4>Espacios No Activos</h4>
+		
+		    
+		      <table class="responsive-table bordered highlight no-activos">
+		          <thead>
+		          <tr>
+		              <th>Edificio</th>
+		              <th>Nombre</th>
+		              <th>Aforo</th>
+		              <th>Acciones</th>
+		          </tr>
+		          </thead>
+		
+		          <tbody>
+		          <tr th:each="e : ${espacios_no_activos}" th:id="${e.id}">
+		              <td th:text="${e.edificio.id}"></td>
+		              <td th:text="${e.nombre}"></td>
+		              <td th:text="${e.aforo}"></td>
+		              <td>
+		                  <i th:attr="data-id=${e.id}" class="material-icons icon activar" title="Activar">undo</i>
+		              </td>
+		          </tr>
+		          </tbody>
+		      </table>
+		  
+		</div>
+	</div>
 </div>
-
 
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
