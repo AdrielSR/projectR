@@ -14,6 +14,7 @@ public class ReservaDTO {
     private DateTime end;
     private int idEspacio;
     private String nombreEspacio;
+    private boolean editable;
 
     public ReservaDTO(){ }
 
@@ -24,6 +25,7 @@ public class ReservaDTO {
         this.end = end;
         this.idEspacio = idEspacio;
         this.nombreEspacio = nombreEspacio;
+        this.editable = false;
     }
 
 
@@ -87,5 +89,18 @@ public class ReservaDTO {
 
         return new ReservaDTO(id, title, start, end, idEspacio, nombreEspacio);
     }
+
+	public boolean isEditable() {
+		return editable;
+	}
+
+	public void setEditable(boolean editable) {
+		this.editable = editable;
+	}
+	
+	public ReservaDTO editable(){
+		this.editable = true;
+		return this;
+	}
 
 }

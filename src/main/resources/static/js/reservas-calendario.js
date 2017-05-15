@@ -149,13 +149,13 @@ function showTooltip(event, $element){
 	
 	var content = asunto + cuando + donde;
 	
-	//if(event.editable){
+	if(event.editable){
 		var editar = '<div class="col s6 left"><a href="/reserva/' + event.id +'">Editar</a></div>';
 		var eliminar = '<div class="col s6 right"><a href="#" onclick="eliminarReserva(\'' + event.id + '\')">Eliminar</a></div>';
 		var acciones = '<div class="col s12">' + editar + eliminar + '</div>';
 		
 		content += acciones;
-	//}
+	}
 	
 	$element.tooltipster({
 		contentAsHTML: true,

@@ -33,8 +33,18 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public List<Reserva> findReservasByIdEspacio(int idEspacio) {
-		return reservaRepository.findReservasByIdEspacio(idEspacio);
+	public List<Reserva> findAllReservasDeUnEspacio(int idEspacio) {
+		return reservaRepository.findByIdEspacio(idEspacio);
+	}
+	
+	@Override
+	public List<Reserva> findReservasUsuarioDeUnEspacio(int idEspacio) {
+		return reservaRepository.findReservasUsuarioDeUnEspacio(idEspacio);
+	}
+	
+	@Override
+	public List<Reserva> findReservasNoUsuarioDeUnEspacio(int idEspacio) {
+		return reservaRepository.findReservasNoUsuarioDeUnEspacio(idEspacio);
 	}
 
 	@Override

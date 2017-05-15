@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,9 +23,22 @@ public class ReservaRestController {
 
     @RequestMapping(value = "/{id}/reservas", method = RequestMethod.GET)
     public List<ReservaDTO> getReservasFromEspacio(@PathVariable("id") int idEspacio){
-        return reservaService.findReservasByIdEspacio(idEspacio).stream()
-                .map(r -> ReservaDTO.from(r))
-                .collect(Collectors.toList());
+    	
+    	List<ReservaDTO> result = new ArrayList<>();
+    	List<Reserva> reservasUsuario = reservaService.findReservasUsuarioDeUnEspacio(idEspacio);
+    	// Reservas del usuario logado (Editables)
+    	result.addAll(reservasUsuario.stream()
+		    			.map(r -> ReservaDTO.from(r).editable())
+		    			.collect(Collectors.toList()));
+    	
+    	List<Reserva> reservasNoUsuario = reservaService.findReservasNoUsuarioDeUnEspacio(idEspacio);
+    	// Reservas de otros usuarios (No editables)
+    	result.addAll(reservasNoUsuario.stream()
+    					.map(r-> ReservaDTO.from(r))
+    					.collect(Collectors.toList()));
+    	
+    	
+        return result;
     }
 
     @RequestMapping(value = "/crear-reserva", method = RequestMethod.POST)

@@ -11,7 +11,11 @@ public interface ReservaService {
 
 	List<Reserva> reservasUsuario();
 
-    List<Reserva> findReservasByIdEspacio(int idEspacio);
+    List<Reserva> findAllReservasDeUnEspacio(int idEspacio);
+    
+    List<Reserva> findReservasUsuarioDeUnEspacio(int idEspacio);
+    
+    List<Reserva> findReservasNoUsuarioDeUnEspacio(int idEspacio);
 
     Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException;
 
