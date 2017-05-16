@@ -51,7 +51,7 @@ public class ReservaServiceImpl implements ReservaService {
 	public Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(!esPosibleReservarEspacioEnRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
-			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra"));
+			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra."));
 		}
 
 		Reserva newReserva = ReservaStepBuilder.builder()

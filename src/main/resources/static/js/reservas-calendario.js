@@ -83,7 +83,8 @@ function crearReserva(reserva) {
 	.fail(function (xhr, status) {
         closeModal();
         var error = JSON.parse(xhr.responseText);
-		console.log(error.msg);
+        scrollToTop();
+        showErrorPanel(error.msg);
 	});
 
 }
@@ -131,16 +132,6 @@ function eliminarReservaCalendario(idReserva){
 	});
 }
 
-function scrollToTop(){
-    $("html, body").animate({
-        scrollTop: 0
-    });
-}
-
-function showErrorPanel(msgError){
-    $(".info-panel").addClass("info-error").text(msgError).show().delay(10000).fadeOut();
-}
-
 
 function showTooltip(event, $element){
 	var asunto = '<p>Asunto: ' + event.title + '</p>';
@@ -164,4 +155,7 @@ function showTooltip(event, $element){
 		theme: 'tooltipster-light',
         trigger: 'click'
 	}).tooltipster('content', content);
+	
 }
+
+

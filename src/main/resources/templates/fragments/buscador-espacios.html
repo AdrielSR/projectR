@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 
+<!-- Info Panel -->
+<div class="info-panel">  </div>
+
 <!-- Buscador Panel -->
 <div class="buscador-panel">
     <div class="col s12 center">
@@ -12,7 +15,13 @@
 	    <div class="row">
 	        <div class="col s12">
 	            <div class="col s4">
-	                <label> Edificio : <input type="text" /> </label>
+	                <label> Edificio : 
+	                	<select class="selec_edificio">
+							<option th:each="e : ${edificios}"
+									th:value="${e.id}"
+									th:text="${e.nombre}"></option>
+						</select>
+						</label>
 	            </div>
 	
 	            <div class="col s4">
