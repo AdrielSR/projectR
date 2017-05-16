@@ -50,7 +50,7 @@ public class ReservaServiceImpl implements ReservaService {
 	@Override
 	public Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
-		if(!esPosibleReservarEnEspacio(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
+		if(!esPosibleReservarEspacioEnRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
 			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra"));
 		}
 
@@ -67,7 +67,7 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
-	public boolean esPosibleReservarEnEspacio(RangoDateTime rango, int idEspacio) {
+	public boolean esPosibleReservarEspacioEnRango(RangoDateTime rango, int idEspacio) {
 		return reservaRepository.findReservasEspacioEnRango(rango.getInicio(), rango.getFin(), idEspacio).isEmpty();
 	}
 

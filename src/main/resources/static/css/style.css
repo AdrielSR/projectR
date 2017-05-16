@@ -79,6 +79,13 @@ nav i.material-icons{
 	background-color: green;
 }
 
+.buscador-panel{
+	padding: 10px 15px;
+	min-height: 70px;
+	background-color: #FFF;
+	color: #000;
+}
+
 .tooltipster-light{
 	border-radius: 0px;
 }

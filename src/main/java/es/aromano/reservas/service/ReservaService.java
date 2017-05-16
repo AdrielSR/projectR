@@ -19,7 +19,7 @@ public interface ReservaService {
 
     Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException;
 
-    boolean esPosibleReservarEnEspacio(RangoDateTime rango, int idEspacio);
+    boolean esPosibleReservarEspacioEnRango(RangoDateTime rango, int idEspacio);
 
     boolean esPosibleEditarReservaEnEspacio(RangoDateTime rango, int idEspacio, long idReserva);
 

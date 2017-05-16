@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<!-- Buscador Panel -->
+<div class="buscador-panel">
+    <div class="col s12 center">
+        <h5>Buscador</h5>
+    </div>
+
+    <form>
+        <div class="col s12">
+            <div class="col s4">
+                <label> Edificio : <input type="text" /> </label>
+            </div>
+
+            <div class="col s4">
+                <label> F.inicio : <input type="text" /> </label>
+            </div>
+
+            <div class="col s4">
+                <label> F.fin : <input type="text" /> </label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+
+
+        </div>
+
+    </div>
+</div>
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+
+
+</body>
+</html>
