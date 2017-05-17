@@ -79,11 +79,12 @@ nav i.material-icons{
 	background-color: green;
 }
 
-.buscador-panel{
+.title-panel{
 	padding: 10px 15px;
-	min-height: 70px;
+	min-height: 40px;
 	background-color: #DDD;
 	color: #000;
+	margin-bottom: 10px;
 }
 
 .tooltipster-light{
