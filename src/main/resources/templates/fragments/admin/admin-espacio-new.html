@@ -7,16 +7,18 @@
 		<div class="col s12">
 		
 			<h4 class="center">Crear Espacio</h4>
-			<form th:action="@{/admin/espacio}" method="post">
+			<form th:action="@{/admin/espacio}" th:object="${espacioDTO}" method="post">
 	            <div class="col s6">
 		            <div>
 		            	<label> Nombre : 
-		            		<input type="text" name="nombre"/>
+		            		<input type="text" th:field="*{nombre}" />
+							<p class="red-text" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
 		            	</label>	
 		            </div>
 		            <div>
 		            	<label> Aforo: 
-		            		<input type="text" name="aforo"/> 
+		            		<input type="text" th:field="*{aforo}" />
+							<p class="red-text" th:if="${#fields.hasErrors('aforo')}" th:errors="*{aforo}"></p>
 		            	</label>
 		            </div>
 	            </div>

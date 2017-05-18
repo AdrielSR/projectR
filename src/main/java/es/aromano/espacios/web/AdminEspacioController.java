@@ -3,6 +3,7 @@ package es.aromano.espacios.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import es.aromano.edificios.service.EdificioService;
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.service.EspacioService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,7 +48,7 @@ public class AdminEspacioController {
 	////// Crear espacio //////
 	
 	@RequestMapping(value = "/espacio", method = RequestMethod.GET)
-	public String crearEspacio(Model model){
+	public String crearEspacio(Model model, EspacioDTO espacioDTO){
 		model.addAttribute("edificios", edificioService.edificiosActivos());
 		model.addAttribute("view", generateView("admin-espacio-new"));
 		
@@ -53,8 +56,12 @@ public class AdminEspacioController {
 	}
 	
 	@RequestMapping(value = "/espacio", method = RequestMethod.POST)
-	public String doCrearEspacio(@ModelAttribute EspacioDTO espacioDTO){
-		
+	public String doCrearEspacio(Model model, @Valid EspacioDTO espacioDTO, BindingResult bindingResult){
+
+		if (bindingResult.hasErrors()) {
+			return crearEspacio(model, espacioDTO);
+		}
+
 		Espacio newEspacio = espacioService.crearEspacio(espacioDTO);
 		
 		if(newEspacio == null){
