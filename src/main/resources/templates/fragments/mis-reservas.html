@@ -30,12 +30,12 @@
 						<div class="row" style="margin-bottom: 0px;">
 							<div class="col s12">
 								<div class="col s6" style="padding-left: 0px;">
-									<p th:inline="text"> <i><b>Donde:</b></i> [[${r.espacio.nombre}]]</p>
+									<p th:inline="text"> <i><b>Dónde:</b></i> [[${r.espacio.nombre}]]</p>
 								</div>
 			
 								<div class="col s6" style="padding-left: 0px;">
 									<p th:inline="text"> 
-										<i><b>Cuando:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] - 
+										<i><b>Cuándo:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] -
 										[[${#dates.format(r.rango.fin,'HH:mm')}]]
 									</p>
 								</div>
