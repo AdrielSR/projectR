@@ -16,4 +16,37 @@ public class RRule {
     private DateTime until;
 
 
+    public Frecuency getFrecuency() {
+        return frecuency;
+    }
+
+    public void setFrecuency(Frecuency frecuency) {
+        this.frecuency = frecuency;
+    }
+
+
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public DateTime getUntil() {
+        return until;
+    }
+
+    public void setUntil(DateTime until) {
+        this.until = until;
+    }
+
+    public int getInterval() {
+        return interval;
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
+    }
 }

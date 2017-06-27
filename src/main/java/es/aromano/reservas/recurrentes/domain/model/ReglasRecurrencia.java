@@ -14,4 +14,29 @@ public class ReglasRecurrencia {
 
     private List<ExDate> exdate;
 
+
+
+    public RRule getRrule() {
+        return rrule;
+    }
+
+    public void setRrule(RRule rrule) {
+        this.rrule = rrule;
+    }
+
+    public List<RDate> getRdate() {
+        return rdate;
+    }
+
+    public void setRdate(List<RDate> rdate) {
+        this.rdate = rdate;
+    }
+
+    public List<ExDate> getExdate() {
+        return exdate;
+    }
+
+    public void setExdate(List<ExDate> exdate) {
+        this.exdate = exdate;
+    }
 }
