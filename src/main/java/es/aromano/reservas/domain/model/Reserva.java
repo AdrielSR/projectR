@@ -1,11 +1,14 @@
 package es.aromano.reservas.domain.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import es.aromano.espacios.domain.model.Espacio;
+import es.aromano.reservas.recurrentes.calculador.CalculadorReservasFactory;
+import es.aromano.reservas.recurrentes.calculador.CalculadorReservasStrategy;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.users.domain.model.User;
 import org.joda.time.DateTime;
@@ -30,6 +33,7 @@ public class Reserva {
 		@AttributeOverride(name = "inicio", column = @Column(name = "rr_inicio")),
 		@AttributeOverride(name = "fin", column = @Column(name = "rr_fin"))
 	})
+	@Transient
 	private RangoDateTime rangoRecurrencia;
 	
 	@NotNull
@@ -43,6 +47,7 @@ public class Reserva {
 	private User user;
 
 	@Embedded
+	@Transient
 	private ReglasRecurrencia reglas;
 	
 	public Reserva(){}
@@ -128,5 +133,37 @@ public class Reserva {
 	public DateTime getFin(){
 		return rango.getFin();
 	}
+
+	public List<Reserva> calcularReservas(){
+		CalculadorReservasStrategy strategy = CalculadorReservasFactory.getCalculador(this);
+		return strategy.calcular();
+	}
+
+	public boolean esRecurrente(){
+		return Objects.nonNull(getReglas());
+	}
+
+
+	public boolean solapa(Reserva otra){
+		if(esRecurrente()){
+			for(Reserva reserva : otra.calcularReservas()){
+				if(solapaSimple(reserva))
+					return true;
+			}
+
+			return false;
+		}
+
+
+		return solapaSimple(otra);
+	}
+
+	private boolean solapaSimple(Reserva otra) {
+		boolean solapa = (otra.getInicio().compareTo(this.getInicio())) <= 0 && !(otra.getFin().compareTo(this.getInicio()) <= 0);
+		solapa = solapa || (otra.getInicio().compareTo(this.getInicio())>= 0 && otra.getInicio().compareTo(this.getFin()) < 0);
+
+		return solapa;
+	}
+
 
 }
