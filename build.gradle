@@ -58,4 +58,6 @@ dependencies {
 
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile (group: 'org.assertj', name: 'assertj-core', version: '3.6.2')
+
 }
