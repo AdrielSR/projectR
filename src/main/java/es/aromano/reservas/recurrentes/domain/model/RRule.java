@@ -1,7 +1,8 @@
 package es.aromano.reservas.recurrentes.domain.model;
 
+import org.joda.time.DateTime;
+
 import javax.persistence.Embeddable;
-import java.util.Date;
 
 @Embeddable
 public class RRule {
@@ -12,7 +13,7 @@ public class RRule {
 
     private int count;
 
-    private Date until;
+    private DateTime until;
 
 
 }
