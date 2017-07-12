@@ -32,6 +32,23 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
 
         }
 
+        @Test
+        public void generar_reservas_recurrentes_semanal(){
+
+            Reserva reserva = crearReservaFrom(new RangoDateTime(start, end));
+            reserva.setEspacio(new Espacio());
+            reserva.setUser(new User());
+
+            ReglasRecurrencia reglas = crearReglasSemanal();
+            reserva.setReglas(reglas);
+
+            List<Reserva> reservasRecurrentes = reserva.calcularReservas();
+
+            reservasRecurrentes.stream().
+                    forEach(r -> System.out.println(r.getInicio().toString("dd/MM/yyyy HH:mm") + " - " + r.getFin().toString("dd/MM/yyyy HH:mm")));
+
+        }
+
     @Test
         public void generar_reservas_recurrentes_mensual(){
 
@@ -69,6 +86,15 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
     private ReglasRecurrencia crearReglasDiario() {
         RRule rrule = new RRule(Frecuency.DAILY, 3);
         rrule.setCount(4);
+
+        return new ReglasRecurrencia(rrule);
+    }
+
+    private ReglasRecurrencia crearReglasSemanal() {
+        RRule rrule = new RRule(Frecuency.WEEKlY, 1);
+        rrule.setCount(10);
+        int[] daysOfWeek = {1,3,5};
+        rrule.setDaysOfWeek(daysOfWeek);
 
         return new ReglasRecurrencia(rrule);
     }

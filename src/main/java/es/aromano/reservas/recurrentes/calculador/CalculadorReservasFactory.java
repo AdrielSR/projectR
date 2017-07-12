@@ -17,7 +17,7 @@ public class CalculadorReservasFactory {
             return new CalculadorReservasStrategyDiario(reserva);
         }
         else if(frecuency == WEEKlY){
-            return new CalculadorReservasStrategySemanal();
+            return new CalculadorReservasStrategySemanal(reserva);
         }
         else if(frecuency == MONTHLY){
             return new CalculadorReservasStrategyMensual(reserva);

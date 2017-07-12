@@ -15,6 +15,8 @@ public class RRule {
 
     private DateTime until;
 
+    private int[] daysOfWeek;
+
     protected  RRule(){}
 
     public RRule(Frecuency frecuency, int interval){
@@ -54,5 +56,13 @@ public class RRule {
 
     public void setInterval(int interval) {
         this.interval = interval;
+    }
+
+    public int[] getDaysOfWeek() {
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(int[] daysOfWeek) {
+        this.daysOfWeek = daysOfWeek;
     }
 }
