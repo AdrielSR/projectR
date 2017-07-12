@@ -15,11 +15,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-public class CalculadorReservasMensualStrategy implements CalculadorReservasStrategy {
+public class CalculadorReservasStrategyMensual implements CalculadorReservasStrategy {
 
     private Reserva reserva;
 
-    public CalculadorReservasMensualStrategy(Reserva reserva){
+    public CalculadorReservasStrategyMensual(Reserva reserva){
         this.reserva = reserva;
     }
 
