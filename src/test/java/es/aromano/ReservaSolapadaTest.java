@@ -14,7 +14,12 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
     private static final DateTime end = new DateTime(2017, 11, 15, 11, 30);
 
 
-
+    /**
+     *        start-end
+     *    |---------------|
+     * |-------------|
+     *   start1-end1
+     */
     @Test
     public void reserva_solapada_caso_1(){
 
@@ -28,6 +33,12 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
 
     }
 
+    /**
+     *        start-end
+     *    |---------------|
+     *            |-------------|
+     *              start1-end1
+     */
     @Test
     public void reserva_solapada_caso_2(){
 
@@ -41,6 +52,12 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
 
     }
 
+    /**
+     *        start-end
+     *    |---------------|
+     *       |--------|
+     *       start1-end1
+     */
     @Test
     public void reserva_solapada_caso_3(){
 
@@ -54,6 +71,12 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
 
     }
 
+    /**
+     *        start-end
+     *    |---------------|
+     * |---------------------|
+     *       start1-end1
+     */
     @Test
     public void reserva_solapada_caso_4(){
 
