@@ -4,6 +4,8 @@ import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import org.joda.time.DateTime;
 
+import java.util.Objects;
+
 import static org.apache.commons.lang3.StringUtils.*;
 
 
@@ -111,5 +113,9 @@ public class ReservaDTO {
 
     public void setReglas(ReglasRecurrencia reglas) {
         this.reglas = reglas;
+    }
+
+    public boolean isRecurrente(){
+	    return Objects.nonNull(reglas);
     }
 }

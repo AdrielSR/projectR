@@ -1,7 +1,9 @@
 package es.aromano.reservas.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import es.aromano.espacios.service.EspacioService;
 import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
@@ -49,6 +51,41 @@ public class ReservaServiceImpl implements ReservaService {
 
 	@Override
 	public Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
+
+		if(reservaDTO.isRecurrente()){
+			return crearReservaRecurrente(reservaDTO);
+		}
+
+		return crearReservaSimple(reservaDTO);
+	}
+
+	private Reserva crearReservaRecurrente(ReservaDTO reservaDTO) throws ReservaSolapadaException {
+
+		List<Reserva> reservasConflictivas = new ArrayList<>();//TODO: findReservasConflictivasEnEspacioYRango
+
+		Reserva newReserva = ReservaStepBuilder.builder()
+				.propietario(userService.getCurrentUser())
+				.lugar(espacioService.findEspacio(reservaDTO.getIdEspacio()))
+				.desde(reservaDTO.getStart())
+				.hasta(reservaDTO.getEnd())
+				.asunto(reservaDTO.getTitle())
+				.build();
+
+		newReserva.setReglas(reservaDTO.getReglas());
+
+		Optional<Reserva> reservaSolapada = reservasConflictivas.stream()
+																.filter(r -> r.solapa(newReserva))
+																.findFirst();
+
+		if(reservaSolapada.isPresent()){
+			throw new ReservaSolapadaException("");
+		}
+
+
+		return reservaRepository.save(newReserva);
+	}
+
+	private Reserva crearReservaSimple(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(!esPosibleReservarEspacioEnRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
 			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra."));

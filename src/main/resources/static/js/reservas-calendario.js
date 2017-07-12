@@ -77,7 +77,6 @@ function generarJSON(){
     reserva.start = toIso8601($("#datetimepicker1").val());
     reserva.end = toIso8601($("#datetimepicker2").val());
     reserva.idEspacio = $("#idEspacio").val();
-    reserva.reglas = {};
 
     if($("#checkRepetir").is(":checked")){
     	reserva.reglas = generarReglasJSON();

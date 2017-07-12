@@ -140,13 +140,15 @@ public class Reserva {
 		return strategy.calcular();
 	}
 
-	public boolean esRecurrente(){
-		return Objects.nonNull(getReglas());
+	public boolean isRecurrente(){
+		return Objects.nonNull(getReglas()) ||
+				Objects.nonNull(getRangoRecurrencia().getInicio()) ||
+				Objects.nonNull(getRangoRecurrencia().getFin()) ;
 	}
 
 
 	public boolean solapa(Reserva otra){
-		if(esRecurrente()){
+		if(isRecurrente()){
 			for(Reserva reserva : otra.calcularReservas()){
 				if(solapaSimple(reserva))
 					return true;
