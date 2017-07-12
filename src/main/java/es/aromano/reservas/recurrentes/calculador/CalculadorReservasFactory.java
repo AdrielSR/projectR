@@ -23,7 +23,7 @@ public class CalculadorReservasFactory {
             return new CalculadorReservasStrategyMensual(reserva);
         }
         else {
-            return new CalculadorReservasStrategyAnual();
+            return new CalculadorReservasStrategyAnual(reserva);
         }
 
     }

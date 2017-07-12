@@ -22,7 +22,7 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
             reserva.setEspacio(new Espacio());
             reserva.setUser(new User());
 
-            ReglasRecurrencia reglas = crearReglas();
+            ReglasRecurrencia reglas = crearReglasMensual();
             reserva.setReglas(reglas);
 
             List<Reserva> reservasRecurrentes = reserva.calcularReservas();
@@ -32,11 +32,38 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
 
         }
 
-    private ReglasRecurrencia crearReglas() {
+    private ReglasRecurrencia crearReglasMensual() {
         RRule rrule = new RRule(Frecuency.MONTHLY, 1);
         rrule.setCount(4);
 
         return new ReglasRecurrencia(rrule);
     }
+
+
+    @Test
+    public void generar_reservas_recurrentes_anual(){
+
+        Reserva reserva = crearReservaFrom(new RangoDateTime(start, end));
+        reserva.setEspacio(new Espacio());
+        reserva.setUser(new User());
+
+        ReglasRecurrencia reglas = crearReglasAnual();
+        reserva.setReglas(reglas);
+
+        List<Reserva> reservasRecurrentes = reserva.calcularReservas();
+
+        reservasRecurrentes.stream().
+                forEach(r -> System.out.println(r.getInicio().toString("dd/MM/yyyy HH:mm") + " - " + r.getFin().toString("dd/MM/yyyy HH:mm")));
+
+    }
+
+    private ReglasRecurrencia crearReglasAnual() {
+        RRule rrule = new RRule(Frecuency.YEARLY, 1);
+        rrule.setCount(4);
+
+        return new ReglasRecurrencia(rrule);
+    }
+
+
 
 }
