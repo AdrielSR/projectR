@@ -2,6 +2,7 @@ package es.aromano.reservas.recurrentes.domain.model;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import java.util.ArrayList;
 import java.util.List;
 
 @Embeddable
@@ -14,7 +15,13 @@ public class ReglasRecurrencia {
 
     private List<ExDate> exdate;
 
+    protected ReglasRecurrencia(){}
 
+    public ReglasRecurrencia(RRule rrule){
+        this.rrule = rrule;
+        this.rdate = new ArrayList<>();
+        this.exdate = new ArrayList<>();
+    }
 
     public RRule getRrule() {
         return rrule;

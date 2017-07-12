@@ -75,7 +75,7 @@ public class CalculadorReservasStrategyMensual implements CalculadorReservasStra
         int interval = rrule.getInterval();
         int count = rrule.getCount();
 
-        RangoDateTime primeraInstancia = reserva.getRango();
+        RangoDateTime primeraInstancia = new RangoDateTime(reserva.getInicio(), reserva.getFin());
 
         int i = 0;
         while (count > 0){

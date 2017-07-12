@@ -11,6 +11,7 @@ import es.aromano.reservas.recurrentes.calculador.CalculadorReservasFactory;
 import es.aromano.reservas.recurrentes.calculador.CalculadorReservasStrategy;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.users.domain.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 @Entity
@@ -70,7 +71,7 @@ public class Reserva {
 
 
 	public String getAsunto() {
-		return asunto;
+		return StringUtils.isNotBlank(asunto)? asunto : "Sin asunto";
 	}
 
 

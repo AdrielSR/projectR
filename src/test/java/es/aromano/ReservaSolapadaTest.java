@@ -10,8 +10,8 @@ import org.junit.Test;
 public class ReservaSolapadaTest extends ProjectApplicationTests{
 
 
-    private static final DateTime start = new DateTime(2017, 11, 15, 10, 30);
-    private static final DateTime end = new DateTime(2017, 11, 15, 11, 30);
+    static final DateTime start = new DateTime(2017, 11, 15, 10, 30);
+    static final DateTime end = new DateTime(2017, 11, 15, 11, 30);
 
 
     /**
@@ -90,7 +90,7 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
 
     }
 
-    private Reserva crearReservaFrom(RangoDateTime rango) {
+    public Reserva crearReservaFrom(RangoDateTime rango) {
 
         Reserva reserva = new Reserva();
         reserva.setRango(rango);

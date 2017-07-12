@@ -15,6 +15,12 @@ public class RRule {
 
     private DateTime until;
 
+    protected  RRule(){}
+
+    public RRule(Frecuency frecuency, int interval){
+        this.frecuency = frecuency;
+        this.interval = interval;
+    }
 
     public Frecuency getFrecuency() {
         return frecuency;
