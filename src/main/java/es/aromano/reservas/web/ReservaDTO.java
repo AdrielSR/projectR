@@ -1,6 +1,7 @@
 package es.aromano.reservas.web;
 
 import es.aromano.reservas.domain.model.Reserva;
+import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import org.joda.time.DateTime;
 
 import static org.apache.commons.lang3.StringUtils.*;
@@ -15,6 +16,7 @@ public class ReservaDTO {
     private int idEspacio;
     private String nombreEspacio;
     private boolean editable;
+    private ReglasRecurrencia reglas;
 
     public ReservaDTO(){ }
 
@@ -85,7 +87,7 @@ public class ReservaDTO {
         DateTime start = reserva.getRango().getInicio();
         DateTime end = reserva.getRango().getFin();
         int idEspacio = reserva.getEspacio().getId();
-        String nombreEspacio =reserva.getEspacio().getNombre();
+        String nombreEspacio = reserva.getEspacio().getNombre();
 
         return new ReservaDTO(id, title, start, end, idEspacio, nombreEspacio);
     }
@@ -103,4 +105,11 @@ public class ReservaDTO {
 		return this;
 	}
 
+    public ReglasRecurrencia getReglas() {
+        return reglas;
+    }
+
+    public void setReglas(ReglasRecurrencia reglas) {
+        this.reglas = reglas;
+    }
 }

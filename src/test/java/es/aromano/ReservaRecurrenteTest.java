@@ -91,7 +91,7 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
     }
 
     private ReglasRecurrencia crearReglasSemanal() {
-        RRule rrule = new RRule(Frecuency.WEEKlY, 1);
+        RRule rrule = new RRule(Frecuency.WEEKLY, 1);
         rrule.setCount(10);
         int[] daysOfWeek = {1,3,5};
         rrule.setDaysOfWeek(daysOfWeek);

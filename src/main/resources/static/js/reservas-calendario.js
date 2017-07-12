@@ -3,11 +3,7 @@ $(document).ready(function(){
 	$('.modal').modal();
 	
     $("#crear-reserva").click(function(){
-		var reserva = {};
-		reserva.title = $("#asunto").val();
-		reserva.start = toIso8601($("#datetimepicker1").val());
-		reserva.end = toIso8601($("#datetimepicker2").val());
-		reserva.idEspacio = $("#idEspacio").val();
+		var reserva = generarJSON();
 
 		crearReserva(reserva);
 	});
@@ -65,8 +61,48 @@ $(document).ready(function(){
 	         ]
   
 	});
+
+	$("#checkRepetir").change(function () {
+
+		$("#repetirContainer").toggle();
+
+    });
 	
 });
+
+
+function generarJSON(){
+    var reserva = {};
+    reserva.title = $("#asunto").val();
+    reserva.start = toIso8601($("#datetimepicker1").val());
+    reserva.end = toIso8601($("#datetimepicker2").val());
+    reserva.idEspacio = $("#idEspacio").val();
+    reserva.reglas = {};
+
+    if($("#checkRepetir").is(":checked")){
+    	reserva.reglas = generarReglasJSON();
+	}
+
+    return reserva;
+}
+
+
+function generarReglasJSON(){
+	var reglas = {};
+	reglas.rrule = {};
+
+    reglas.rrule.frecuency =  $("#selec_frec").val();
+    reglas.rrule.interval = $("#selec_inter").val();
+    reglas.rrule.count = $("#count_repeat").val();
+    reglas.rrule.until = null;
+    reglas.rrule.daysOfWeek = [];
+
+
+
+    return reglas;
+}
+
+
 
 function crearReserva(reserva) {
 

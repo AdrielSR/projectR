@@ -28,7 +28,7 @@
      <form>
          <input type="hidden" id="idEspacio" th:value="${idEspacio}"/>
          <div class="row">
-             <div class="col s12">
+             <div class="row col s12">
                  <div>
                      <label>Asunto <input id="asunto" type="text" /></label>
                  </div>
@@ -40,7 +40,80 @@
                  <div>
                      <label>Hasta <input id="datetimepicker2" type="text" /></label>
                  </div>
+
+                 <!-- Check Repetir -->
+                 <input id="checkRepetir" type="checkbox" />
+                 <label for="checkRepetir">Repetir</label>
+
              </div>
+
+             <div id="repetirContainer" class="col s12" style="display: none;">
+                 <!-- Frecuencia -->
+                 <div class="col s12 m6 input-field">
+                     <select id="selec_frec">
+                         <option value="WEEKLY">Cada semana</option>
+                         <option value="DAILY">Cada dia</option>
+                         <option value="MONTHLY">Cada mes</option>
+                         <option value="YEARLY">Cada año</option>
+                         <option value="WEEKLY">Todos los dias laborables (de lunes a viernes)</option>
+                         <option value="WEEKLY">Todos los lunes, miercoles y viernes</option>
+                         <option value="WEEKLY">Todos los martes y jueves</option>
+                     </select>
+                     <label>Se repite: </label>
+                 </div>
+
+                 <!-- Intervalo -->
+                 <div class="col s12 m6 input-field">
+                     <select id="selec_inter">
+                         <option th:each="i : ${#numbers.sequence(1,30)}"
+                                 th:value="${i}"
+                                 th:text="${i}"></option>
+                     </select>
+                     <label>Reperir cada: </label>
+                 </div>
+
+                 <!-- Dias de la Semana -->
+                 <div id="checksDiasSemana">
+                     <p>Repetir el: </p>
+
+                         <input id="check_L" type="checkbox" />
+                         <label class="label-check" for="check_L">L</label>
+
+                         <input id="check_M" type="checkbox" />
+                         <label class="label-check" for="check_M">M</label>
+
+                         <input id="check_X" type="checkbox" />
+                         <label class="label-check" for="check_X">X</label>
+
+                         <input id="check_J" type="checkbox" />
+                         <label class="label-check" for="check_J">J</label>
+
+                         <input id="check_V" type="checkbox" />
+                         <label class="label-check" for="check_V">V</label>
+
+                         <input id="check_S" type="checkbox" />
+                         <label class="label-check" for="check_S">S</label>
+
+                         <input id="check_D" type="checkbox" />
+                         <label class="label-check" for="check_D">D</label>
+                 </div>
+
+                 <!-- Empieza el -->
+                 <div class="col s12 m4">
+                     <label>Empieza el </label>
+                     <input id="empieza_el" type="text" />
+                 </div>
+
+                 <!-- Finaliza -->
+                 <div class="col s6 m4">
+                     <label>Al cabo de
+                     <input id="count_repeat" type="text" value="5" />
+                     repeticiones </label>
+                 </div>
+
+
+             </div>
+
          </div>
      </form>
    </div>

@@ -91,3 +91,8 @@ nav i.material-icons{
 	border-radius: 0px;
 }
 
+label.label-check{
+	padding-left: 20px;
+	padding-right: 10px;
+}
+
