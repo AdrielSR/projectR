@@ -14,7 +14,7 @@ public class CalculadorReservasFactory {
         Frecuency frecuency = reserva.getReglas().getRrule().getFrecuency();
 
         if(frecuency == DAILY){
-            return new CalculadorReservasStrategyDiario();
+            return new CalculadorReservasStrategyDiario(reserva);
         }
         else if(frecuency == WEEKlY){
             return new CalculadorReservasStrategySemanal();

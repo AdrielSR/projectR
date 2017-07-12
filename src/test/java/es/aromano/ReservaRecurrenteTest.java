@@ -16,6 +16,23 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
 
 
         @Test
+        public void generar_reservas_recurrentes_diario(){
+
+            Reserva reserva = crearReservaFrom(new RangoDateTime(start, end));
+            reserva.setEspacio(new Espacio());
+            reserva.setUser(new User());
+
+            ReglasRecurrencia reglas = crearReglasDiario();
+            reserva.setReglas(reglas);
+
+            List<Reserva> reservasRecurrentes = reserva.calcularReservas();
+
+            reservasRecurrentes.stream().
+                    forEach(r -> System.out.println(r.getInicio().toString("dd/MM/yyyy HH:mm") + " - " + r.getFin().toString("dd/MM/yyyy HH:mm")));
+
+        }
+
+    @Test
         public void generar_reservas_recurrentes_mensual(){
 
             Reserva reserva = crearReservaFrom(new RangoDateTime(start, end));
@@ -32,14 +49,6 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
 
         }
 
-    private ReglasRecurrencia crearReglasMensual() {
-        RRule rrule = new RRule(Frecuency.MONTHLY, 1);
-        rrule.setCount(4);
-
-        return new ReglasRecurrencia(rrule);
-    }
-
-
     @Test
     public void generar_reservas_recurrentes_anual(){
 
@@ -55,6 +64,21 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
         reservasRecurrentes.stream().
                 forEach(r -> System.out.println(r.getInicio().toString("dd/MM/yyyy HH:mm") + " - " + r.getFin().toString("dd/MM/yyyy HH:mm")));
 
+    }
+
+    private ReglasRecurrencia crearReglasDiario() {
+        RRule rrule = new RRule(Frecuency.DAILY, 3);
+        rrule.setCount(4);
+
+        return new ReglasRecurrencia(rrule);
+    }
+
+
+    private ReglasRecurrencia crearReglasMensual() {
+        RRule rrule = new RRule(Frecuency.MONTHLY, 1);
+        rrule.setCount(4);
+
+        return new ReglasRecurrencia(rrule);
     }
 
     private ReglasRecurrencia crearReglasAnual() {
