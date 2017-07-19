@@ -5,7 +5,8 @@ $(document).ready(function(){
     $("#crear-reserva").click(function(){
 		var reserva = generarJSON();
 
-		crearReserva(reserva);
+		debugger;
+		//crearReserva(reserva);
 	});
 
 
@@ -62,9 +63,55 @@ $(document).ready(function(){
   
 	});
 
-	$("#checkRepetir").change(function () {
 
+    /// CHECK REPETIR ///
+	$("#checkRepetir").change(function () {
 		$("#repetirContainer").toggle();
+    });
+
+	/// SELECTOR FRECUENCIA ///
+    $("#selec_frec").change(function(){
+    	var t =  $("#selec_frec option:selected").text();
+    	var dow = [];
+    	desmarcarChecks();
+
+        if(t === 'Todos los lunes, miercoles y viernes'){
+            $("#checksDiasSemana").hide();
+
+            dow = ["L","X","V"];
+            marcarChecks(dow);
+        }
+        else if(t === 'Todos los martes y jueves'){
+            $("#checksDiasSemana").hide();
+
+            dow = ["M","J"];
+            marcarChecks(dow);
+        }
+        else if(t === 'Todos los dias laborables (de lunes a viernes)'){
+            $("#checksDiasSemana").hide();
+
+            dow = ["L","M","X","J","V"];
+            marcarChecks(dow);
+        }
+        else if(t === 'Cada dia'){
+
+            $("#checksDiasSemana").hide();
+
+        }
+        else if(t === 'Cada semana'){
+
+            $("#checksDiasSemana").show();
+
+        }
+        else if(t === 'Cada mes'){
+
+            $("#checksDiasSemana").hide();
+
+        }
+        else{
+            $("#checksDiasSemana").hide();
+        }
+
 
     });
 	
@@ -94,7 +141,7 @@ function generarReglasJSON(){
     reglas.rrule.interval = $("#selec_inter").val();
     reglas.rrule.count = $("#count_repeat").val();
     reglas.rrule.until = null;
-    reglas.rrule.daysOfWeek = [];
+    reglas.rrule.daysOfWeek = getChecksMarcados();
 
 
 
@@ -167,7 +214,6 @@ function eliminarReservaCalendario(idReserva){
 	});
 }
 
-
 function showTooltip(event, $element){
 	var asunto = '<p>Asunto: ' + event.title + '</p>';
 	var cuando = '<p>Cuando: ' + event.start.format("DD/MM/YYYY HH:mm") + '</p>';
@@ -194,3 +240,28 @@ function showTooltip(event, $element){
 }
 
 
+function getChecksMarcados(){
+	var daysOfWeek = [];
+
+	$("#checksDiasSemana input").each(function (index, elem) {
+			if($(this).is(":checked")){
+				var valor = $(this).attr("data-value");
+				daysOfWeek.push(valor);
+			}
+    });
+
+	return daysOfWeek;
+}
+
+
+function desmarcarChecks(){
+    $("#checksDiasSemana input").each(function (index, elem) {
+        $(this).prop("checked", false);
+    });
+}
+
+function marcarChecks(array) {
+    for(var i in array){
+        $("#check_" + array[i]).prop("checked",true);
+    }
+}
