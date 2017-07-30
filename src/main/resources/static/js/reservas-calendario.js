@@ -250,7 +250,7 @@ function getChecksMarcados(){
 			}
     });
 
-	return daysOfWeek;
+	return daysOfWeek.join(",");
 }
 
 

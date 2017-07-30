@@ -4,6 +4,7 @@ package es.aromano;
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.Reserva;
+import es.aromano.reservas.recurrentes.domain.model.ExDate;
 import es.aromano.reservas.recurrentes.domain.model.Frecuency;
 import es.aromano.reservas.recurrentes.domain.model.RRule;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
@@ -93,10 +94,13 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
     private ReglasRecurrencia crearReglasSemanal() {
         RRule rrule = new RRule(Frecuency.WEEKLY, 1);
         rrule.setCount(10);
-        int[] daysOfWeek = {1,3,5};
+        String daysOfWeek = "1,3,5";
         rrule.setDaysOfWeek(daysOfWeek);
 
-        return new ReglasRecurrencia(rrule);
+        ReglasRecurrencia reglas = new ReglasRecurrencia(rrule);
+        reglas.setExdate(new ExDate("17/11/2017,22/11/2017"));
+
+        return reglas;
     }
 
 

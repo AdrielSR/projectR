@@ -11,6 +11,7 @@ import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,12 +34,12 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
         }
 
         RRule rrule = reglas.get().getRrule();
-        List<RDate> rdates = reglas.get().getRdate();
-        List<ExDate> exdates = reglas.get().getExdate();
+        RDate rdate = reglas.get().getRdate();
+        ExDate exdate = reglas.get().getExdate();
 
         List<RangoDateTime> instancias = calcularInstancias(rrule);
-        agregarInstanciasExtra(rdates, instancias);
-        eliminarExcepcionesDeInstancias(exdates, instancias);
+        agregarInstanciasExtra(rdate, instancias);
+        eliminarExcepcionesDeInstancias(exdate, instancias);
 
 
         return instancias.stream()
@@ -56,23 +57,34 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
                 .build();
     }
 
-    private void agregarInstanciasExtra(List<RDate> rdates, List<RangoDateTime> instancias) {
-        rdates.stream()
-                .forEach(rDate -> instancias.add(rDate.getRangoRdate()));
+    private void agregarInstanciasExtra(RDate rdate, List<RangoDateTime> instancias) {
+        rdate.convertToRangeFromString().stream()
+                .forEach(rDate -> instancias.add(rDate));
     }
 
-    private void eliminarExcepcionesDeInstancias(List<ExDate> exdates, List<RangoDateTime> instancias) {
-        exdates.stream()
-                .forEach(exDate -> instancias.remove(exDate.getRangoExdate()));
+    private void eliminarExcepcionesDeInstancias(ExDate exdate, List<RangoDateTime> instancias) {
+        List<RangoDateTime> rangosExDate = exdate.convertToRangeFromString();
+        List<RangoDateTime> _instancias = new ArrayList<>(instancias);
+
+        for(RangoDateTime rangoExDate : rangosExDate){
+            removeRangoIfPresent(_instancias, instancias, rangoExDate);
+        }
 
     }
 
+    private void removeRangoIfPresent(List<RangoDateTime> _instancias, List<RangoDateTime> instancias, RangoDateTime rango){
+        for(RangoDateTime r : _instancias){
+            if(r.getInicio().toString("dd/MM/yyyy").equals(rango.getInicio().toString("dd/MM/yyyy"))){
+                instancias.remove(r);
+            }
+        }
+    }
 
     private List<RangoDateTime> calcularInstancias(RRule rrule){
         List<RangoDateTime> instancias = new ArrayList<>();
         int interval = rrule.getInterval();
         int count = rrule.getCount();
-        int[] daysOfWeek = rrule.getDaysOfWeek();
+        String daysOfWeek = rrule.getDaysOfWeek();
 
         RangoDateTime primeraInstancia = new RangoDateTime(reserva.getInicio(), reserva.getFin());
 
@@ -82,9 +94,11 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
             DateTime start = reserva.getInicio();
             DateTime end = reserva.getFin();
 
-            for(int j=0; j < daysOfWeek.length && count > 0; j++){
+            String[] dias = daysOfWeek.split(",");
 
-                int dayOfWeek = daysOfWeek[j];
+            for(int j=0; j < dias.length && count > 0; j++){
+
+                int dayOfWeek = Integer.parseInt(dias[j]);
                 int currentDay = start.getDayOfWeek();
                 int diasASumar = dayOfWeek - currentDay;
 

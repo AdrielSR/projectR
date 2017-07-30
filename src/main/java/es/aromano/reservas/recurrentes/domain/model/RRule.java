@@ -15,7 +15,7 @@ public class RRule {
 
     private DateTime until;
 
-    private int[] daysOfWeek;
+    private String daysOfWeek;
 
     protected  RRule(){}
 
@@ -58,11 +58,11 @@ public class RRule {
         this.interval = interval;
     }
 
-    public int[] getDaysOfWeek() {
+    public String getDaysOfWeek() {
         return daysOfWeek;
     }
 
-    public void setDaysOfWeek(int[] daysOfWeek) {
+    public void setDaysOfWeek(String daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
     }
 }

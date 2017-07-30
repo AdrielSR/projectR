@@ -34,7 +34,6 @@ public class Reserva {
 		@AttributeOverride(name = "inicio", column = @Column(name = "rr_inicio")),
 		@AttributeOverride(name = "fin", column = @Column(name = "rr_fin"))
 	})
-	@Transient
 	private RangoDateTime rangoRecurrencia;
 	
 	@NotNull

@@ -33,12 +33,12 @@ public class CalculadorReservasStrategyDiario implements CalculadorReservasStrat
         }
 
         RRule rrule = reglas.get().getRrule();
-        List<RDate> rdates = reglas.get().getRdate();
-        List<ExDate> exdates = reglas.get().getExdate();
+        RDate rdate = reglas.get().getRdate();
+        ExDate exdate = reglas.get().getExdate();
 
         List<RangoDateTime> instancias = calcularInstancias(rrule);
-        agregarInstanciasExtra(rdates, instancias);
-        eliminarExcepcionesDeInstancias(exdates, instancias);
+        agregarInstanciasExtra(rdate, instancias);
+        eliminarExcepcionesDeInstancias(exdate, instancias);
 
 
         return instancias.stream()
@@ -57,14 +57,14 @@ public class CalculadorReservasStrategyDiario implements CalculadorReservasStrat
                 .build();
     }
 
-    private void agregarInstanciasExtra(List<RDate> rdates, List<RangoDateTime> instancias) {
-        rdates.stream()
-                .forEach(rDate -> instancias.add(rDate.getRangoRdate()));
+    private void agregarInstanciasExtra(RDate rdate, List<RangoDateTime> instancias) {
+        rdate.convertToRangeFromString().stream()
+                .forEach(rDate -> instancias.add(rDate));
     }
 
-    private void eliminarExcepcionesDeInstancias(List<ExDate> exdates, List<RangoDateTime> instancias) {
-        exdates.stream()
-                .forEach(exDate -> instancias.remove(exDate.getRangoExdate()));
+    private void eliminarExcepcionesDeInstancias(ExDate exdate, List<RangoDateTime> instancias) {
+        exdate.convertToRangeFromString().stream()
+                .forEach(exDate -> instancias.remove(exDate));
 
     }
 
