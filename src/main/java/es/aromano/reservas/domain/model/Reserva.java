@@ -47,7 +47,6 @@ public class Reserva {
 	private User user;
 
 	@Embedded
-	@Transient
 	private ReglasRecurrencia reglas;
 	
 	public Reserva(){}

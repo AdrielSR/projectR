@@ -34,12 +34,12 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
         }
 
         RRule rrule = reglas.get().getRrule();
-        RDate rdate = reglas.get().getRdate();
-        ExDate exdate = reglas.get().getExdate();
+        List<RDate> rdates = reglas.get().getRdate();
+        List<ExDate> exdates = reglas.get().getExdate();
 
         List<RangoDateTime> instancias = calcularInstancias(rrule);
-        agregarInstanciasExtra(rdate, instancias);
-        eliminarExcepcionesDeInstancias(exdate, instancias);
+        agregarInstanciasExtra(rdates, instancias);
+        instancias = eliminarExcepcionesDeInstancias(exdates, instancias);
 
 
         return instancias.stream()
@@ -57,27 +57,15 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
                 .build();
     }
 
-    private void agregarInstanciasExtra(RDate rdate, List<RangoDateTime> instancias) {
-        rdate.convertToRangeFromString().stream()
-                .forEach(rDate -> instancias.add(rDate));
+    private void agregarInstanciasExtra(List<RDate> rdates, List<RangoDateTime> instancias) {
+        rdates.stream()
+                .forEach(rDate -> instancias.add(rDate.getRangoRdate()));
     }
 
-    private void eliminarExcepcionesDeInstancias(ExDate exdate, List<RangoDateTime> instancias) {
-        List<RangoDateTime> rangosExDate = exdate.convertToRangeFromString();
-        List<RangoDateTime> _instancias = new ArrayList<>(instancias);
-
-        for(RangoDateTime rangoExDate : rangosExDate){
-            removeRangoIfPresent(_instancias, instancias, rangoExDate);
-        }
-
-    }
-
-    private void removeRangoIfPresent(List<RangoDateTime> _instancias, List<RangoDateTime> instancias, RangoDateTime rango){
-        for(RangoDateTime r : _instancias){
-            if(r.getInicio().toString("dd/MM/yyyy").equals(rango.getInicio().toString("dd/MM/yyyy"))){
-                instancias.remove(r);
-            }
-        }
+    private List<RangoDateTime> eliminarExcepcionesDeInstancias(List<ExDate> exdates, List<RangoDateTime> instancias) {
+        return instancias.stream()
+                        .filter(rango -> !exdates.contains(new ExDate(rango)))
+                        .collect(Collectors.toList());
     }
 
     private List<RangoDateTime> calcularInstancias(RRule rrule){

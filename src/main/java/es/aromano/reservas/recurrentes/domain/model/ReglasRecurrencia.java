@@ -1,8 +1,6 @@
 package es.aromano.reservas.recurrentes.domain.model;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +10,20 @@ public class ReglasRecurrencia {
     @Embedded
     private RRule rrule;
 
-    private RDate rdate;
+    @ElementCollection
+    @CollectionTable(joinColumns = @JoinColumn(name = "reserva_id"))
+    private List<RDate> rdate;
 
-    private ExDate exdate;
+    @ElementCollection
+    @CollectionTable(joinColumns = @JoinColumn(name = "reserva_id"))
+    private List<ExDate> exdate;
 
     protected ReglasRecurrencia(){}
 
     public ReglasRecurrencia(RRule rrule){
         this.rrule = rrule;
-        this.rdate = new RDate();
-        this.exdate = new ExDate();
+        this.rdate = new ArrayList<>();
+        this.exdate = new ArrayList<>();
     }
 
     public RRule getRrule() {
@@ -32,19 +34,19 @@ public class ReglasRecurrencia {
         this.rrule = rrule;
     }
 
-    public RDate getRdate() {
+    public List<RDate> getRdate() {
         return rdate;
     }
 
-    public void setRdate(RDate rdate) {
+    public void setRdate(List<RDate> rdate) {
         this.rdate = rdate;
     }
 
-    public ExDate getExdate() {
+    public List<ExDate> getExdate() {
         return exdate;
     }
 
-    public void setExdate(ExDate exdate) {
+    public void setExdate(List<ExDate> exdate) {
         this.exdate = exdate;
     }
 }

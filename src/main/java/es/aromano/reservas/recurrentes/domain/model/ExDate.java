@@ -1,53 +1,43 @@
 package es.aromano.reservas.recurrentes.domain.model;
 
 import es.aromano.reservas.domain.model.RangoDateTime;
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
 @Embeddable
 public class ExDate {
 
-    private String rangoExdate;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="inicio", column = @Column(name="exdate_inicio", nullable = false)),
+            @AttributeOverride(name="fin", column = @Column(name="exdate_fin", nullable = false))
+    })
+    private RangoDateTime rangoExdate;
 
     protected ExDate(){}
 
-    public ExDate(String rangoExdate) {
+    public ExDate(RangoDateTime rangoExdate) {
         this.rangoExdate = rangoExdate;
     }
 
-    public String getRangoExdate() {
+    public RangoDateTime getRangoExdate() {
         return rangoExdate;
     }
 
-    public void setRangoExdate(String rangoExdate) {
+    public void setRangoExdate(RangoDateTime rangoExdate) {
         this.rangoExdate = rangoExdate;
     }
 
-    public List<RangoDateTime> convertToRangeFromString(){
 
-        if(StringUtils.isBlank(rangoExdate)){
-            return new ArrayList<>();
-        }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
 
-        List<RangoDateTime> result = new ArrayList<>();
-        String[] fechas = rangoExdate.split(",");
-
-        for(String fecha : fechas){
-            DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
-            DateTime ini = DateTime.parse(fecha, dtf);
-            result.add(new RangoDateTime(ini, ini));
-        }
-
-
-        return result;
+        ExDate otro = (ExDate) obj;
+        return rangoExdate.equals(otro.getRangoExdate());
     }
-
 }

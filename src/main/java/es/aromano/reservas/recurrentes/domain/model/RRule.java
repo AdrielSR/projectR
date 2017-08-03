@@ -1,18 +1,25 @@
 package es.aromano.reservas.recurrentes.domain.model;
 
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 
 @Embeddable
 public class RRule {
 
+    @Enumerated(EnumType.STRING)
     private Frecuency frecuency;
 
+    @NotNull
     private int interval;
 
     private int count;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
     private DateTime until;
 
     private String daysOfWeek;

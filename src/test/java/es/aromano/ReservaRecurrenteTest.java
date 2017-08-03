@@ -11,6 +11,7 @@ import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.users.domain.model.User;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaRecurrenteTest extends ReservaSolapadaTest {
@@ -98,7 +99,12 @@ public class ReservaRecurrenteTest extends ReservaSolapadaTest {
         rrule.setDaysOfWeek(daysOfWeek);
 
         ReglasRecurrencia reglas = new ReglasRecurrencia(rrule);
-        reglas.setExdate(new ExDate("17/11/2017,22/11/2017"));
+
+        List<ExDate> exDates = new ArrayList<>();
+        RangoDateTime rangoExDate = new RangoDateTime(start, end);
+        exDates.add(new ExDate(rangoExDate));
+
+        reglas.setExdate(exDates);
 
         return reglas;
     }

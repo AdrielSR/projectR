@@ -6,7 +6,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Embeddable
-public class RangoDateTime implements Comparable<DateTime>{
+public class RangoDateTime {
 
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -42,9 +42,19 @@ public class RangoDateTime implements Comparable<DateTime>{
 	}
 
 	@Override
-	public int compareTo(DateTime rango) {
-		return this.compareTo(rango);
+	public boolean equals(Object obj){
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+
+		RangoDateTime otro = (RangoDateTime) obj;
+
+		return this.inicio.compareTo(otro.getInicio()) == 0
+				&& this.fin.compareTo(otro.getFin()) == 0;
+
 	}
-	
-	
+
 }
