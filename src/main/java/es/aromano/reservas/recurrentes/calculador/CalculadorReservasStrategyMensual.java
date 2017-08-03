@@ -41,6 +41,9 @@ public class CalculadorReservasStrategyMensual implements CalculadorReservasStra
         agregarInstanciasExtra(rdates, instancias);
         instancias = eliminarExcepcionesDeInstancias(exdates, instancias);
 
+        if(!instancias.isEmpty()){
+            calcularRangoRecurrencia(instancias);
+        }
 
         return instancias.stream()
                 .map(rango -> crearReservaFrom(rango))
@@ -48,14 +51,25 @@ public class CalculadorReservasStrategyMensual implements CalculadorReservasStra
 
     }
 
+    private void calcularRangoRecurrencia(List<RangoDateTime> instancias) {
+        RangoDateTime rangoRecurrencia = new RangoDateTime();
+        rangoRecurrencia.setInicio(instancias.get(0).getInicio());
+        rangoRecurrencia.setFin(instancias.get(instancias.size()-1).getFin());
+        reserva.setRangoRecurrencia(rangoRecurrencia);
+    }
+
     private Reserva crearReservaFrom(RangoDateTime rango) {
-        return ReservaStepBuilder.builder()
+        Reserva nuevaReserva = ReservaStepBuilder.builder()
                 .propietario(reserva.getUser())
                 .lugar(reserva.getEspacio())
                 .desde(rango.getInicio())
                 .hasta(rango.getFin())
                 .asunto(reserva.getAsunto())
                 .build();
+
+        nuevaReserva.setRangoRecurrencia(reserva.getRangoRecurrencia());
+
+        return nuevaReserva;
     }
 
     private void agregarInstanciasExtra(List<RDate> rdates, List<RangoDateTime> instancias) {

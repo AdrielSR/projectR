@@ -47,4 +47,10 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 			" or (:inicio between r.rango.inicio and r.rango.fin) or (:fin between r.rango.inicio and r.rango.fin))")
 	List<Reserva> findReservasEspacioEnRango(@Param("inicio") DateTime inicio, @Param("fin") DateTime fin, @Param("idEspacio") int idEspacio, @Param("idReserva") long idReserva);
 
+	@Query("FROM Reserva r WHERE (r.espacio.id = :idEspacio) AND " +
+			"(( :inicio BETWEEN r.rango.inicio AND r.rango.fin) OR ( :fin BETWEEN r.rango.inicio AND r.rango.fin ) OR " +
+			"(r.rango.inicio BETWEEN :inicio AND :fin) OR (r.rango.fin BETWEEN :inicio AND :fin) OR" +
+			"( :inicio BETWEEN r.rangoRecurrencia.inicio AND r.rangoRecurrencia.fin) OR ( :fin BETWEEN r.rangoRecurrencia.inicio AND r.rangoRecurrencia.fin ) OR" +
+			"(r.rangoRecurrencia.inicio BETWEEN :inicio AND :fin) OR (r.rangoRecurrencia.fin BETWEEN :inicio AND :fin)) )")
+	List<Reserva> findReservasConflictivasEnEspacioYRango(@Param("idEspacio") int idEspacio, @Param("inicio") DateTime inicio, @Param("fin") DateTime fin);
 }

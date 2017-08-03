@@ -17,6 +17,8 @@ public interface ReservaService {
     
     List<Reserva> findReservasNoUsuarioDeUnEspacio(int idEspacio);
 
+    List<Reserva> findReservasConflictivasEnEspacioYRango(int idEspacio, RangoDateTime rango);
+
     Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException;
 
     boolean esPosibleReservarEspacioEnRango(RangoDateTime rango, int idEspacio);

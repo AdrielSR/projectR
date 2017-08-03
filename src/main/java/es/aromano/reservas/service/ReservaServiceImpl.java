@@ -1,6 +1,5 @@
 package es.aromano.reservas.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -50,6 +49,11 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	@Override
+	public List<Reserva> findReservasConflictivasEnEspacioYRango(int idEspacio, RangoDateTime rango) {
+		return reservaRepository.findReservasConflictivasEnEspacioYRango(idEspacio, rango.getInicio(), rango.getFin());
+	}
+
+	@Override
 	public Reserva crearReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(reservaDTO.isRecurrente()){
@@ -61,7 +65,8 @@ public class ReservaServiceImpl implements ReservaService {
 
 	private Reserva crearReservaRecurrente(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
-		List<Reserva> reservasConflictivas = new ArrayList<>();//TODO: findReservasConflictivasEnEspacioYRango
+		List<Reserva> reservasConflictivas = findReservasConflictivasEnEspacioYRango(reservaDTO.getIdEspacio(),
+																						new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()));
 
 		Reserva newReserva = ReservaStepBuilder.builder()
 				.propietario(userService.getCurrentUser())
@@ -78,7 +83,7 @@ public class ReservaServiceImpl implements ReservaService {
 																.findFirst();
 
 		if(reservaSolapada.isPresent()){
-			throw new ReservaSolapadaException("");
+			throw new ReservaSolapadaException("No se ha podido crear la reserva debido a que esta solapa con otra.");
 		}
 
 
@@ -88,7 +93,7 @@ public class ReservaServiceImpl implements ReservaService {
 	private Reserva crearReservaSimple(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(!esPosibleReservarEspacioEnRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio())){
-			throw new ReservaSolapadaException(String.format("No se ha podido crear la reserva debido a que esta solapa con otra."));
+			throw new ReservaSolapadaException("No se ha podido crear la reserva debido a que esta solapa con otra.");
 		}
 
 		Reserva newReserva = ReservaStepBuilder.builder()
@@ -127,7 +132,7 @@ public class ReservaServiceImpl implements ReservaService {
 	public Reserva editarReserva(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
 		if(!esPosibleEditarReservaEnEspacio(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()), reservaDTO.getIdEspacio(), reservaDTO.getId())){
-			throw new ReservaSolapadaException(String.format("No se ha podido editar la reserva. Es posible que se solape con otra existente"));
+			throw new ReservaSolapadaException("No se ha podido editar la reserva. Es posible que se solape con otra existente");
 		}
 
 		Reserva reserva = findReservaByIdReserva(reservaDTO.getId());
