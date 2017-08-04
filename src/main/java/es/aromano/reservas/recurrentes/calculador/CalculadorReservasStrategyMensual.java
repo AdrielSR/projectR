@@ -86,7 +86,7 @@ public class CalculadorReservasStrategyMensual implements CalculadorReservasStra
 
     private List<RangoDateTime> calcularInstancias(RRule rrule){
         List<RangoDateTime> instancias = new ArrayList<>();
-        int interval = rrule.getInterval();
+        int interval = rrule.getIntervalo();
         int count = rrule.getCount();
 
         RangoDateTime primeraInstancia = new RangoDateTime(reserva.getInicio(), reserva.getFin());

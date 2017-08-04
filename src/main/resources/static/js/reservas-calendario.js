@@ -4,9 +4,7 @@ $(document).ready(function(){
 	
     $("#crear-reserva").click(function(){
 		var reserva = generarJSON();
-
-		debugger;
-		//crearReserva(reserva);
+		crearReserva(reserva);
 	});
 
 
@@ -136,9 +134,11 @@ function generarJSON(){
 function generarReglasJSON(){
 	var reglas = {};
 	reglas.rrule = {};
+    reglas.rdate = [];
+    reglas.exdate = [];
 
     reglas.rrule.frecuency =  $("#selec_frec").val();
-    reglas.rrule.interval = $("#selec_inter").val();
+    reglas.rrule.intervalo = $("#selec_inter").val();
     reglas.rrule.count = $("#count_repeat").val();
     reglas.rrule.until = null;
     reglas.rrule.daysOfWeek = getChecksMarcados();

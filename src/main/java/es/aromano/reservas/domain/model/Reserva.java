@@ -20,7 +20,7 @@ public class Reserva {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="reserva_id")
+	@Column(name="reserva_id", nullable = false)
 	private Long id;
 	
 	@Column(name="asunto", nullable=false)
@@ -139,9 +139,7 @@ public class Reserva {
 	}
 
 	public boolean isRecurrente(){
-		return Objects.nonNull(getReglas()) ||
-				Objects.nonNull(getRangoRecurrencia().getInicio()) ||
-				Objects.nonNull(getRangoRecurrencia().getFin()) ;
+		return Objects.nonNull(getReglas()) && Objects.nonNull(getRangoRecurrencia()) ;
 	}
 
 

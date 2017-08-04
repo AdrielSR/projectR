@@ -26,17 +26,33 @@ public class ReservaRestController {
     	
     	List<ReservaDTO> result = new ArrayList<>();
     	List<Reserva> reservasUsuario = reservaService.findReservasUsuarioDeUnEspacio(idEspacio);
+
     	// Reservas del usuario logado (Editables)
-    	result.addAll(reservasUsuario.stream()
-		    			.map(r -> ReservaDTO.from(r).editable())
-		    			.collect(Collectors.toList()));
+    	for(Reserva r : reservasUsuario){
+    	    if(r.isRecurrente()){
+                result.addAll(r.calcularReservas().stream()
+                                .map(reserva -> ReservaDTO.from(reserva).editable())
+                                .collect(Collectors.toList()));
+            }
+            else {
+    	        result.add(ReservaDTO.from(r).editable());
+            }
+        }
+
     	
     	List<Reserva> reservasNoUsuario = reservaService.findReservasNoUsuarioDeUnEspacio(idEspacio);
     	// Reservas de otros usuarios (No editables)
-    	result.addAll(reservasNoUsuario.stream()
-    					.map(r-> ReservaDTO.from(r))
-    					.collect(Collectors.toList()));
-    	
+        for(Reserva r : reservasNoUsuario){
+            if(r.isRecurrente()){
+                result.addAll(r.calcularReservas().stream()
+                        .map(reserva -> ReservaDTO.from(reserva))
+                        .collect(Collectors.toList()));
+            }
+            else {
+                result.add(ReservaDTO.from(r));
+            }
+        }
+
     	
         return result;
     }

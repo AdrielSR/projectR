@@ -53,7 +53,7 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
     private void calcularRangoRecurrencia(List<RangoDateTime> instancias) {
         RangoDateTime rangoRecurrencia = new RangoDateTime();
         rangoRecurrencia.setInicio(instancias.get(0).getInicio());
-        rangoRecurrencia.setFin(instancias.get(instancias.size()-1).getFin());
+        rangoRecurrencia.setFin(instancias.get(instancias.size() - 1).getFin());
         reserva.setRangoRecurrencia(rangoRecurrencia);
     }
 
@@ -66,7 +66,9 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
                                     .asunto(reserva.getAsunto())
                                     .build();
 
+        nuevaReserva.setId(reserva.getId());
         nuevaReserva.setRangoRecurrencia(reserva.getRangoRecurrencia());
+        nuevaReserva.setReglas(reserva.getReglas());
 
         return nuevaReserva;
     }
@@ -84,7 +86,7 @@ public class CalculadorReservasStrategySemanal implements CalculadorReservasStra
 
     private List<RangoDateTime> calcularInstancias(RRule rrule){
         List<RangoDateTime> instancias = new ArrayList<>();
-        int interval = rrule.getInterval();
+        int interval = rrule.getIntervalo();
         int count = rrule.getCount();
         String daysOfWeek = rrule.getDaysOfWeek();
 

@@ -3,6 +3,7 @@ package es.aromano.reservas.recurrentes.domain.model;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,8 +15,7 @@ public class RRule {
     @Enumerated(EnumType.STRING)
     private Frecuency frecuency;
 
-    @NotNull
-    private int interval;
+    private int intervalo;
 
     private int count;
 
@@ -26,9 +26,9 @@ public class RRule {
 
     protected  RRule(){}
 
-    public RRule(Frecuency frecuency, int interval){
+    public RRule(Frecuency frecuency, int intervalo){
         this.frecuency = frecuency;
-        this.interval = interval;
+        this.intervalo = intervalo;
     }
 
     public Frecuency getFrecuency() {
@@ -38,8 +38,6 @@ public class RRule {
     public void setFrecuency(Frecuency frecuency) {
         this.frecuency = frecuency;
     }
-
-
 
     public int getCount() {
         return count;
@@ -57,12 +55,12 @@ public class RRule {
         this.until = until;
     }
 
-    public int getInterval() {
-        return interval;
+    public int getIntervalo() {
+        return intervalo;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setIntervalo(int intervalo) {
+        this.intervalo = intervalo;
     }
 
     public String getDaysOfWeek() {

@@ -2,7 +2,9 @@ package es.aromano.reservas.recurrentes.domain.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Embeddable
 public class ReglasRecurrencia {
@@ -18,7 +20,8 @@ public class ReglasRecurrencia {
     @CollectionTable(joinColumns = @JoinColumn(name = "reserva_id"))
     private List<ExDate> exdate;
 
-    protected ReglasRecurrencia(){}
+    protected ReglasRecurrencia(){
+    }
 
     public ReglasRecurrencia(RRule rrule){
         this.rrule = rrule;

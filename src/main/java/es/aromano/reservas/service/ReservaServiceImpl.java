@@ -8,6 +8,8 @@ import es.aromano.espacios.service.EspacioService;
 import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.ReservaStepBuilder;
+import es.aromano.reservas.recurrentes.domain.model.RRule;
+import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.reservas.web.ReservaDTO;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +67,6 @@ public class ReservaServiceImpl implements ReservaService {
 
 	private Reserva crearReservaRecurrente(ReservaDTO reservaDTO) throws ReservaSolapadaException {
 
-		List<Reserva> reservasConflictivas = findReservasConflictivasEnEspacioYRango(reservaDTO.getIdEspacio(),
-																						new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()));
 
 		Reserva newReserva = ReservaStepBuilder.builder()
 				.propietario(userService.getCurrentUser())
@@ -77,6 +77,10 @@ public class ReservaServiceImpl implements ReservaService {
 				.build();
 
 		newReserva.setReglas(reservaDTO.getReglas());
+
+		newReserva.calcularReservas();
+		List<Reserva> reservasConflictivas = findReservasConflictivasEnEspacioYRango(reservaDTO.getIdEspacio(), newReserva.getRangoRecurrencia());
+
 
 		Optional<Reserva> reservaSolapada = reservasConflictivas.stream()
 																.filter(r -> r.solapa(newReserva))
