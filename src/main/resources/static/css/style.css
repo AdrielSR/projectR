@@ -96,3 +96,10 @@ label.label-check{
 	padding-right: 10px;
 }
 
+.card .card-content{
+	padding: 10px;
+}
+
+.card .card-title{
+	font-size: 20px;
+}
