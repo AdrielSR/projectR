@@ -3,6 +3,9 @@ package es.aromano.reservas.domain;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +19,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long>{
 	@Query("from Reserva r where r.user.id = ?#{principal.id} order by r.rango.inicio")
 	List<Reserva> findReservasUsuario();
 
+	@Query("from Reserva r where r.user.id = ?#{principal.id} order by r.rango.inicio")
+	Page<Reserva> findReservasUsuario(Pageable pageable);
 
 	@Query("from Reserva r where r.id = :idReserva and r.user.id = ?#{principal.id}")
 	Reserva findReservaUsuario(@Param("idReserva") long idReserva);

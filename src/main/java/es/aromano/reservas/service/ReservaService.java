@@ -6,10 +6,14 @@ import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.web.ReservaDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface ReservaService {
 
 	List<Reserva> reservasUsuario();
+
+	Page<Reserva> reservasUsuario(PageRequest pageRequest);
 
     List<Reserva> findAllReservasDeUnEspacio(int idEspacio);
     

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="copy(content, currentIndex, beginIndex, endIndex, totalPages )">
+
+    <!-- Pagination -->
+    <div class="row" th:unless="${#lists.isEmpty(content)}">
+        <div class="col s12 center">
+
+            <ul class="pagination">
+
+                <li th:class="${currentIndex != 1}? '' : 'disabled'">
+                    <a th:if='${currentIndex == 1}'><i class="material-icons">chevron_left</i></a>
+                    <a th:if='${currentIndex != 1}'
+                       th:href="@{${(currentIndex - 1)}}"
+                       title='Go to previous page'><i class="material-icons">chevron_left</i></a>
+                </li>
+
+                <li th:each="item : ${#numbers.sequence(beginIndex, endIndex)}"
+                    th:class="${item == currentIndex ? 'active' : '' }">
+
+                    <a th:if='${item == currentIndex}' th:text='${item}'>1</a>
+
+                    <a th:if='${item != currentIndex}'
+                       th:href="@{${item}}">
+                        <span th:text='${item}'>1</span>
+                    </a>
+                </li>
+
+                <li th:class="${currentIndex != totalPages}? '' : 'disabled'">
+                    <a th:if='${currentIndex == totalPages}'><i class="material-icons">chevron_right</i></a>
+                    <a th:if='${currentIndex != totalPages}'
+                       th:href="@{${(currentIndex + 1)}}" title='Go to next page'><i class="material-icons">chevron_right</i></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+    <!-- /.Pagination -->
+
+</div>
+
+</body>
+</html>

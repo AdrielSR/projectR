@@ -45,7 +45,10 @@
 						<a th:attr="data-id=${r.id}" href="#modal1" class="secondary-content"><i class="material-icons">more_vert</i></a>
 					</li>
 				</ul>
-			
+
+				<!-- Pagination -->
+				<div th:include="fragments/pagination :: copy(${results.content}, ${currentIndex},${beginIndex}, ${endIndex}, ${totalPages})" ></div>
+
 			<!-- Modal Structure -->
 			  <div id="modal1" class="modal bottom-sheet">
 			    <div class="modal-footer">

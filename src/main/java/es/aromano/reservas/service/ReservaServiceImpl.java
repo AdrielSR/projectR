@@ -8,11 +8,11 @@ import es.aromano.espacios.service.EspacioService;
 import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.ReservaStepBuilder;
-import es.aromano.reservas.recurrentes.domain.model.RRule;
-import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.reservas.web.ReservaDTO;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import es.aromano.reservas.domain.model.Reserva;
@@ -33,6 +33,11 @@ public class ReservaServiceImpl implements ReservaService {
 	@Override
 	public List<Reserva> reservasUsuario() {
 		return reservaRepository.findReservasUsuario();
+	}
+
+	@Override
+	public Page<Reserva> reservasUsuario(PageRequest pageRequest) {
+		return reservaRepository.findReservasUsuario(pageRequest);
 	}
 
 	@Override
