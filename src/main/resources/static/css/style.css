@@ -96,10 +96,23 @@ label.label-check{
 	padding-right: 10px;
 }
 
+.card{
+	border-radius: 0px;
+}
+
 .card .card-content{
 	padding: 10px;
+	border-radius: 0px;
+}
+
+.card .card-image img{
+	border-radius: 0px;
 }
 
 .card .card-title{
 	font-size: 20px;
+}
+
+.espacioSeleccionado{
+	border-bottom: 5px solid #a680a9;
 }
