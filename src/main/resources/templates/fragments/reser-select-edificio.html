@@ -7,7 +7,7 @@
         <div class="col s12">
             <h4 class="center">Seleccione un edificio</h4>
 
-        <div class="col s12 m9">
+        <div class="col s12 m8 offset-m2">
             <div class="collection">
                 <a th:each="e : ${edificios}" th:href="@{'/edificio/' + ${e.id} + '/espacios'}" class="collection-item" th:inline="text">
                     [[${e.nombre}]] <span class="new badge" th:with="numEspacios=${e.espacios.size()}" th:attr="data-badge-caption=${numEspacios == 1 ? 'espacio' : 'espacios'}" th:text="${numEspacios}"></span>
