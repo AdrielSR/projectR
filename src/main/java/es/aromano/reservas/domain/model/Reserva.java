@@ -1,7 +1,6 @@
 package es.aromano.reservas.domain.model;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,7 +47,11 @@ public class Reserva {
 
 	@Embedded
 	private ReglasRecurrencia reglas;
-	
+
+	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+	private Set<Invitacion> invitados = new HashSet<>();
+
+
 	public Reserva(){}
 
 	public Reserva(String asunto, RangoDateTime rango, Espacio espacio, User user){
@@ -132,6 +135,12 @@ public class Reserva {
 	public DateTime getFin(){
 		return rango.getFin();
 	}
+
+
+	public Set<Invitacion> getInvitados() {
+		return Collections.unmodifiableSet(invitados);
+	}
+
 
 	public List<Reserva> calcularReservas(){
 		CalculadorReservasStrategy strategy = CalculadorReservasFactory.getCalculador(this);

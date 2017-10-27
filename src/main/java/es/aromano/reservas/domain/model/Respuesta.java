@@ -1,6 +1,6 @@
 package es.aromano.reservas.domain.model;
 
-public enum RespuestaInvitacion {
+public enum Respuesta {
 
     ASISTIRE("Voy a ir"),
     QUIZAS_ASISTA("Quiza"),
@@ -8,7 +8,7 @@ public enum RespuestaInvitacion {
 
     private String name;
 
-    RespuestaInvitacion(String name) {
+    Respuesta(String name) {
         this.name = name;
     }
 
