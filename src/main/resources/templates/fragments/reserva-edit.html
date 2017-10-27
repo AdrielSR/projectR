@@ -10,7 +10,7 @@
 		    <form>
 		        <input type="hidden" id="idReserva" th:value="${reserva.espacio.id}"/>
 		        <input type="hidden" id="idEspacio" th:value="${reserva.espacio.id}"/>
-		        <div class="col s6 offset-s3">
+		        <div class="col s6">
 		            <div>
 		                <label> Asunto :
 		                    <input type="text" id="asunto" th:value="${reserva.asunto}"/>
@@ -27,7 +27,17 @@
 		                </label>
 		            </div>
 		        </div>
-		
+
+				<div class="col s6">
+					<input type="text" id="autocomplete-input" class="autocomplete" />
+					<label for="autocomplete-input">Autocomplete</label>
+
+					<!-- Invitados -->
+					<div>
+
+					</div>
+
+				</div>
 		
 		        <div class="col s12 center">
 		            <button id="editar-reserva" class="btn waves-effect waves-light">Guardar</button>

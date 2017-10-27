@@ -3,12 +3,16 @@ package es.aromano.reservas.service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import es.aromano.espacios.service.EspacioService;
 import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
+import es.aromano.reservas.domain.model.Invitacion;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.ReservaStepBuilder;
 import es.aromano.reservas.web.ReservaDTO;
+import es.aromano.users.domain.model.User;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -147,6 +151,16 @@ public class ReservaServiceImpl implements ReservaService {
 		Reserva reserva = findReservaByIdReserva(reservaDTO.getId());
 		reserva.setAsunto(reservaDTO.getTitle());
 		reserva.setRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()));
+
+		if(reservaDTO.hayUsuariosInvitados()){
+			Set<Invitacion> invitaciones = reservaDTO.getIdsUsuariosInvitados().stream()
+					.map(idUsuario -> userService.findUserById(idUsuario))
+					.map(usuario -> new Invitacion(usuario, reserva))
+					.collect(Collectors.toSet());
+
+			reserva.setInvitaciones(invitaciones);
+		}
+
 
 		return reservaRepository.save(reserva);
 	}

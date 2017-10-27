@@ -49,7 +49,7 @@ public class Reserva {
 	private ReglasRecurrencia reglas;
 
 	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
-	private Set<Invitacion> invitados = new HashSet<>();
+	private Set<Invitacion> invitaciones = new HashSet<>();
 
 
 	public Reserva(){}
@@ -137,10 +137,14 @@ public class Reserva {
 	}
 
 
-	public Set<Invitacion> getInvitados() {
-		return Collections.unmodifiableSet(invitados);
+	public Set<Invitacion> getInvitaciones() {
+		return Collections.unmodifiableSet(invitaciones);
 	}
 
+	public void setInvitaciones(Set<Invitacion> invitaciones) {
+		this.invitaciones.clear();
+		this.invitaciones = invitaciones;
+	}
 
 	public List<Reserva> calcularReservas(){
 		CalculadorReservasStrategy strategy = CalculadorReservasFactory.getCalculador(this);

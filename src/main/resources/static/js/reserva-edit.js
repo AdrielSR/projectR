@@ -1,5 +1,16 @@
 $(document).ready(function() {
-  
+
+    $('input.autocomplete').autocomplete({
+        data: {"algo" : null,
+                    "otra cosa" : null},
+        limit: 20,
+        onAutocomplete: function(val) {
+            // Callback function when value is autcompleted.
+        },
+        minLength: 3
+    });
+
+
     $("#editar-reserva").click(function(){
         var reserva = {};
         reserva.id = idReserva;
@@ -7,6 +18,7 @@ $(document).ready(function() {
         reserva.start = toIso8601($("#datetimepicker1").val());
         reserva.end = toIso8601($("#datetimepicker2").val());
         reserva.idEspacio = $("#idEspacio").val();
+        reserva.idsUsuariosInvitados = obtenerUsuariosSeleccionados();
 
         editarReserva(reserva);
     });
@@ -14,6 +26,13 @@ $(document).ready(function() {
 
 });
 
+function obtenerUsuariosSeleccionados(){
+    var invitaciones = [];
+    invitaciones.push(2);
+    invitaciones.push(4);
+
+    return invitaciones;
+}
 
 function editarReserva(reserva){
     $.ajax({

@@ -4,6 +4,8 @@ import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.*;
@@ -19,6 +21,7 @@ public class ReservaDTO {
     private String nombreEspacio;
     private boolean editable;
     private ReglasRecurrencia reglas;
+    private List<Integer> idsUsuariosInvitados;
 
     public ReservaDTO(){ }
 
@@ -30,6 +33,7 @@ public class ReservaDTO {
         this.idEspacio = idEspacio;
         this.nombreEspacio = nombreEspacio;
         this.editable = false;
+        this.idsUsuariosInvitados = new ArrayList<>();
     }
 
 
@@ -117,5 +121,17 @@ public class ReservaDTO {
 
     public boolean isRecurrente(){
 	    return Objects.nonNull(reglas);
+    }
+
+    public List<Integer> getIdsUsuariosInvitados() {
+        return idsUsuariosInvitados;
+    }
+
+    public void setIdsUsuariosInvitados(List<Integer> idsUsuariosInvitados) {
+        this.idsUsuariosInvitados = idsUsuariosInvitados;
+    }
+
+    public boolean hayUsuariosInvitados(){
+        return !idsUsuariosInvitados.isEmpty();
     }
 }
