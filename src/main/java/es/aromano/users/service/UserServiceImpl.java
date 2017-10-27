@@ -58,6 +58,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails user = userRespository.findByEmailAndEnabledTrue(username);
@@ -170,6 +172,11 @@ public class UserServiceImpl implements UserService {
 
 		return userRespository.save(user);
 	}
-    
+
+
+    @Override
+    public List<User> findUsuariosActivosEnEmpresaByTerm(String term) {
+        return userRespository.findUsuariosActivosEnEmpresaByTerm(term);
+    }
     
 }

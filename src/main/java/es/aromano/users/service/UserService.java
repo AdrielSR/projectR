@@ -40,4 +40,6 @@ public interface UserService extends UserDetailsService{
 
 	void checkIfUserExist(User user) throws UserException;
 
+    List<User> findUsuariosActivosEnEmpresaByTerm(String term);
+
 }

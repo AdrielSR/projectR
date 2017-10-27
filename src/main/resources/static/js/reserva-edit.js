@@ -1,11 +1,31 @@
 $(document).ready(function() {
 
-    $('input.autocomplete').autocomplete({
-        data: {"algo" : null,
-                    "otra cosa" : null},
-        limit: 20,
-        onAutocomplete: function(val) {
-            // Callback function when value is autcompleted.
+
+    $("#autocomplete-users").autocomplete({
+        source: function(request, response){
+            //TODO
+            var term = request.term;
+
+            buscarUsuariosEmpresa(term)
+                .done(function (data) {
+                    response($.map(datos,function(item){
+
+                        var obj = {};
+                        obj.label = item.id;
+                        obj.value = item.tag;
+                        return obj;
+
+                    }))
+
+
+                })
+                .fail(function (xhr, status) {
+                    var error = JSON.parse(xhr.responseText);
+                    console.log(error.msg);
+                });
+        },
+        select: function(event, ui){
+            //TODO
         },
         minLength: 3
     });
@@ -32,6 +52,14 @@ function obtenerUsuariosSeleccionados(){
     invitaciones.push(4);
 
     return invitaciones;
+}
+
+function buscarUsuariosEmpresa(term){
+        return $.ajax({
+                    url: baseURL + 'buscar-usuarios-empresa/' + term,
+                    method: 'GET',
+                    contentType: 'application/json'
+                });
 }
 
 function editarReserva(reserva){

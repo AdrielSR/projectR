@@ -35,4 +35,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("from User u where u.id = :idUsuario and u.empresa.id = ?#{principal.empresa.id}")
     User findUsuarioEmpresaLogada(@Param("idUsuario") int idUsuario);
 
+    @Query("from User u where u.enabled = 1 and u.empresa.id = ?#{principal.empresa.id} and (u.email like concat('%' , :term, '%') or u.username like concat('%' , :term, '%'))")
+    List<User> findUsuariosActivosEnEmpresaByTerm(@Param("term")String term);
 }
