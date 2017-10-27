@@ -12,12 +12,12 @@ public class Invitacion {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "RESERVA_ID")
+    @JoinColumn(name = "reserva_id")
     private Reserva reserva;
 
     @Enumerated(EnumType.STRING)

@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class InvitacionId implements Serializable {
 
     private int user;
-    private int reserva;
+    private long reserva;
 
     protected InvitacionId() {
     }
 
-    public InvitacionId(int user, int reserva) {
+    public InvitacionId(int user, long reserva) {
         this.user = user;
         this.reserva = reserva;
     }
@@ -23,7 +23,7 @@ public class InvitacionId implements Serializable {
         this.user = user;
     }
 
-    public int getReserva() {
+    public long getReserva() {
         return reserva;
     }
 
@@ -45,7 +45,7 @@ public class InvitacionId implements Serializable {
     @Override
     public int hashCode() {
         int result = user;
-        result = 31 * result + reserva;
+        result = 31 * result + (int) (reserva ^ (reserva >>> 32));
         return result;
     }
 }

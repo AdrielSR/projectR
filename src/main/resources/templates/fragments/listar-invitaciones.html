@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+<!-- Info Panel -->
+<div class="info-panel">  </div>
+
+<!-- Title Panel -->
+<div class="title-panel center">
+    <span>Mis Invitaciones</span>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+
+            <div class="jumbo" th:if="${#lists.isEmpty(invitaciones)}">
+                <h5 class="center-align">
+                    Uups! Parece que todavia no tienes invitaciones.
+                </h5>
+            </div>
+
+            <ul class="collection" th:if="${not #lists.isEmpty(invitaciones)}">
+                <li th:each="i : ${invitaciones}" class="collection-item avatar" style="min-height: 63px;">
+                    <div class="row">
+                        <div class="col s12 m7">
+                            <span th:inline="text">
+                                [[${#strings.capitalize(i.reserva.user.username)}]], te ha invitado a una reunión el día [[${#dates.format(i.reserva.inicio,'dd/MM/yyy')}]]
+                                a las [[${#dates.format(i.reserva.inicio,'HH:mm')}]].
+                            </span>
+                        </div>
+
+                        <div class="col s12 m5">
+                            <a class="btn-flat right red-text">No voy a ir</a>
+                            <a class="btn-flat right">Quiza</a>
+                            <a class="btn-flat right blue-text">Voy a ir</a>
+                        </div>
+
+                    </div>
+
+                </li>
+            </ul>
+
+
+
+        </div>
+
+    </div>
+</div>
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
+
+
+</body>
+</html>
