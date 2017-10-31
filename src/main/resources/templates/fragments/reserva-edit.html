@@ -33,8 +33,10 @@
 					<input type="text" id="autocomplete-users" class="autocomplete" />
 
 					<!-- Invitados -->
-					<div>
-
+					<div id="invitados">
+						<div class="chip" th:each="i : ${reserva.invitaciones}" th:inline="text" th:attr="data-id-usuario=${i.user.id}">
+							[[${i.user.username}]] <i class="close material-icons">close</i>
+						</div>
 					</div>
 
 				</div>
@@ -50,6 +52,50 @@
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
     var idReserva = /*[[${reserva.id}]]*/ '1';
+
+
+    $("#autocomplete-users").autocomplete({
+        source: function(request, response){
+            var term = request.term;
+
+            buscarUsuariosEmpresa(term)
+                .done(function (data) {
+                    response($.map(data,function(item){
+
+                        var obj = {};
+                        obj.label = item.username;
+                        obj.value = item.email;
+                        obj.id = item.id;
+                        return obj;
+
+                    }))
+
+
+                })
+                .fail(function (xhr, status) {
+                    var error = JSON.parse(xhr.responseText);
+                    console.log(error.msg);
+                });
+        },
+        select: function(evt, ui){
+			evt.preventDefault();
+            $("#autocomplete-users").val("");
+			var nuevoInvitado = '<div class="chip" data-id-usuario="' + ui.item.id + '">' + ui.item.label + '<i class="close material-icons">close</i></div>';
+			$("#invitados").append(nuevoInvitado);
+        },
+        minLength: 3
+    }).autocomplete("instance")._renderItem = function(ul,item){
+
+        var inner_html = '<span class="title">' + item.label + '</span>';
+
+        return $('<li class="collection-item avatar"></li>')
+            .data("item.autocomplete", item)
+            .append(inner_html)
+            .appendTo(ul);
+
+    };
+
+
 </script>
 <script th:src="@{/js/reserva-edit.js}" src="../../js/reserva-edit.js"></script>
 
