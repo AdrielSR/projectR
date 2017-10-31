@@ -143,7 +143,7 @@ public class Reserva {
 
 	public void setInvitaciones(Set<Invitacion> invitaciones) {
 		this.invitaciones.clear();
-		this.invitaciones = invitaciones;
+		this.invitaciones.addAll(invitaciones);
 	}
 
 	public List<Reserva> calcularReservas(){
