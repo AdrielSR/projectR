@@ -23,7 +23,13 @@
 					<li th:each="r : ${reservas}" class="collection-item avatar" th:id="${r.id}">
 						<div class="row">
 							<div class="col s12">
-								<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
+								<div class="col s6">
+									<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
+								</div>
+								<div class="col s6">
+									<img th:each="i : ${r.invitaciones}" th:src="@{/img/yuna.jpg}" class="img-avatar-mini" th:title="${#strings.capitalize(i.user.username)}"/>
+								</div>
+
 							</div>
 						</div>
 						

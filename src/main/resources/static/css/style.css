@@ -116,3 +116,9 @@ label.label-check{
 .espacioSeleccionado{
 	border-bottom: 5px solid #a680a9;
 }
+
+.img-avatar-mini{
+	height: 25px;
+	width: 25px;
+	border-radius: 50%;
+}
