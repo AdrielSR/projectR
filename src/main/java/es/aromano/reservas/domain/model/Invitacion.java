@@ -54,4 +54,22 @@ public class Invitacion {
         this.respuesta = NO_ASISTIRE;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Invitacion that = (Invitacion) o;
+
+        if (!user.equals(that.user)) return false;
+        return reserva.equals(that.reserva);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = user.hashCode();
+        result = 31 * result + reserva.hashCode();
+        return result;
+    }
 }
