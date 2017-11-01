@@ -152,14 +152,13 @@ public class ReservaServiceImpl implements ReservaService {
 		reserva.setAsunto(reservaDTO.getTitle());
 		reserva.setRango(new RangoDateTime(reservaDTO.getStart(), reservaDTO.getEnd()));
 
-		if(reservaDTO.hayUsuariosInvitados()){
-			Set<Invitacion> invitaciones = reservaDTO.getIdsUsuariosInvitados().stream()
-					.map(idUsuario -> userService.findUserById(idUsuario))
-					.map(usuario -> new Invitacion(usuario, reserva))
-					.collect(Collectors.toSet());
+		Set<Invitacion> invitaciones = reservaDTO.getIdsUsuariosInvitados().stream()
+				.map(idUsuario -> userService.findUserById(idUsuario))
+				.map(usuario -> new Invitacion(usuario, reserva))
+				.collect(Collectors.toSet());
 
-			reserva.setInvitaciones(invitaciones);
-		}
+		reserva.setInvitaciones(invitaciones);
+
 
 
 		return reservaRepository.save(reserva);
