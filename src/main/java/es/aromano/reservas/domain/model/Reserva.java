@@ -48,7 +48,7 @@ public class Reserva {
 	@Embedded
 	private ReglasRecurrencia reglas;
 
-	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Invitacion> invitaciones = new HashSet<>();
 
 
