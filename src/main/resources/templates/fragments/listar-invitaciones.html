@@ -29,10 +29,11 @@
                             </span>
                         </div>
 
-                        <div class="col s12 m5">
-                            <a class="btn-flat right red-text">No voy a ir</a>
-                            <a class="btn-flat right">Quiza</a>
-                            <a class="btn-flat right blue-text">Voy a ir</a>
+                        <div class="col s12 m5 respuestas">
+                            <a th:each="respuesta : ${respuestas}" class="btn-flat right"
+                               th:classappend="${respuesta == i.respuesta ? #strings.toLowerCase(respuesta) : ''}"
+                               th:attr="data-respuesta=${respuesta}, data-id-reserva=${i.reserva.id}"
+                               th:text="${respuesta.name}"></a>
                         </div>
 
                     </div>
@@ -49,7 +50,50 @@
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
 </script>
+<script>
 
+    $(document).ready(function(){
+
+        $("div.respuestas a").click(function(){
+
+            var $respuestaSeleccionada = $(this);
+
+            var idReserva = $respuestaSeleccionada.data("id-reserva");
+            var respuesta = $respuestaSeleccionada.data("respuesta");
+
+            var invitacionDTO = {};
+            invitacionDTO.idReserva = idReserva;
+            invitacionDTO.respuesta = respuesta;
+
+            responderInvitacion(invitacionDTO);
+            marcarRespuestaSeleccionada($respuestaSeleccionada);
+
+        });
+
+
+
+    });
+
+    function responderInvitacion(invitacionDTO){
+        $.ajax({
+            url: baseURL + 'responder-invitacion',
+            method: 'POST',
+            data: JSON.stringify(invitacionDTO),
+            contentType: 'application/json'
+        })
+        .done(function () {
+
+        })
+        .fail(function (xhr, status) {
+            alert(status);
+        });
+    }
+
+    function marcarRespuestaSeleccionada($respuestaSeleccionada) {
+
+    }
+
+</script>
 
 </body>
 </html>

@@ -122,3 +122,15 @@ label.label-check{
 	width: 25px;
 	border-radius: 50%;
 }
+
+.asistire{
+	color: cornflowerblue;
+}
+
+.quizas_asista{
+	color: orange;
+}
+
+.no_asistire{
+	color: red;
+}

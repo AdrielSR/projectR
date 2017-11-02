@@ -45,15 +45,9 @@ public class Invitacion {
         return respuesta;
     }
 
-
-    public void asistire(){
-        this.respuesta = ASISTIRE;
+    public void setRespuesta(Respuesta respuesta) {
+        this.respuesta = respuesta;
     }
-
-    public void noAsistire(){
-        this.respuesta = NO_ASISTIRE;
-    }
-
 
     @Override
     public boolean equals(Object o) {
