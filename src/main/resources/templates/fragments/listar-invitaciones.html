@@ -31,7 +31,7 @@
 
                         <div class="col s12 m5 respuestas">
                             <a th:each="respuesta : ${respuestas}" class="btn-flat right"
-                               th:classappend="${respuesta == i.respuesta ? #strings.toLowerCase(respuesta) : ''}"
+                               th:classappend="${respuesta == i.respuesta ? 'respuesta-seleccionada' : ''}"
                                th:attr="data-respuesta=${respuesta}, data-id-reserva=${i.reserva.id}"
                                th:text="${respuesta.name}"></a>
                         </div>
@@ -90,7 +90,11 @@
     }
 
     function marcarRespuestaSeleccionada($respuestaSeleccionada) {
+        $respuestaSeleccionada.parent().children().each(function(){
+           $(this).removeClass('respuesta-seleccionada')
+        });
 
+        $respuestaSeleccionada.addClass('respuesta-seleccionada');
     }
 
 </script>
