@@ -2,6 +2,7 @@ package es.aromano.reservas.web;
 
 import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -22,10 +23,11 @@ public class ReservaDTO {
     private boolean editable;
     private ReglasRecurrencia reglas;
     private List<Integer> idsUsuariosInvitados;
+    private String reservadoPor;
 
     public ReservaDTO(){ }
 
-    public ReservaDTO(Long id, String title, DateTime start, DateTime end, int idEspacio, String nombreEspacio){
+    private ReservaDTO(Long id, String title, DateTime start, DateTime end, int idEspacio, String nombreEspacio, String reservadoPor){
         this.id = id;
         this.title = title;
         this.start = start;
@@ -34,6 +36,7 @@ public class ReservaDTO {
         this.nombreEspacio = nombreEspacio;
         this.editable = false;
         this.idsUsuariosInvitados = new ArrayList<>();
+        this.reservadoPor = reservadoPor;
     }
 
 
@@ -94,8 +97,9 @@ public class ReservaDTO {
         DateTime end = reserva.getRango().getFin();
         int idEspacio = reserva.getEspacio().getId();
         String nombreEspacio = reserva.getEspacio().getNombre();
+        String reservadoPor = StringUtils.capitalize(reserva.getUser().getUsername());
 
-        return new ReservaDTO(id, title, start, end, idEspacio, nombreEspacio);
+        return new ReservaDTO(id, title, start, end, idEspacio, nombreEspacio, reservadoPor);
     }
 
 	public boolean isEditable() {
@@ -133,5 +137,9 @@ public class ReservaDTO {
 
     public boolean hayUsuariosInvitados(){
         return !idsUsuariosInvitados.isEmpty();
+    }
+
+    public String getReservadoPor() {
+        return reservadoPor;
     }
 }

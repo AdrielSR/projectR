@@ -17,7 +17,7 @@ $(document).ready(function(){
 	    },
 	    eventLimit: true,
 	    eventClick: function(event, jsEvent, view){
-	    	if(view.name == 'month'){
+	    	if(view.name === 'month'){
 	    		showTooltip(event, $(this));
 	    	}
 	    	
@@ -215,19 +215,26 @@ function eliminarReservaCalendario(idReserva){
 }
 
 function showTooltip(event, $element){
-	var asunto = '<p>Asunto: ' + event.title + '</p>';
-	var cuando = '<p>Cuando: ' + event.start.format("DD/MM/YYYY HH:mm") + '</p>';
-	var donde = '<p>Donde: ' + event.nombreEspacio + '</p>'
-	
-	var content = asunto + cuando + donde;
+    var content = '<div style="min-width: 400px; font-size: 12px;">';
+
+    var reservadoPor = '<p class="right" style="margin-top: 0px;"><b><i>Reservado por: </i></b>' + event.reservadoPor + '</p>';
+	var asunto = '<p><b><i>Asunto: </i></b>' + event.title + '</p>';
+	var cuando = '<p><b><i>Cuándo: </i></b>' + event.start.format("DD/MM/YYYY HH:mm") + '</p>';
+	var donde = '<p><b><i>Dónde: </i></b>' + event.nombreEspacio + '</p>';
+
+	if(!event.editable){
+	    content += reservadoPor;
+    }
+
+	content += asunto + cuando + donde;
 	
 	if(event.editable){
 		var editar = '<div class="col s6 left"><a href="/reserva/' + event.id +'">Editar</a></div>';
 		var eliminar = '<div class="col s6 right"><a href="#" onclick="eliminarReserva(\'' + event.id + '\')">Eliminar</a></div>';
-		var acciones = '<div class="col s12">' + editar + eliminar + '</div>';
-		
-		content += acciones;
+        content += '<div class="col s12">' + editar + eliminar + '</div>';
 	}
+
+	content += '</div>';
 	
 	$element.tooltipster({
 		contentAsHTML: true,
