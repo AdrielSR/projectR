@@ -5,11 +5,15 @@
 <header>
     <!-- Top Bar Dropdown -->
 	<ul id="dropdown1" class="dropdown-content">
-	  <li>
-	  	<form th:action="@{/logout}" method="post">
-	  		<button type="submit" class="log-out">Log out</button>
-	  	</form>
-	  </li>
+		<li>
+			<a th:href="@{/perfil}">Perfil</a>
+		</li>
+		<li class="divider"></li>
+		<li>
+			<form th:action="@{/logout}" method="post">
+				<button type="submit" class="log-out">Log out</button>
+			</form>
+		</li>
 	</ul>
 
     <nav>
