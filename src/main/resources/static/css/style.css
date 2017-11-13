@@ -126,3 +126,7 @@ label.label-check{
 .respuesta-seleccionada{
 	color: cornflowerblue;
 }
+
+.collapsible-body{
+	background-color: #EEE;
+}

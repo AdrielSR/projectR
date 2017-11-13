@@ -17,14 +17,50 @@
                 <li>
                     <div class="collapsible-header active"><i class="material-icons">perm_identity</i> Mis Datos</div>
                     <div class="collapsible-body">
-                        <span>Lorem ipsum dolor sit amet.</span>
+                        <div class="row">
+                            <div class="col s12 m6">
+                                <label> Username :
+                                    <input type="text" name="username" th:value="${#authentication.principal.username}"/>
+                                </label>
+                            </div>
+                            <div class="col s12 m6">
+                                <label> Email :
+                                    <input type="text" name="email" th:value="${#authentication.principal.email}"/>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <a class="btn-flat right blue-text">GUARDAR</a>
+                        </div>
                     </div>
                 </li>
 
                 <li>
                     <div class="collapsible-header active"><i class="material-icons">vpn_key</i> Mi Contraseña</div>
                     <div class="collapsible-body">
-                        <span>Lorem ipsum dolor sit amet.</span>
+                        <div class="row">
+                            <div class="col s12 m4">
+                                <label> Contraseña actual:
+                                    <input type="text" name="passwordActual" />
+                                </label>
+                            </div>
+                            <div class="col s12 m4">
+                                <label> Nueva contraseña:
+                                    <input type="text" name="passwordNuevo" />
+                                </label>
+                            </div>
+                            <div class="col s12 m4">
+                                <label> Repetir nueva contraseña:
+                                    <input type="text" name="passwordNuevoRepetido" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <a class="btn-flat right blue-text">GUARDAR</a>
+                        </div>
+
                     </div>
                 </li>
             </ul>
