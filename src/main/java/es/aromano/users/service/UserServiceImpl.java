@@ -4,14 +4,17 @@ package es.aromano.users.service;
 import java.util.List;
 import java.util.Objects;
 
+import es.aromano.users.web.dto.ChangePasswordDTO;
+import es.aromano.users.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.aromano.empresas.domain.exceptions.EmpresaException;
 import es.aromano.empresas.domain.model.Empresa;
 import es.aromano.empresas.service.EmpresaService;
 import es.aromano.users.domain.exceptions.UserException;
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository; 
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
     
     @Autowired
     private EmpresaService empresaService;
@@ -102,7 +105,7 @@ public class UserServiceImpl implements UserService {
         checkIfUserExist(user);
 
         User newUser = new User(user.getUsername(), user.getEmail());
-        newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.addRole(roleRepository.findByRole("ROLE_ADMIN"));
         newUser.setEmpresa(newEmpresa);
         newUser = userRespository.save(newUser);
@@ -122,7 +125,7 @@ public class UserServiceImpl implements UserService {
         checkIfUserExist(user);
 
 		User newUser = new User(user.getUsername(), user.getEmail());
-		newUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 		newUser.addRole(roleRepository.findByRole("ROLE_USER"));
 		newUser.setEmpresa(getCurrentUser().getEmpresa());
 		newUser = userRespository.save(newUser);
@@ -178,5 +181,39 @@ public class UserServiceImpl implements UserService {
     public List<User> findUsuariosActivosEnEmpresaByTerm(String term) {
         return userRespository.findUsuariosActivosEnEmpresaByTerm(term);
     }
-    
+
+    @Override
+    public void modificarDatosPerfil(UserDTO userDTO) {
+        User currentUser = getCurrentUser();
+
+        currentUser.setUsername(userDTO.getUsername());
+        currentUser.setEmail(userDTO.getEmail());
+
+        updateUserInSession(currentUser);
+
+
+    }
+
+    @Override
+    public void modificarPasswordPerfil(ChangePasswordDTO changePasswordDTO) throws UserException {
+        User currentUser = getCurrentUser();
+
+        if(!passwordEncoder.matches(changePasswordDTO.getCurrentPassword(), currentUser.getPassword())){
+            throw new UserException("La contraseña introducida no coincide con la actual.");
+        }
+
+        currentUser.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
+
+        updateUserInSession(currentUser);
+    }
+
+    private void updateUserInSession(User user) {
+        // Actualiza el usuario actual sin cerrar sesión
+        Authentication request = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(request);
+
+        // Guarda los cambios en la base de datos
+        userRespository.save(user);
+    }
+
 }

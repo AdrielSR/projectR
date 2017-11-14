@@ -2,6 +2,8 @@ package es.aromano.users.service;
 
 import java.util.List;
 
+import es.aromano.users.web.dto.ChangePasswordDTO;
+import es.aromano.users.web.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import es.aromano.empresas.domain.exceptions.EmpresaException;
@@ -42,4 +44,7 @@ public interface UserService extends UserDetailsService{
 
     List<User> findUsuariosActivosEnEmpresaByTerm(String term);
 
+    void modificarDatosPerfil(UserDTO userDTO);
+
+	void modificarPasswordPerfil(ChangePasswordDTO changePasswordDTO) throws UserException;
 }

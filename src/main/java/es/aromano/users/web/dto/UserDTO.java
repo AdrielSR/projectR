@@ -1,4 +1,4 @@
-package es.aromano.users.web;
+package es.aromano.users.web.dto;
 
 import es.aromano.users.domain.model.User;
 
@@ -8,7 +8,10 @@ public class UserDTO {
     private String username;
     private String email;
 
-    public UserDTO(int id, String username, String email) {
+    public UserDTO() {
+    }
+
+    private UserDTO(int id, String username, String email) {
         this.id = id;
         this.username = username;
         this.email = email;

@@ -20,18 +20,18 @@
                         <div class="row">
                             <div class="col s12 m6">
                                 <label> Username :
-                                    <input type="text" name="username" th:value="${#authentication.principal.username}"/>
+                                    <input type="text" id="username" name="username" th:value="${#authentication.principal.username}"/>
                                 </label>
                             </div>
                             <div class="col s12 m6">
                                 <label> Email :
-                                    <input type="text" name="email" th:value="${#authentication.principal.email}"/>
+                                    <input type="text" id="email"  name="email" th:value="${#authentication.principal.email}"/>
                                 </label>
                             </div>
                         </div>
 
                         <div class="row">
-                            <a class="btn-flat right blue-text">GUARDAR</a>
+                            <a id="btn-modificar-datos" class="btn-flat right blue-text">GUARDAR</a>
                         </div>
                     </div>
                 </li>
@@ -42,23 +42,23 @@
                         <div class="row">
                             <div class="col s12 m4">
                                 <label> Contraseña actual:
-                                    <input type="text" name="passwordActual" />
+                                    <input type="password" id="currentPassword" name="currentPassword" />
                                 </label>
                             </div>
                             <div class="col s12 m4">
                                 <label> Nueva contraseña:
-                                    <input type="text" name="passwordNuevo" />
+                                    <input type="password" id="newPassword" name="newPassword" />
                                 </label>
                             </div>
                             <div class="col s12 m4">
                                 <label> Repetir nueva contraseña:
-                                    <input type="text" name="passwordNuevoRepetido" />
+                                    <input type="password" id="repeatedNewPassword" name="repeatedNewPassword" />
                                 </label>
                             </div>
                         </div>
 
                         <div class="row">
-                            <a class="btn-flat right blue-text">GUARDAR</a>
+                            <a id="btn-change-password" class="btn-flat right blue-text">GUARDAR</a>
                         </div>
 
                     </div>
@@ -69,11 +69,86 @@
     </div>
 </div>
 
-
+<script th:inline="javascript">
+    var baseURL = /*[[@{/}]]*/ '/';
+</script>
 <script type="text/javascript">
     $(document).ready(function(){
         $('.collapsible').collapsible();
+
+
+        $('#btn-modificar-datos').click(function(){
+
+          var userDTO = {};
+          userDTO.username = $('#username').val();
+          userDTO.email = $('#email').val();
+
+
+          modificarDatos(userDTO);
+
+        });
+
+
+        $('#btn-change-password').click(function(){
+
+            var currentPassword = $('#currentPassword').val();
+            var newPassword = $('#newPassword').val();
+            var repeatedNewPassword = $('#repeatedNewPassword').val();
+
+            if(newPassword !== repeatedNewPassword){
+                alert('Las nuevas contraseñas no coinciden');
+                return;
+            }
+
+            var changePasswordDTO = {};
+            changePasswordDTO.currentPassword = currentPassword;
+            changePasswordDTO.newPassword = newPassword;
+            changePasswordDTO.repeatedNewPassword = repeatedNewPassword;
+
+            changePassword(changePasswordDTO);
+
+        });
+
+
+
     });
+
+
+    function modificarDatos(userDTO){
+        $.ajax({
+            url: baseURL + 'editar-datos-usuario',
+            method: 'POST',
+            data: JSON.stringify(userDTO),
+            contentType: 'application/json'
+        })
+            .done(function () {
+                window.location.reload();
+            })
+            .fail(function (xhr, status) {
+                var error = JSON.parse(xhr.responseText);
+                console.log(error.msg);
+            });
+    }
+
+
+    function changePassword(changePasswordDTO){
+
+        $.ajax({
+            url: baseURL + 'editar-password-usuario',
+            method: 'POST',
+            data: JSON.stringify(changePasswordDTO),
+            contentType: 'application/json'
+        })
+            .done(function () {
+                window.location.reload();
+            })
+            .fail(function (xhr, status) {
+                var error = JSON.parse(xhr.responseText);
+                console.log(error.msg);
+            });
+    }
+
+
 </script>
 
 </body>

@@ -1,5 +1,6 @@
 package es.aromano.users.web;
 
+import es.aromano.users.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,13 +38,9 @@ public class UserRestController {
 	@GetMapping("/buscar-usuarios-empresa/{term}")
 	public List<UserDTO> buscarUsuarios(@PathVariable("term") String term){
 
-		List<UserDTO> usuarios = userService.findUsuariosActivosEnEmpresaByTerm(term).stream()
+		return userService.findUsuariosActivosEnEmpresaByTerm(term).stream()
 									.map(user -> UserDTO.from(user))
 									.collect(Collectors.toList());
-
-
-
-		return usuarios;
 	}
 
 
