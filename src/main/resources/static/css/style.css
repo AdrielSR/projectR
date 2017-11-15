@@ -140,3 +140,13 @@ label.label-check{
 .selected-avatar{
     border-bottom: 3px solid #868992;
 }
+
+.pagination li.active {
+	background-color: #FFF;
+	border-bottom: 3px solid #e4a4e2;
+	border-radius: 0px;
+}
+
+.pagination li.active a {
+	color: #444;
+}
