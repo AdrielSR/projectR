@@ -40,9 +40,9 @@
 			    	<div class="background">
 			        	<img th:src="@{/img/background_1.jpg}" />
 			        </div>
-			        <a href="#!user"><img class="circle" th:src="@{${#authentication.principal.avatar.enlace}}"/></a>
-			        <a href="#!name"><span class="white-text name" th:text="${#authentication.principal.username}"></span></a>
-			        <a href="#!email"><span class="white-text email" th:text="${#authentication.principal.email}"></span></a>
+			        <a th:href="@{/perfil}"><img class="circle" th:src="@{${#authentication.principal.avatar.enlace}}"/></a>
+			        <a th:href="@{/perfil}"><span class="white-text name" th:text="${#authentication.principal.username}"></span></a>
+			        <a th:href="@{/perfil}"><span class="white-text email" th:text="${#authentication.principal.email}"></span></a>
 		    	</div>
 			</li>
 		    <li><a th:href="@{/}"><i class="material-icons">class</i>Mis Reservas</a></li>
