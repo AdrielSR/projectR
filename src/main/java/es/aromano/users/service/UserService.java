@@ -2,6 +2,7 @@ package es.aromano.users.service;
 
 import java.util.List;
 
+import es.aromano.users.domain.model.Imagen;
 import es.aromano.users.web.dto.ChangePasswordDTO;
 import es.aromano.users.web.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,4 +48,6 @@ public interface UserService extends UserDetailsService{
     void modificarDatosPerfil(UserDTO userDTO);
 
 	void modificarPasswordPerfil(ChangePasswordDTO changePasswordDTO) throws UserException;
+
+	List<Imagen> findAllAvatares();
 }

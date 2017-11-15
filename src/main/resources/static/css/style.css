@@ -118,8 +118,14 @@ label.label-check{
 }
 
 .img-avatar-mini{
-	height: 25px;
-	width: 25px;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+}
+
+.img-avatar{
+	height: 150px;
+	width: 150px;
 	border-radius: 50%;
 }
 
@@ -129,4 +135,8 @@ label.label-check{
 
 .collapsible-body{
 	background-color: #EEE;
+}
+
+.selected-avatar{
+    border-bottom: 3px solid #868992;
 }

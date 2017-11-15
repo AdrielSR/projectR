@@ -7,14 +7,17 @@ public class UserDTO {
     private int id;
     private String username;
     private String email;
+    private String enlaceImagen;
+    private int idAvatar;
 
     public UserDTO() {
     }
 
-    private UserDTO(int id, String username, String email) {
+    public UserDTO(int id, String username, String email, String enlaceImagen) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.enlaceImagen = enlaceImagen;
     }
 
     public int getId() {
@@ -29,10 +32,19 @@ public class UserDTO {
         return email;
     }
 
+    public String getEnlaceImagen() {
+        return enlaceImagen;
+    }
+
+    public int getIdAvatar() {
+        return idAvatar;
+    }
+
     public static UserDTO from(User user){
         return new UserDTO(user.getId(),
                             user.getUsername(),
-                            user.getEmail());
+                            user.getEmail(),
+                            user.getAvatar().getEnlace());
     }
 
 

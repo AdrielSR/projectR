@@ -23,6 +23,7 @@ public class PerfilController {
 
     @GetMapping("/perfil")
     public String verPerfil(Model model){
+        model.addAttribute("avatares", userService.findAllAvatares());
         model.addAttribute("view", "perfil");
 
         return "index";

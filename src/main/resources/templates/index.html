@@ -40,7 +40,7 @@
 			    	<div class="background">
 			        	<img th:src="@{/img/background_1.jpg}" />
 			        </div>
-			        <a href="#!user"><img class="circle" th:src="@{/img/user_avatar.png}"/></a>
+			        <a href="#!user"><img class="circle" th:src="@{${#authentication.principal.avatar.enlace}}"/></a>
 			        <a href="#!name"><span class="white-text name" th:text="${#authentication.principal.username}"></span></a>
 			        <a href="#!email"><span class="white-text email" th:text="${#authentication.principal.email}"></span></a>
 		    	</div>

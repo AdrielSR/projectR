@@ -5,18 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -63,7 +52,10 @@ public class User implements UserDetails{
     @ManyToOne
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
-    
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "avatar_id")
+    private Imagen avatar;
 
 	public User(){
         roles = new HashSet<>();
@@ -180,4 +172,11 @@ public class User implements UserDetails{
         setEnabled(false);
     }
 
+    public Imagen getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Imagen avatar) {
+        this.avatar = avatar;
+    }
 }

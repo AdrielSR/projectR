@@ -4,6 +4,8 @@ package es.aromano.users.service;
 import java.util.List;
 import java.util.Objects;
 
+import es.aromano.users.domain.ImagenRepository;
+import es.aromano.users.domain.model.Imagen;
 import es.aromano.users.web.dto.ChangePasswordDTO;
 import es.aromano.users.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private EmpresaService empresaService;
+
+    @Autowired
+    private ImagenRepository imagenRepository;
 
 
     @Override
@@ -188,6 +193,7 @@ public class UserServiceImpl implements UserService {
 
         currentUser.setUsername(userDTO.getUsername());
         currentUser.setEmail(userDTO.getEmail());
+        currentUser.setAvatar(imagenRepository.findOne(userDTO.getIdAvatar()));
 
         updateUserInSession(currentUser);
 
@@ -205,6 +211,11 @@ public class UserServiceImpl implements UserService {
         currentUser.setPassword(passwordEncoder.encode(changePasswordDTO.getNewPassword()));
 
         updateUserInSession(currentUser);
+    }
+
+    @Override
+    public List<Imagen> findAllAvatares() {
+        return imagenRepository.findAll();
     }
 
     private void updateUserInSession(User user) {

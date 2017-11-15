@@ -27,7 +27,7 @@
 									<span th:inline="text">[[${#strings.abbreviate(r.asunto,50)}]]</span>
 								</div>
 								<div class="col s6">
-									<img th:each="i : ${r.invitaciones}" th:src="@{/img/yuna.jpg}" class="img-avatar-mini" th:title="${#strings.capitalize(i.user.username)}"/>
+									<img th:each="i : ${r.invitaciones}" th:src="@{${i.user.avatar.enlace}}" class="img-avatar-mini" th:title="${#strings.capitalize(i.user.username)}"/>
 								</div>
 
 							</div>

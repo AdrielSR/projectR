@@ -18,15 +18,34 @@
                     <div class="collapsible-header active"><i class="material-icons">perm_identity</i> Mis Datos</div>
                     <div class="collapsible-body">
                         <div class="row">
-                            <div class="col s12 m6">
-                                <label> Username :
-                                    <input type="text" id="username" name="username" th:value="${#authentication.principal.username}"/>
-                                </label>
+                            <div class="col s12 m4 center">
+                                <div class="col s12">
+                                    <img id="avatarPrincipal" th:attr="data-id-avatar=${#authentication.principal.avatar.id}"
+                                                                th:src="@{${#authentication.principal.avatar.enlace}}" class="img-avatar" />
+                                </div>
+
+                                <div class="col s12" style="padding: 10px;">
+                                    <span class="center" th:each="avatar : ${avatares}"
+                                          th:id="${#strings.concat('spanAvatar_', avatar.id)}"
+                                          th:attr="data-id-avatar=${avatar.id}"
+                                          th:classappend="${#authentication.principal.avatar.id == avatar.id ? 'selected-avatar' : ''}">
+                                        <img  th:src="@{${avatar.enlace}}" class="img-avatar-mini" style="cursor: pointer;"/>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="col s12 m6">
-                                <label> Email :
-                                    <input type="text" id="email"  name="email" th:value="${#authentication.principal.email}"/>
-                                </label>
+
+                            <div class="col s12 m8">
+                                <div class="col s12">
+                                    <label> Username :
+                                        <input type="text" id="username" name="username" th:value="${#authentication.principal.username}"/>
+                                    </label>
+                                </div>
+
+                                <div class="col s12">
+                                    <label> Email :
+                                        <input type="text" id="email"  name="email" th:value="${#authentication.principal.email}"/>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -72,84 +91,7 @@
 <script th:inline="javascript">
     var baseURL = /*[[@{/}]]*/ '/';
 </script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.collapsible').collapsible();
-
-
-        $('#btn-modificar-datos').click(function(){
-
-          var userDTO = {};
-          userDTO.username = $('#username').val();
-          userDTO.email = $('#email').val();
-
-
-          modificarDatos(userDTO);
-
-        });
-
-
-        $('#btn-change-password').click(function(){
-
-            var currentPassword = $('#currentPassword').val();
-            var newPassword = $('#newPassword').val();
-            var repeatedNewPassword = $('#repeatedNewPassword').val();
-
-            if(newPassword !== repeatedNewPassword){
-                alert('Las nuevas contraseñas no coinciden');
-                return;
-            }
-
-            var changePasswordDTO = {};
-            changePasswordDTO.currentPassword = currentPassword;
-            changePasswordDTO.newPassword = newPassword;
-            changePasswordDTO.repeatedNewPassword = repeatedNewPassword;
-
-            changePassword(changePasswordDTO);
-
-        });
-
-
-
-    });
-
-
-    function modificarDatos(userDTO){
-        $.ajax({
-            url: baseURL + 'editar-datos-usuario',
-            method: 'POST',
-            data: JSON.stringify(userDTO),
-            contentType: 'application/json'
-        })
-            .done(function () {
-                window.location.reload();
-            })
-            .fail(function (xhr, status) {
-                var error = JSON.parse(xhr.responseText);
-                console.log(error.msg);
-            });
-    }
-
-
-    function changePassword(changePasswordDTO){
-
-        $.ajax({
-            url: baseURL + 'editar-password-usuario',
-            method: 'POST',
-            data: JSON.stringify(changePasswordDTO),
-            contentType: 'application/json'
-        })
-            .done(function () {
-                window.location.reload();
-            })
-            .fail(function (xhr, status) {
-                var error = JSON.parse(xhr.responseText);
-                console.log(error.msg);
-            });
-    }
-
-
-</script>
+<script th:src="@{/js/perfil.js}" src="../../js/perfil.js"></script>
 
 </body>
 </html>
