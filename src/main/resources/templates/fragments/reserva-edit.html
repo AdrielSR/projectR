@@ -41,7 +41,7 @@
 					</div>
 
 				</div>
-		
+
 		        <div class="col s12 center">
 		            <button id="editar-reserva" class="btn waves-effect waves-light">Guardar</button>
 		        </div>
@@ -93,9 +93,20 @@
         minLength: 3
     }).autocomplete("instance")._renderItem = function(ul,item){
 
-        var inner_html = '<span class="title">' + item.label + '</span>';
 
-        return $('<li class="collection-item avatar"></li>')
+        var inner_html =  '<div class="row" style="margin-bottom: 0;">' +
+								'<div class="col s12">' +
+									'<div class="col s2">' +
+										'<img src="' + item.enlaceImagen + '"  class="img-avatar-medium" />' +
+									'</div>' +
+									'<div class="col s10">' +
+										'<span class="title">' + item.label + '</span>' +
+										'<p style="margin-top: 0; font-size: 14px; color: #BBB;">' + item.value + '</p>' +
+									'</div>' +
+								'</div>' +
+							'</div>';
+
+        return $('<li></li>')
             .data("item.autocomplete", item)
             .append(inner_html)
             .appendTo(ul);

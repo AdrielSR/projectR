@@ -117,16 +117,26 @@ label.label-check{
 	border-bottom: 5px solid #a680a9;
 }
 
+
+.img-avatar-mini,
+.img-avatar-medium,
+.img-avatar{
+	border-radius: 50%;
+}
+
 .img-avatar-mini{
 	height: 30px;
 	width: 30px;
-	border-radius: 50%;
+}
+
+.img-avatar-medium{
+	height: 50px;
+	width: 50px;
 }
 
 .img-avatar{
 	height: 150px;
 	width: 150px;
-	border-radius: 50%;
 }
 
 .respuesta-seleccionada{
