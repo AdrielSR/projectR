@@ -72,12 +72,12 @@ public class Reserva {
 
 
 	public String getAsunto() {
-		return StringUtils.isNotBlank(asunto)? asunto : "Sin asunto";
+		return asunto;
 	}
 
 
 	public void setAsunto(String asunto) {
-		this.asunto = asunto;
+		this.asunto = StringUtils.isNotBlank(asunto)? asunto : "Sin asunto";
 	}
 
 
