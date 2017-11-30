@@ -8,29 +8,29 @@
 		
 			<h4 class="center">Editar Edificio</h4>
 			<form th:action="@{'/admin/edificio/' + ${edificio.id}}" method="post" enctype="multipart/form-data">
-	            <div class="col s6">
-		            <div>
+
+				<div class="col s12 m6 center">
+					<img th:src="@{${edificio.enlaceImagen}}" class="img-avatar" />
+					<br/>
+					<input type="file" name="file"/>
+				</div>
+
+				<div class="col s12 m6">
+		            <div class="col s12">
 		            	<label> Nombre : 
 		            		<input type="text" name="nombre" th:value="${edificio.nombre}"/>
 		            	</label>	
 		            </div>	           
 	            </div>
 	            
-	            <div class="col s6">
-	            	<div>
+	            <div class="col s12 m6">
+	            	<div class="col s12 ">
 		            	<label> Direccion: 
 		            		<input type="text" name="direccion" th:value="${edificio.direccion}"/> 
 		            	</label>
 		            </div>
 	            </div>
 
-				<div class="row">
-					<div class="col s12">
-						<input type="file" name="file"/>
-					</div>
-				</div>
-	            
-	            
 	            
 	            <div class="col s12 center">
 	                <button type="submit" class="btn waves-effect waves-light">Guardar</button>
