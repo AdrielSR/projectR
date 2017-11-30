@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-    private String location = "/uploads";
+    private String location = "uploads";
 
     public String getLocation() {
         return location;

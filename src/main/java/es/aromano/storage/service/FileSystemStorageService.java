@@ -11,6 +11,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -32,22 +33,24 @@ public class FileSystemStorageService implements StorageService {
 
     @Override
     public void store(MultipartFile file, String fullPath) {
-        //String filename = StringUtils.cleanPath(file.getOriginalFilename());
+        /*
+            fileCopy = new File(this.rootLocation.toString(), fileNameCopy);
+            Files.copy(file.getInputStream(), this.rootLocation.resolve(fileNameCopy),StandardCopyOption.REPLACE_EXISTING);
+         */
+
+        File fileCopy;
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + fullPath);
+                throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            if (fullPath.contains("..")) {
-                // This is a security check
-                throw new StorageException(
-                        "Cannot store file with relative path outside current directory "
-                                + fullPath);
-            }
-            Files.copy(file.getInputStream(), this.rootLocation.resolve(fullPath),
+
+            fileCopy = new File(fullPath);
+
+            Files.copy(file.getInputStream(), fileCopy.toPath(),
                     StandardCopyOption.REPLACE_EXISTING);
         }
         catch (IOException e) {
-            throw new StorageException("Failed to store file " + fullPath, e);
+            throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
     }
 

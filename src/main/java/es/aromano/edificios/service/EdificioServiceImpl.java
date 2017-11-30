@@ -2,9 +2,11 @@ package es.aromano.edificios.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import es.aromano.edificios.web.dto.EdificioDTO;
 import es.aromano.storage.service.StorageService;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,7 +81,11 @@ public class EdificioServiceImpl implements EdificioService{
 
 
 	private String generarFullPathFichero(MultipartFile file, int idEdificio){
-		return String.format("/uploads/edificio/%d/edf_%s.jpg", idEdificio, new Date().getTime());
+		String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
+		String fileNameCopy = String.format("%s.%s", UUID.randomUUID().toString(), fileExtension);
+
+
+		return String.format("/uploads/edificio/%d/%s", idEdificio, fileNameCopy);
 	}
 
 
