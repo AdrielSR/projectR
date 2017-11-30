@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 
 import es.aromano.empresas.domain.model.Empresa;
 import es.aromano.espacios.domain.model.Espacio;
+import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Table(name="edificio")
@@ -44,6 +45,10 @@ public class Edificio {
     private boolean activo;
 
 
+    @Column(nullable = false)
+    private String enlaceImagen = "";
+
+
     public Edificio(){
     	this.espacios = new HashSet<>();
     }
@@ -53,6 +58,7 @@ public class Edificio {
         this.direccion = direccion;
         this.activo = true;
         this.espacios = new HashSet<>();
+        this.enlaceImagen = "/img/building.png";
     }
 
     public void addEspacio(Espacio espacio){
@@ -114,5 +120,12 @@ public class Edificio {
 	public void desactivar(){
 		this.activo = false;
 	}
-	
+
+    public String getEnlaceImagen() {
+        return enlaceImagen;
+    }
+
+    public void setEnlaceImagen(String enlaceImagen) {
+        this.enlaceImagen = StringUtils.isNotBlank(enlaceImagen) ? enlaceImagen : "/img/building.png";
+    }
 }

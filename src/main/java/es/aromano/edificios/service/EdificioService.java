@@ -2,6 +2,7 @@ package es.aromano.edificios.service;
 
 import java.util.List;
 import es.aromano.edificios.domain.model.Edificio;
+import es.aromano.edificios.web.dto.EdificioDTO;
 
 public interface EdificioService {
 
@@ -15,7 +16,7 @@ public interface EdificioService {
 
 	Edificio findEdificio(int idEdificio);
 	
-	Edificio editarEdificio(int idEdificio, Edificio edificio);
+	Edificio editarEdificio(int idEdificio, EdificioDTO edificio);
 
 	Edificio toggleActivarEdificio(Edificio edificio);
 

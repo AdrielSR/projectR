@@ -1,14 +1,13 @@
 package es.aromano.edificios.web;
 
+import es.aromano.edificios.web.dto.EdificioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import es.aromano.edificios.domain.model.Edificio;
 import es.aromano.edificios.service.EdificioService;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/admin")
@@ -49,7 +48,7 @@ public class AdminEdificioController {
 	
 	@RequestMapping(value = "/edificio/{id}", method = RequestMethod.POST)
 	public String doEditarEdificioEmpresa(@PathVariable("id") int idEdificio,
-										 @ModelAttribute Edificio edificio, Model model) {
+										  @ModelAttribute EdificioDTO edificio) {
 		
 		if(edificioService.editarEdificio(idEdificio, edificio) == null){
 			return String.format("redirect:/admin/edificio/%d", idEdificio);

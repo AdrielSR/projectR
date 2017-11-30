@@ -1,13 +1,17 @@
 package es.aromano.edificios.service;
 
+import java.util.Date;
 import java.util.List;
 
+import es.aromano.edificios.web.dto.EdificioDTO;
+import es.aromano.storage.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.aromano.edificios.domain.model.Edificio;
 import es.aromano.edificios.domain.EdificioRepository;
 import es.aromano.users.service.UserService;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class EdificioServiceImpl implements EdificioService{
@@ -17,6 +21,9 @@ public class EdificioServiceImpl implements EdificioService{
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private StorageService storageService;
 	
 	@Override
 	public List<Edificio> edificiosActivos() {
@@ -47,20 +54,34 @@ public class EdificioServiceImpl implements EdificioService{
 	}
 
 	@Override
-	public Edificio editarEdificio(int idEdificio, Edificio e) {
+	public Edificio editarEdificio(int idEdificio, EdificioDTO e) {
 		
 		Edificio edificio = findEdificioActivo(idEdificio);
 		
 		if(edificio == null){
-			
+			throw new IllegalArgumentException(String.format("No se ha encontrado el edificio con el id=[%d]", idEdificio));
 		}
 		
 		edificio.setNombre(e.getNombre());
 		edificio.setDireccion(e.getDireccion());
+
+		String fullPath = "";
+		if(!e.getFile().isEmpty()){
+			fullPath = generarFullPathFichero(e.getFile(), idEdificio);
+			storageService.store(e.getFile(), fullPath);
+		}
+
+		edificio.setEnlaceImagen(fullPath);
 		
 		
 		return edificioRepository.save(edificio);
 	}
+
+
+	private String generarFullPathFichero(MultipartFile file, int idEdificio){
+		return String.format("/uploads/edificio/%d/edf_%s.jpg", idEdificio, new Date().getTime());
+	}
+
 
 	@Override
 	public Edificio toggleActivarEdificio(Edificio edificio) {
