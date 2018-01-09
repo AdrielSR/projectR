@@ -160,3 +160,9 @@ label.label-check{
 .pagination li.active a {
 	color: #444;
 }
+
+.span-text{
+	font-size: 12px;
+	font-style: italic;
+	color: #aaa;
+}

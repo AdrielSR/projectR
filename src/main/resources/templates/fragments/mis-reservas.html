@@ -35,15 +35,18 @@
 						
 						<div class="row" style="margin-bottom: 0px;">
 							<div class="col s12">
-								<div class="col s6" style="padding-left: 0px;">
+								<div class="col s12 m6" style="padding-left: 0px;">
 									<p th:inline="text"> <i><b>Dónde:</b></i> [[${r.espacio.nombre}]]</p>
 								</div>
 			
-								<div class="col s6" style="padding-left: 0px;">
-									<p th:inline="text"> 
+								<div class="col s12 m6" style="padding-left: 0px;">
+									<span th:inline="text">
 										<i><b>Cuándo:</b></i> [[${#dates.format(r.rango.inicio,'dd/MM/yyy HH:mm')}]] -
 										[[${#dates.format(r.rango.fin,'HH:mm')}]]
-									</p>
+									</span>
+									<span class="span-text right created-date" th:inline="text" style="display: none;">
+										Creada el: [[${#dates.format(r.createdDate, 'dd/MM/yyy')}]]
+									</span>
 								</div>
 							</div>					
 						</div>

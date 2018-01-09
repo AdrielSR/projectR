@@ -18,6 +18,15 @@ $(document).ready(function(){
 		}
     });
 
+    $('ul.collection li').hover(
+    	function(){
+			$(this).find('span.created-date').show();
+		},
+		function(){
+            $(this).find('span.created-date').hide();
+		}
+	)
+
 	
 });
 

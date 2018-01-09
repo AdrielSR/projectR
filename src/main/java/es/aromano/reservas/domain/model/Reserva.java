@@ -12,9 +12,13 @@ import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.users.domain.model.User;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="reserva")
+@EntityListeners(AuditingEntityListener.class)
 public class Reserva {
 
 	@Id
@@ -51,6 +55,10 @@ public class Reserva {
 	@OneToMany(mappedBy = "reserva", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Invitacion> invitaciones = new HashSet<>();
 
+	@Column(name="createdDate", nullable = false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@CreatedDate
+	private DateTime createdDate;
 
 	public Reserva(){}
 
@@ -144,6 +152,10 @@ public class Reserva {
 	public void setInvitaciones(Set<Invitacion> invitaciones) {
 		this.invitaciones.clear();
 		this.invitaciones.addAll(invitaciones);
+	}
+
+	public DateTime getCreatedDate() {
+		return createdDate;
 	}
 
 	public List<Reserva> calcularReservas(){
