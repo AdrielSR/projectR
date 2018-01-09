@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="copy">
+
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <!--/*@thymesVar id="espacio" type="es.aromano.espacios.domain.model.Espacio"*/-->
+            <!--/*@thymesVar id="edificios" type="List<es.aromano.edificios.domain.model.Edificio>"*/-->
+            <!--/*@thymesVar id="e" type="es.aromano.edificios.domain.model.Edificio"*/-->
+            <h4 class="center">Editar Espacio</h4>
+            <form method="post">
+                <div class="col s12 m6">
+                    <div>
+                        <label> Nombre :
+                            <input type="text" id="nombre-espacio" th:value="${espacio.nombre}"/>
+                        </label>
+                    </div>
+                    <div>
+                        <label> Aforo:
+                            <input type="text" id="aforo-espacio" th:value="${espacio.aforo}" />
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col s12 m6">
+                    <div class="input-field">
+                        <select id="selec-id-edificio">
+                            <option th:each="e : ${edificios}"
+                                    th:value="${e.id}"
+                                    th:text="${e.nombre}"
+                                    th:selected="${e.id == espacio.edificio.id}">
+                            </option>
+                        </select>
+                        <label>Asignar a:</label>
+                    </div>
+
+                    <div>
+                        <p>Prestaciones:</p>
+                        <div class="p-item"><i id="p-mesa" class="material-icons" th:classappend="${espacio.prestaciones.isTieneMesa() ? 'p-item-active' : 'p-item-no-active'}">layers</i></div>
+                        <div class="p-item"><i id="p-silla" class="material-icons" th:classappend="${espacio.prestaciones.isTieneSillas() ? 'p-item-active' : 'p-item-no-active'}">weekend</i></div>
+                        <div class="p-item"><i id="p-proyector" class="material-icons" th:classappend="${espacio.prestaciones.isTieneProyector() ? 'p-item-active' : 'p-item-no-active'}">videocam</i></div>
+                        <div class="p-item"><i id="p-ordenador" class="material-icons" th:classappend="${espacio.prestaciones.isTieneOrdenador() ? 'p-item-active' : 'p-item-no-active'}">laptop</i></div>
+                        <div class="p-item"><i id="p-pizarra" class="material-icons" th:classappend="${espacio.prestaciones.isTienePizarra() ? 'p-item-active' : 'p-item-no-active'}">call_to_action</i></div>
+                        <div class="p-item"><i id="p-microfono" class="material-icons" th:classappend="${espacio.prestaciones.isTieneMicrofono() ? 'p-item-active' : 'p-item-no-active'}">mic_none</i></div>
+                        <div class="p-item"><i id="p-telefono" class="material-icons" th:classappend="${espacio.prestaciones.isTieneTelefono() ? 'p-item-active' : 'p-item-no-active'}">phone</i></div>
+                        <div class="p-item"><i id="p-enchufe" class="material-icons" th:classappend="${espacio.prestaciones.isTieneEnchufes() ? 'p-item-active' : 'p-item-no-active'}">power</i></div>
+                    </div>
+
+                </div>
+                <br/>
+
+
+
+                <div class="col s12 center">
+                    <button id="btnEditarEspacio" class="btn waves-effect waves-light">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+var baseURL = /*[[@{/}]]*/ '/';
+var idEspacio = /*[[${espacio.id}]]*/ '1';
+</script>
+<script th:src="@{/js/admin-espacios.js}" src="../../js/admin-espacios.js"></script>
+
+
+
+</body>
+</html>

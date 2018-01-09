@@ -2,13 +2,12 @@ package es.aromano.espacios.web;
 
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.service.BuscadorEspaciosService;
+import es.aromano.espacios.web.dto.BuscadorEspaciosDTO;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.web.ReservaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

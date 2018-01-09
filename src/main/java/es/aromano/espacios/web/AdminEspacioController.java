@@ -1,18 +1,18 @@
 package es.aromano.espacios.web;
 
+import es.aromano.espacios.web.dto.EspacioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import es.aromano.edificios.service.EdificioService;
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.service.EspacioService;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/admin")
@@ -28,7 +28,7 @@ public class AdminEspacioController {
 	
 	////// Listar espacios //////
 	
-	@RequestMapping(value = "/espacios", method = RequestMethod.GET)
+	@GetMapping(value = "/espacios")
 	public String listarEspaciosActivos(Model model){
 		model.addAttribute("espacios", espacioService.espaciosActivos());
 		model.addAttribute("view", generateView("admin-espacios"));
@@ -36,18 +36,29 @@ public class AdminEspacioController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/espacios-no-activos", method = RequestMethod.GET)
+	@GetMapping(value = "/espacios-no-activos")
 	public String listarEspaciosNoActivos(Model model){
 		model.addAttribute("espacios_no_activos", espacioService.espaciosDesactivos());
 		model.addAttribute("view", generateView("admin-espacios-no-activos"));
 		
 		return "index";
 	}
-	
+
+	////// Editar espacio //////
+
+	@GetMapping(value = "/espacio/{id}")
+	public String editarEspacio(@PathVariable("id") int idEspacio, Model model){
+		model.addAttribute("edificios", edificioService.edificiosActivos());
+		model.addAttribute("espacio", espacioService.findEspacio(idEspacio));
+		model.addAttribute("view", generateView("admin-espacio-edit"));
+
+		return "index";
+	}
+
 	
 	////// Crear espacio //////
 	
-	@RequestMapping(value = "/espacio", method = RequestMethod.GET)
+	@GetMapping(value = "/espacio")
 	public String crearEspacio(Model model, EspacioDTO espacioDTO){
 		model.addAttribute("edificios", edificioService.edificiosActivos());
 		model.addAttribute("view", generateView("admin-espacio-new"));
@@ -55,7 +66,7 @@ public class AdminEspacioController {
 		return "index";
 	}
 	
-	@RequestMapping(value = "/espacio", method = RequestMethod.POST)
+	@PostMapping(value = "/espacio")
 	public String doCrearEspacio(Model model, @Valid EspacioDTO espacioDTO, BindingResult bindingResult){
 
 		if (bindingResult.hasErrors()) {

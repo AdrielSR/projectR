@@ -1,6 +1,7 @@
 package es.aromano.espacios.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import es.aromano.edificios.service.EdificioService;
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.domain.EspacioRepository;
-import es.aromano.espacios.web.EspacioDTO;
+import es.aromano.espacios.web.dto.EspacioDTO;
 
 @Service
 public class EspacioServiceImpl implements EspacioService {
@@ -42,6 +43,20 @@ public class EspacioServiceImpl implements EspacioService {
 		newEspacio.setEdificio(edificioService.findEdificio(espacioDTO.getIdEdificio()));
 		
 		return espacioRepository.save(newEspacio);
+	}
+
+	@Override
+	public Espacio editarEspacio(EspacioDTO espacioDTO) {
+		Espacio espacio = espacioRepository.findOne(espacioDTO.getId());
+
+		if(Objects.nonNull(espacio)){
+			espacio.setNombre(espacioDTO.getNombre());
+			espacio.setAforo(espacioDTO.getAforo());
+			espacio.setEdificio(edificioService.findEdificio(espacioDTO.getIdEdificio()));
+			espacio.setPrestaciones(espacioDTO.getPrestaciones());
+		}
+
+		return espacioRepository.save(espacio);
 	}
 
 	@Override

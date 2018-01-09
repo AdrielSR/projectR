@@ -166,3 +166,19 @@ label.label-check{
 	font-style: italic;
 	color: #aaa;
 }
+
+.p-item{
+	background-color: #e0e0e0;
+	padding: 15px 15px 10px 15px;
+	margin-right: 3px;
+	margin-bottom: 6px;
+    display: inline-block;
+}
+
+.p-item-active{
+    color: #55a0e2;
+}
+
+.p-item-no-active{
+    color: #757575;
+}

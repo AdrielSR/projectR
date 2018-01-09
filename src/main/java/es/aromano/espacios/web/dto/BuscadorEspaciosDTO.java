@@ -1,4 +1,4 @@
-package es.aromano.espacios.web;
+package es.aromano.espacios.web.dto;
 
 import org.joda.time.DateTime;
 
