@@ -26,12 +26,12 @@ public class EspacioRestController {
 		Espacio espacio = espacioService.findEspacio(idEspacio);
 		
 		if(espacio == null){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			return ResponseEntity.notFound().build();
 		}
 		
 		espacioService.toggleActivarEspacio(espacio);
 		
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.ok().build();
 	}
 
 	@PostMapping(value = "/info-espacio")
@@ -39,7 +39,7 @@ public class EspacioRestController {
 		Espacio espacio = espacioService.findEspacio(idEspacio);
 
 		if(espacio == null){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+			return ResponseEntity.notFound().build();
 		}
 
 		return ResponseEntity.ok(EspacioDTO.from(espacio));
@@ -47,11 +47,7 @@ public class EspacioRestController {
 
 
 	@PostMapping(value = "/editar-espacio")
-	public ResponseEntity<Void> doEditarEspacio(@RequestBody @Valid EspacioDTO espacioDTO, BindingResult bindingResult){
-
-		if (bindingResult.hasErrors()) {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<Void> doEditarEspacio(@RequestBody @Valid EspacioDTO espacioDTO){
 
 		Espacio espacioEditado = espacioService.editarEspacio(espacioDTO);
 		if(Objects.isNull(espacioEditado)){

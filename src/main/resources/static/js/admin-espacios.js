@@ -45,7 +45,7 @@ function toggleActivarDesactivar(idEspacio) {
 
     var prestaciones = {};
 
-    //TODO
+    //TODO: comprobar qué opciones están seleccionadas
      prestaciones.tieneMesa = false;
      prestaciones.tieneSillas = false;
      prestaciones.tieneProyector = false;
