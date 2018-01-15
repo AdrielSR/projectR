@@ -1,4 +1,4 @@
-package es.aromano;
+package es.aromano.config;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.data.repository.query.spi.EvaluationContextExtensionSupport;
