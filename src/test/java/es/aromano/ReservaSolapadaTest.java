@@ -1,17 +1,16 @@
 package es.aromano;
 
 
-import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.Reserva;
 import org.joda.time.DateTime;
+
+import static es.aromano.utils.ReservaTestUtils.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
 
 public class ReservaSolapadaTest extends ProjectApplicationTests{
-
-
-    static final DateTime start = new DateTime(2017, 11, 15, 10, 30);
-    static final DateTime end = new DateTime(2017, 11, 15, 11, 30);
 
 
     /**
@@ -26,8 +25,10 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
        DateTime start1 = new DateTime(2017, 11, 15, 10, 20);
        DateTime end1 = new DateTime(2017, 11, 15, 10, 50);
 
-       Reserva reserva1 = crearReservaFrom(new RangoDateTime(start, end));
-       Reserva reserva2 = crearReservaFrom(new RangoDateTime(start1, end1));
+       Reserva reserva1 = crearDefaultMockReserva();
+       Reserva reserva2 = crearMockReserva(start1, end1);
+
+       when(reserva1.solapa(reserva2)).thenCallRealMethod();
 
        assertThat(reserva1.solapa(reserva2)).isTrue();
 
@@ -45,8 +46,10 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
         DateTime start1 = new DateTime(2017, 11, 15, 10, 40);
         DateTime end1 = new DateTime(2017, 11, 15, 11, 50);
 
-        Reserva reserva1 = crearReservaFrom(new RangoDateTime(start, end));
-        Reserva reserva2 = crearReservaFrom(new RangoDateTime(start1, end1));
+        Reserva reserva1 = crearDefaultMockReserva();
+        Reserva reserva2 = crearMockReserva(start1, end1);
+
+        when(reserva1.solapa(reserva2)).thenCallRealMethod();
 
         assertThat(reserva1.solapa(reserva2)).isTrue();
 
@@ -64,8 +67,10 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
         DateTime start1 = new DateTime(2017, 11, 15, 10, 50);
         DateTime end1 = new DateTime(2017, 11, 15, 11, 10);
 
-        Reserva reserva1 = crearReservaFrom(new RangoDateTime(start, end));
-        Reserva reserva2 = crearReservaFrom(new RangoDateTime(start1, end1));
+        Reserva reserva1 = crearDefaultMockReserva();
+        Reserva reserva2 = crearMockReserva(start1, end1);
+
+        when(reserva1.solapa(reserva2)).thenCallRealMethod();
 
         assertThat(reserva1.solapa(reserva2)).isTrue();
 
@@ -83,19 +88,14 @@ public class ReservaSolapadaTest extends ProjectApplicationTests{
         DateTime start1 = new DateTime(2017, 11, 15, 10, 10);
         DateTime end1 = new DateTime(2017, 11, 15, 11, 50);
 
-        Reserva reserva1 = crearReservaFrom(new RangoDateTime(start, end));
-        Reserva reserva2 = crearReservaFrom(new RangoDateTime(start1, end1));
+        Reserva reserva1 = crearDefaultMockReserva();
+        Reserva reserva2 = crearMockReserva(start1, end1);
+
+        when(reserva1.solapa(reserva2)).thenCallRealMethod();
 
         assertThat(reserva1.solapa(reserva2)).isTrue();
 
     }
 
-    public Reserva crearReservaFrom(RangoDateTime rango) {
-
-        Reserva reserva = new Reserva();
-        reserva.setRango(rango);
-
-        return reserva;
-    }
 
 }
