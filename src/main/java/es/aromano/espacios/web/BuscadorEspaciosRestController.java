@@ -4,7 +4,7 @@ import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.espacios.service.BuscadorEspaciosService;
 import es.aromano.espacios.web.dto.BuscadorEspaciosDTO;
 import es.aromano.reservas.domain.model.RangoDateTime;
-import es.aromano.reservas.web.ReservaDTO;
+import es.aromano.reservas.web.dto.ReservaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,6 +2,7 @@ package es.aromano.reservas.web;
 
 import es.aromano.reservas.domain.model.Respuesta;
 import es.aromano.reservas.service.InvitacionService;
+import es.aromano.reservas.web.dto.InvitacionDTO;
 import es.aromano.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

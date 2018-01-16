@@ -5,7 +5,7 @@ import java.util.List;
 import es.aromano.reservas.domain.excepciones.ReservaSolapadaException;
 import es.aromano.reservas.domain.model.RangoDateTime;
 import es.aromano.reservas.domain.model.Reserva;
-import es.aromano.reservas.web.ReservaDTO;
+import es.aromano.reservas.web.dto.ReservaDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 

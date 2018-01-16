@@ -1,4 +1,4 @@
-package es.aromano.reservas.web;
+package es.aromano.reservas.web.dto;
 
 import es.aromano.reservas.domain.model.Respuesta;
 

@@ -1,4 +1,4 @@
-package es.aromano.reservas.web;
+package es.aromano.reservas.web.dto;
 
 import es.aromano.reservas.domain.model.Reserva;
 import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
