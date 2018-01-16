@@ -1,5 +1,6 @@
 package es.aromano;
 
+import es.aromano.config.SecurityEvaluationContextExtension;
 import es.aromano.storage.StorageProperties;
 import es.aromano.storage.service.StorageService;
 import org.springframework.boot.CommandLineRunner;
