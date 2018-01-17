@@ -84,7 +84,6 @@ nav i.material-icons{
 	min-height: 40px;
 	background-color: #DDD;
 	color: #000;
-	margin-bottom: 10px;
 }
 
 .tooltipster-light{
@@ -181,4 +180,8 @@ label.label-check{
 
 .p-item-no-active{
     color: #757575;
+}
+
+.container{
+    margin-top: 10px;
 }

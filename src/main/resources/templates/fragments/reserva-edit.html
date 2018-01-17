@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
 
+<div class="title-panel center">
+	<span>Editar Reserva</span>
+</div>
+
 <div class="container">
     <div class="row">
 		<div class="col s12">
-		
-		    <h4 class="center">Editar Reserva</h4>
+
 		    <form>
 		        <input type="hidden" id="idReserva" th:value="${reserva.espacio.id}"/>
 		        <input type="hidden" id="idEspacio" th:value="${reserva.espacio.id}"/>

@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:fragment="copy">
-	
-<div class="container">
-    <div class="row">	
-		<div class="col s12">
-			<h4 class="center">Seleccione un espacio</h4>
 
+	<div class="title-panel center">
+		<span>Seleccione un espacio</span>
+	</div>
 
-			<!-- Carousel -->
+	<div class="container">
+		<div class="row">
 			<div class="col s12">
-				<div class="owl-carousel owl-theme">
-					<div class="card" th:each="e : ${espacios}">
-						<div class="card-image waves-effect waves-block waves-light">
-							<img class="activator" th:src="@{/img/background_1.jpg}"/>
+
+				<!-- Carousel -->
+				<div class="col s12">
+					<div class="owl-carousel owl-theme">
+						<div class="card" th:each="e : ${espacios}">
+							<div class="card-image waves-effect waves-block waves-light">
+								<img class="activator" th:src="@{/img/background_1.jpg}"/>
+							</div>
+							<div class="card-content">
+								<span class="card-title activator grey-text text-darken-4" th:text="${e.nombre}"></span>
+								<p class="valign-wrapper" th:inline="text">[[${e.aforo}]] <i class="material-icons" style="font-size: 19px;">group</i></p>
+							</div>
+							<input type="hidden" th:value="${e.id}" />
 						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4" th:text="${e.nombre}"></span>
-							<p class="valign-wrapper" th:inline="text">[[${e.aforo}]] <i class="material-icons" style="font-size: 19px;">group</i></p>
-						</div>
-						<input type="hidden" th:value="${e.id}" />
 					</div>
 				</div>
-			</div>
 
-			<!-- Prestaciones -->
-			<div class="row">
-				<div class="col s12 center">
-					<h4 id="nombre-espacio"></h4>
-					<p><span id="capacidad-espacio"></span></p>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col s12 center">
-					<div id="prestaciones-espacio">
-						<div id="p-mesa" title="Mesa" class="p-item"><i class="material-icons">layers</i></div>
-						<div id="p-silla" title="Sillas" class="p-item"><i class="material-icons">weekend</i></div>
-						<div id="p-proyector" title="Proyector" class="p-item"><i class="material-icons">videocam</i></div>
-						<div id="p-ordenador" title="Ordenador" class="p-item"><i class="material-icons">laptop</i></div>
-						<div id="p-pizarra" title="Pizarra" class="p-item"><i class="material-icons">call_to_action</i></div>
-						<div id="p-microfono" title="Microfono" class="p-item"><i class="material-icons">mic_none</i></div>
-						<div id="p-telefono" title="Telefono" class="p-item"><i class="material-icons">phone</i></div>
-						<div id="p-enchufe" title="Enchufes" class="p-item"><i class="material-icons">power</i></div>
+				<!-- Prestaciones -->
+				<div class="row">
+					<div class="col s12 center">
+						<h4 id="nombre-espacio"></h4>
+						<p><span id="capacidad-espacio"></span></p>
 					</div>
 				</div>
+
+				<div class="row">
+					<div class="col s12 center">
+						<div id="prestaciones-espacio">
+							<div id="p-mesa" title="Mesa" class="p-item"><i class="material-icons">layers</i></div>
+							<div id="p-silla" title="Sillas" class="p-item"><i class="material-icons">weekend</i></div>
+							<div id="p-proyector" title="Proyector" class="p-item"><i class="material-icons">videocam</i></div>
+							<div id="p-ordenador" title="Ordenador" class="p-item"><i class="material-icons">laptop</i></div>
+							<div id="p-pizarra" title="Pizarra" class="p-item"><i class="material-icons">call_to_action</i></div>
+							<div id="p-microfono" title="Microfono" class="p-item"><i class="material-icons">mic_none</i></div>
+							<div id="p-telefono" title="Telefono" class="p-item"><i class="material-icons">phone</i></div>
+							<div id="p-enchufe" title="Enchufes" class="p-item"><i class="material-icons">power</i></div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<br/>
+				<br/>
+				<a class="left" href="/edificios">ANTERIOR</a>
+				<a class="right" id="espacio_link" th:href="@{''}">SIGUIENTE</a>
+
 			</div>
-
-
-
-			<br/>
-			<br/>
-			<a class="right" id="espacio_link" th:href="@{''}">SIGUIENTE</a>
-
 		</div>
 	</div>
-</div>
 
 <script th:inline="javascript">
    	var baseURL = /*[[@{/}]]*/ '/';
