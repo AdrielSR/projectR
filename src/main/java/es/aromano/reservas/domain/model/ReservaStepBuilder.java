@@ -3,17 +3,19 @@ package es.aromano.reservas.domain.model;
 
 import es.aromano.espacios.domain.model.Espacio;
 import es.aromano.reservas.domain.model.ReservaStepBuilderInterfaces.*;
+import es.aromano.reservas.recurrentes.domain.model.ReglasRecurrencia;
 import es.aromano.users.domain.model.User;
 import org.joda.time.DateTime;
 
 
-public class ReservaStepBuilder implements UserStep, LugarStep, DesdeStep, HastaStep, AsuntoStep, BuildStep {
+public class ReservaStepBuilder implements UserStep, LugarStep, DesdeStep, HastaStep, ReglasStep, AsuntoStep, BuildStep {
 
     private User user;
     private Espacio espacio;
     private DateTime inicio;
     private DateTime fin;
     private String asunto = "";
+    private ReglasRecurrencia reglas;
 
     public static UserStep builder(){
         return new ReservaStepBuilder();
@@ -38,8 +40,14 @@ public class ReservaStepBuilder implements UserStep, LugarStep, DesdeStep, Hasta
     }
 
     @Override
-    public AsuntoStep hasta(DateTime fin) {
+    public ReglasStep hasta(DateTime fin) {
         this.fin = fin;
+        return this;
+    }
+
+    @Override
+    public AsuntoStep reglas(ReglasRecurrencia reglas) {
+        this.reglas = reglas;
         return this;
     }
 
@@ -55,8 +63,11 @@ public class ReservaStepBuilder implements UserStep, LugarStep, DesdeStep, Hasta
         RangoDateTime rango = new RangoDateTime(this.inicio, this.fin);
         Espacio espacio = this.espacio;
         User user = this.user;
+        ReglasRecurrencia reglas = this.reglas;
 
-        return new Reserva(asunto, rango, espacio, user);
+        Reserva reserva = new Reserva(asunto, rango, espacio, user);
+        reserva.setReglas(reglas);
+
+        return reserva;
     }
-
 }

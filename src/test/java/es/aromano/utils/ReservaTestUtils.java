@@ -47,15 +47,22 @@ public class ReservaTestUtils {
                 .build();
     }
 
+    public static Reserva crearReservaRecurrente(DateTime inicio, DateTime fin, ReglasRecurrencia reglas){
+        return ReservaStepBuilder.builder()
+                .propietario(new User())
+                .lugar(new Espacio())
+                .desde(inicio)
+                .hasta(fin)
+                .reglas(reglas)
+                .build();
+    }
+
     public static Reserva crearDefaultReserva(){
         return crearReserva(start, end);
     }
 
     public static Reserva crearReservaRecurrente(ReglasRecurrencia reglas){
-        Reserva reserva = crearDefaultReserva();
-        reserva.setReglas(reglas);
-
-        return reserva;
+        return crearReservaRecurrente(start, end, reglas);
     }
 
     public static ReglasRecurrencia dailyRule() {
