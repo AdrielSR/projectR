@@ -17,12 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableAutoConfiguration
-public class ProjectApplication extends SpringBootServletInitializer{
-
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(ProjectApplication.class);
-	}
+public class ProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApplication.class, args);
@@ -30,8 +25,7 @@ public class ProjectApplication extends SpringBootServletInitializer{
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Bean

@@ -48,7 +48,6 @@ dependencies {
 	compile group: 'org.webjars.bower', name: 'OwlCarousel2', version: '2.2.1'
 
 
-
 	// THYMELEAF EXTRA
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
 	
@@ -64,7 +63,8 @@ dependencies {
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
 	compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	// DEVTOOLS
+	compile("org.springframework.boot:spring-boot-devtools")
 
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
